@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function PageLogin(params) {
+function LoginPage(params) {
     // state
     const [value, setValue] = useState("");
 
@@ -31,4 +31,4 @@ function PageLogin(params) {
     )
 }
 
-export default PageLogin;
+export default LoginPage;

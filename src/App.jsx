@@ -1,5 +1,5 @@
-import { useState } from "react"
-import PageLogin from "./components/PageLogin"
+import { useState } from "react";
+import LoginPage from "./components/pages/LoginPage";
 
 function App () {
   // state
@@ -9,7 +9,7 @@ function App () {
   // affichage(render)
   return (
     <div>
-      <PageLogin/>
+      <LoginPage/>
     </div>
   )
 }
