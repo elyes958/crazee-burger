@@ -23,7 +23,7 @@ export default function LoginForm() {
     //affichage (render)
     return (
         <form action="submit" onSubmit={handleSubmit}>
-            <h1>Bienvenue chez nous!</h1>
+            <h1>Bienvenue chez nous !</h1>
             <br />
             <h2>Connectez-vous</h2>
             <input type="text"
