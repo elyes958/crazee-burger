@@ -1,3 +1,4 @@
+//  l'on en a plus besoin en dehors de l'élément racine dans les versions récentes de React.donc plus besoin d'importe react comme sur la ligne en dessous
 import React from 'react';
 import { Link } from 'react-router-dom';
 
