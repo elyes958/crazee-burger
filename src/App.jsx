@@ -15,8 +15,8 @@ function App () {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage/>}></Route>
-          <Route path="login" element={<LoginPage />} />
-          <Route path="order/:username" element={<OrderPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/order/:username" element={<OrderPage />} />
           <Route path="*" element={<ErrorPage/>}/>
         </Routes>
       </BrowserRouter>
@@ -25,6 +25,7 @@ function App () {
   // Route path="/" quand ont met ça dans route c'est la page par default de l'application donc rien après le /
   // <Route path="*" *= si l'utilisteur nous rentre n'importe quoi un chemin qui n'existe pas
   //avec create-react-app browser router est mis dans index.js pour englober app la bas, or moi la j'ai utiliser Vite et je l'ai mis la et ça a fonctionner(j'ai suivi la doc sur le site react-router)
+  // ligne 19 j'ajoute des parametre dans l'url avec le ':' et username(le nom que je donne à la variable car c'est comme une variable) pour pouvoir afficher dynamiquement le nom de l'utilisateur rentrer dans LoginForm(au moment de la redirection)
 }
 
 export default App
