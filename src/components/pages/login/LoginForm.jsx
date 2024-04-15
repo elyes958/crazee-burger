@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+// methode module Css en important un fichier css
+import "./LoginForm.css";
+
 
 export default function LoginForm() {
     // state
@@ -27,12 +30,15 @@ export default function LoginForm() {
         setInputValue(event.target.value);
     }
 
+    // methode Object style
+    const titreH2Style = {backgroundColor:"blue", color:"white", fontSize: "15px" };
+
     //affichage (render)
     return (
         <form action="submit" onSubmit={handleSubmit}>
-            <h1>Bienvenue chez nous !</h1>
+            <h1 style={{ color: "red" }} >Bienvenue chez nous !</h1>
             <br />
-            <h2>Connectez-vous</h2>
+            <h2 className='bonbon'>Connectez-vous</h2>
             <input type="text"
                 value={inputValue}
                 onChange={handleChange}
@@ -50,3 +56,15 @@ export default function LoginForm() {
     // dans Link attention a ajouter le / avant le nom de route sinon ça ne fonctionnera pas et il y'aura une erreur que j'ai deja fait, Link to = lien vers
     // ligne 41 moi j'avais utilisze LINK pour la redirection lui dans la corection il nous a montrzer avec le hook useNavigate(les 2 ont fonctionner mais je vais faire comme lui du coup)
 }
+
+/** 4 méthode pour ajouter du style à un composants
+ * 1. inline style: directement sur la balise, interpolation jsx + objet et camelCase pour les propriete css, la valeur de la proprieté entre "", par contre on ne peu pas faire des combinaison de style avec inline-style. Inline-style a la priorité sur les autres méthodes. ex:style={{ color: "red" }}
+ * 2. object style:meme chose juste ont declare un objet en dehors de la balise et ont lui passe en propriete: style={titreH2Style}
+ * 3. modules CSS (avec className): = un fichier css,  methode module Css en important un fichier css à l'echelle du composant dans le meme dossier que celui avec le meme nom ce qui nous aide a nous repere
+ * 4. global style (index.css): "c'est la meme chose que le precedent" sauf c'est fichier à l'echelle du projet en entier pour avoir des comportement css sur tout le projet par exemple, mais du coup ce qu'ont mettra dedans notament des classe ne sera pas prioritaire
+ */
+
+/** Styled-Components
+ * éviter le style collision (CSS, Sass)
+ * conserver nested styling (Sass)
+ */
