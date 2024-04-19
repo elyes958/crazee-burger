@@ -9,7 +9,7 @@ export default function Logo() {
   )
 }
 
-const LogoStyled = styled.h1`
+const LogoStyled = styled.div`
     color: ${theme.colors.primary_burger};
     display: flex;
     flex-direction: row;

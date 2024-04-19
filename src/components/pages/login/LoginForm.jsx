@@ -8,7 +8,7 @@ import { theme } from '../../../theme';
 // import { theme } from '../../../theme/indexExemple';    <- exemple du cours
 // la j'importe le design system du projet
 import { CgProfile } from "react-icons/cg";
-import Logo from '../../logo/Logo';
+import Logo from '../../reusable-ui/Logo';
 import { IoChevronForwardOutline } from "react-icons/io5";
 
 
@@ -49,7 +49,6 @@ export default function LoginForm() {
     //affichage (render)
     return (
         <LoginFormStyled action="submit" onSubmit={handleSubmit}>
-            <Logo/>
             <h1>Bienvenue chez nous !</h1>
             <div></div>
             <h2>Connectez-vous</h2>

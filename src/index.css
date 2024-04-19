@@ -32,9 +32,9 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  background-image: url("/src/assets/F03\ burger-background.jpg");
-  background-size: cover;
-  background-position: center;
+  /* background-image: url("/src/assets/F03\ burger-background.jpg"); j'avais mis l'image ici mais il falait la mettre directement dans loginPage */
+  /* background-size: cover;
+  background-position: center; */
 }
 
 h1 {
