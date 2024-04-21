@@ -50,7 +50,7 @@ export default function LoginForm() {
     return (
         <LoginFormStyled action="submit" onSubmit={handleSubmit}>
             <h1>Bienvenue chez nous !</h1>
-            <div></div>
+            <hr />
             <h2>Connectez-vous</h2>
             <div id='input'>
                 <CgProfile />
@@ -109,23 +109,22 @@ export default function LoginForm() {
 
 
 const LoginFormStyled = styled.form`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+    background: green;
+    text-align: center;
+    max-width: 500px;
+    min-width: 400px;
+    margin: 0px auto;
+    padding: 2.5rem 2rem;
+    border-radius: 5px;
+    font-family: "Amatic SC", cursive;
     h1{
-        font-family: "Amatic SC", sans-serif;
-        font-size: ${theme.fonts.P6};
-        color: ${theme.colors.white};
-        margin-bottom: 32px;
+        border: 1.5px solid #f56a2c;
+        margin-bottom: 40px;
     }
     h2{
-        font-family: "Amatic SC", sans-serif;
-        font-size: ${theme.fonts.P5};
-        color: ${theme.colors.white};
-        margin-bottom: 18px;
+       margin: 20px 10px 10px;
+       color: white;
+       font-size: 36px;
     }
     button{
         background-color: ${theme.colors.primary};
@@ -139,7 +138,7 @@ const LoginFormStyled = styled.form`
             background-color: ${theme.colors.white};
             color: ${theme.colors.primary};
     }
-    div{
+    hr{
         height: 3px;
         width: 400px;
         background-color: ${theme.colors.primary_burger};
