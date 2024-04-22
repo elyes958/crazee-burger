@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { theme } from '../../../theme';
 // import { theme } from '../../../theme/indexExemple';    <- exemple du cours
 // la j'importe le design system du projet
-import { CgProfile } from "react-icons/cg";
+import { BsPersonCircle } from "react-icons/bs";
 import Logo from '../../reusable-ui/Logo';
 import { IoChevronForwardOutline } from "react-icons/io5";
 
@@ -44,26 +44,30 @@ export default function LoginForm() {
     }
 
     // methode Object style
-    const titreH2Style = {backgroundColor:"blue", color:"white", fontSize: "15px" };
+    const titreH2Style = { backgroundColor: "blue", color: "white", fontSize: "15px" };
 
     //affichage (render)
     return (
         <LoginFormStyled action="submit" onSubmit={handleSubmit}>
-            <h1>Bienvenue chez nous !</h1>
-            <hr />
-            <h2>Connectez-vous</h2>
-            <div id='input'>
-                <CgProfile />
-                <input type="text"
-                    value={inputValue}
-                    onChange={handleChange}
-                    placeholder="Entrez votre prénom"
-                    required
-                />
+            <div>
+                <h1>Bienvenue chez nous !</h1>
+                <hr />
+                <h2>Connectez-vous</h2>
             </div>
-            {/* <Link to={`/order/${inputValue}`}> */}
-               <button>Accédez à mon espace <IoChevronForwardOutline /></button>
-            {/* </Link> */}
+            <div>
+                <div className='input-with-icon'>
+                    <BsPersonCircle className='icon'/>
+                    <input type="text"
+                        value={inputValue}
+                        onChange={handleChange}
+                        placeholder="Entrez votre prénom"
+                        required
+                    />
+                </div>
+                {/* <Link to={`/order/${inputValue}`}> */}
+                <button>Accédez à mon espace <IoChevronForwardOutline /></button>
+                {/* </Link> */}
+            </div>
         </LoginFormStyled>
     )
     // required dans l'input affiche un msg d'erreur si l'utilisateur n'entre rien, event.preventDefault empeche le rechargement de la page du a l'evenement
@@ -118,7 +122,7 @@ const LoginFormStyled = styled.form`
     border-radius: 5px;
     font-family: "Amatic SC", cursive;
     h1{
-        border: 1.5px solid #f56a2c;
+        /* border: 1.5px solid #f56a2c; les border comme ça servent à identifier nos éléments*/
         margin-bottom: 40px;
     }
     h2{
@@ -126,38 +130,40 @@ const LoginFormStyled = styled.form`
        color: white;
        font-size: 36px;
     }
-    button{
-        background-color: ${theme.colors.primary};
-        color: ${theme.colors.white};
-        border-radius: ${theme.borderRadius.round};
-        width: 400px;
-        height: 53px;
-        font-size: ${theme.fonts.P1};
-    }
-    button:hover{
-            background-color: ${theme.colors.white};
-            color: ${theme.colors.primary};
+    .input-with-icon{
+        /* border: 1px solid red; */
+        background-color: #fff;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        padding: 18px 24px;
+        margin: 18px 0;
+        .icon{
+            font-size: 15px;
+            margin-right: 8px;
+            color: #93a2b1;
+        }
+
+        input{
+            border: none;
+            font-size: 15px;
+            color: #17161a;
+        }
+
+        &::placeholder {
+            background: white;
+            color: lightgrey;
+        }
     }
     hr{
         height: 3px;
         width: 400px;
         background-color: ${theme.colors.primary_burger};
     }
-    input{
-        border-radius: ${theme.borderRadius.round};
-        width: 400px;
-        height: 55px;
-        padding: 18px, 24px;
-        margin-bottom: 18px;
-    }
-    #input{
-        width: 400px;
-        height: 55px;
-        margin-bottom: 18px;
-        display: flex;
-        flex-direction: row;
-    }
 `;
+
+
+// LIGNE 59, pour mon probleme pour mettre l'icone à coter du placeholder en faite il fallai mettre les 2 element dans un element parent une div et ça les met à coter
 
 
 
