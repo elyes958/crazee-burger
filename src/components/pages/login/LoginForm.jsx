@@ -120,9 +120,9 @@ export default function LoginForm() {
  */
 
 
-
+// Attention au element html que tu cree avec styled component ici c'est bon il falait bien cree un formulaire pour pouvoir le soumettre et recuperer les donnee (dans la video il avait fait l'erreur de cree une div attention !)
 const LoginFormStyled = styled.form`
-    background: green;
+    /* background: green; */
     text-align: center;
     max-width: 500px;
     min-width: 400px;
@@ -133,6 +133,7 @@ const LoginFormStyled = styled.form`
     h1{
         /* border: 1.5px solid #f56a2c; les border comme ça servent à identifier nos éléments*/
         margin-bottom: 40px;
+        color: white;
     }
     h2{
        margin: 20px 10px 10px;
@@ -157,6 +158,7 @@ const LoginFormStyled = styled.form`
             border: none;
             font-size: 15px;
             color: #17161a;
+            width: 100%;
         }
 
         &::placeholder {
@@ -168,6 +170,7 @@ const LoginFormStyled = styled.form`
         height: 3px;
         width: 400px;
         background-color: ${theme.colors.primary_burger};
+        border: none;
     }
 
     .button-with-icon {
