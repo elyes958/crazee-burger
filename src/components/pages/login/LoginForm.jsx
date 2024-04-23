@@ -8,7 +8,7 @@ import { theme } from '../../../theme';
 // import { theme } from '../../../theme/indexExemple';    <- exemple du cours
 // la j'importe le design system du projet
 import { IoChevronForward } from "react-icons/io5";
-import Input from './Input';
+import TextInput from './TextInput';
 import { BsPersonCircle } from "react-icons/bs";
 
 
@@ -59,7 +59,7 @@ export default function LoginForm() {
 
             <div>
                 {/* pour faire des composant generique reutilisable comme ici avec notre Input qu'on a cree en sous composant, ont ne met rien de specifique à l'interieur du composant donc ici input.jsx on ne met que du generique et ici à l'exterieur ont lui passe tout le specifique au composant ce qui nous donne un composant reutilisable */}
-                <Input 
+                <TextInput
                 value={inputValue}
                 onChange={handleChange}
                 placeholder={"Entrez votre prénom"}
