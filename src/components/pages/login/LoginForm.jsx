@@ -7,8 +7,9 @@ import styled from "styled-components";
 import { theme } from '../../../theme';
 // import { theme } from '../../../theme/indexExemple';    <- exemple du cours
 // la j'importe le design system du projet
-import { BsPersonCircle } from "react-icons/bs";
 import { IoChevronForward } from "react-icons/io5";
+import Input from './Input';
+import { BsPersonCircle } from "react-icons/bs";
 
 
 
@@ -57,16 +58,14 @@ export default function LoginForm() {
             </div>
 
             <div>
-
-                <div className='input-with-icon'>
-                    <BsPersonCircle className='icon' />
-                    <input type="text"
-                        value={inputValue}
-                        onChange={handleChange}
-                        placeholder="Entrez votre prénom"
-                        required
-                    />
-                </div>
+                {/* pour faire des composant generique reutilisable comme ici avec notre Input qu'on a cree en sous composant, ont ne met rien de specifique à l'interieur du composant donc ici input.jsx on ne met que du generique et ici à l'exterieur ont lui passe tout le specifique au composant ce qui nous donne un composant reutilisable */}
+                <Input 
+                value={inputValue}
+                onChange={handleChange}
+                placeholder={"Entrez votre prénom"}
+                required
+                icon={<BsPersonCircle className='icon' />}
+                />
 
                 <button className='button-with-icon'>
                     {/* <Link to={`/order/${inputValue}`}> */}
@@ -139,32 +138,6 @@ const LoginFormStyled = styled.form`
        margin: 20px 10px 10px;
        color: white;
        font-size: 36px;
-    }
-    .input-with-icon{
-        /* border: 1px solid red; */
-        background-color: #fff;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        padding: 18px 24px;
-        margin: 18px 0;
-        .icon{
-            font-size: 15px;
-            margin-right: 8px;
-            color: #93a2b1;
-        }
-
-        input{
-            border: none;
-            font-size: 15px;
-            color: #17161a;
-            width: 100%;
-        }
-
-        &::placeholder {
-            background: white;
-            color: lightgrey;
-        }
     }
     hr{
         height: 3px;
