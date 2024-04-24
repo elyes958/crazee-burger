@@ -120,30 +120,28 @@ const LoginFormStyled = styled.form`
     max-width: 500px;
     min-width: 400px;
     margin: 0px auto;
-    padding: 2.5rem 2rem;
-    border-radius: 5px;
+    padding: 2.5rem ${theme.spacing.lg}; // car 2rem = 32 px, 1rem = 16px
+    border-radius: ${theme.borderRadius.round};
     font-family: "Amatic SC", cursive;
     h1{
         /* border: 1.5px solid #f56a2c; les border comme ça servent à identifier nos éléments*/
-        margin-bottom: 40px;
-        color: white;
+        color: ${theme.colors.white};
+        font-size: ${theme.fonts.size.P5};
     }
     h2{
        margin: 20px 10px 10px;
-       color: white;
-       font-size: 36px;
+       color: ${theme.colors.white};
+       font-size: ${theme.fonts.size.P4};
     }
     hr{
-        height: 3px;
-        width: 400px;
-        background-color: ${theme.colors.primary_burger};
-        border: none;
+      border: 1.5px solid ${theme.colors.loginLine};
+      margin-bottom: ${theme.gridUnit * 5}px; //pour faire 40px
     }
     .icon{
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 15px;
+            font-size: ${theme.fonts.size.P0};
             margin-left: 10px;
     }
 
@@ -154,3 +152,4 @@ const LoginFormStyled = styled.form`
 // et du coup je remarque qu'il faut faire comme ça partout une div avec les element pour pouvoir les placer cote à cote avec display flex, sauf pour le button ici
 // 2fois la classe icon car il y'a celle dans le input et celle dans le button et ont le meme nom mais sont 2 classe differente
 //ctrl + espace nous montre aussi les props a mettre dans un composant
+// à chaque fois que tu cree un composant pose toi la question ou ça va aller ? dans reusable ui? ou alors dans pages si composant specifique et non reutilisable
