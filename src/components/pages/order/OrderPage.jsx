@@ -16,7 +16,18 @@ export default function OrderPage() {
   //affichage
   return (
     <OrderPageStyled>
-       <Container/>
+       <div className='container'>
+          <div className='navbar'>
+              Navbar
+              <h1>Bonjour {username}</h1>
+            <Link to="/">
+              <button>Deconnexion</button>
+            </Link>
+          </div>
+          <div className="main">
+            Main
+          </div>
+       </div>
     </OrderPageStyled>
   )
 }
@@ -25,11 +36,28 @@ export default function OrderPage() {
 const OrderPageStyled = styled.div`
   background: ${theme.colors.primary};
   height: 100vh;
-  width: 100%;
   /* padding-top: 25px; */
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
+  .container{
+  background: red;
+  height: 95vh;
+  width: 1400px;
+  display: flex;
+  flex-direction: column;
+
+  .navbar{
+    background: blue;
+    height: 10vh;
+  }
+  .main{
+    background: green;
+    /* height: calc(95vh - 10vh);  ont peu egalement faire ce qu'on a fait ligne 58 comme ça, mais la 2eme methode avec flex:1 parai plus simple*/ 
+    flex: 1;  // quand on utilise flexbox cela permet de dire à l'element de prendre toute la place restante (ici dans notre container du coup notre main va bien j'usqu'a en bas)
+  }
+  }
 `;
 
 
