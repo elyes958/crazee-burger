@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from "styled-components";
 import { theme } from '../../../theme';
-import Container from './Container';
 import Navbar from './Navbar';
 import Main from './Main';
 
