@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from "styled-components";
 import { theme } from '../../../theme';
 import Navbar from './Navbar';
