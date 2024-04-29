@@ -3,7 +3,9 @@ html, body{
   width: 100%;
   margin: 0;
   padding: 0;
+  font-family: "Open Sans", sans-serif; 
 }
+/* tu peu definir direct dans le body la font-family du projet surtout celle qui ce retrouve en majorite partout sur notre projet comme ça, ça nous evite de le faire sur chaque composant */
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -32,9 +34,6 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  /* background-image: url("/src/assets/F03\ burger-background.jpg"); j'avais mis l'image ici mais il falait la mettre directement dans loginPage */
-  /* background-size: cover;
-  background-position: center; */
 }
 
 h1 {
