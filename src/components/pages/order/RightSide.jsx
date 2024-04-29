@@ -7,7 +7,7 @@ export default function RightSide({ username }) {
  //affichage
   return (
       <RightSideStyled>
-          <Profile/>
+          <Profile username={username} />
       </RightSideStyled>
   )
 }
