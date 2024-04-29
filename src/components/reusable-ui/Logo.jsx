@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../theme';
 
-export default function Logo() {
+export default function Logo( {className} ) {
   return (
-        <LogoStyled>
+        <LogoStyled className={className}>
             <h1>CRAZEE</h1>
             <img src="images/logo-orange.png" alt="logo" />
             <h1>BURGER</h1>
@@ -15,7 +15,7 @@ export default function Logo() {
 const LogoStyled = styled.div`
     display: flex;
     align-items: center;
-    transform: scale(2.5);
+    /* transform: scale(2.5); ça ct la taille qu'on avait mis pour le gros logo de loginPage mais ce n'est pas la taille par default car dans toutes les autres pages le logo est petit*/
 
     h1{
         display: inline;
@@ -55,5 +55,5 @@ const LogoStyled = styled.div`
     } */
 `;
 // ligne 9 au niveau des images, soit tu y accede directement comme ça sans remonter les dossier avec les ./ soit tu y accede en important l'image en haut avec par exemple import logo from et la tu met le chemin avec les ./ 2 methode au choix la premiere me semble plus simple
-
+// ligne 7 className= est un className de html(ici jsx) la props est à l'interieur, contrairement au composant parent qui a une props qu'ont a appeler className car les composant prenne des props et pas du html/jsx
 

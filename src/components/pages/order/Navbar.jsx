@@ -1,13 +1,11 @@
-import LeftSide from "./LeftSide";
+import Logo from "../../reusable-ui/Logo";
 import RightSide from "./RightSide";
 import styled from "styled-components";
 
 export default function Navbar({ username }) {
     return (
         <NavbarStyled>
-            <div className="left-side">
-                Left
-            </div>
+            <Logo/>
             <RightSide username={username}/>
         </NavbarStyled>
     )
@@ -23,9 +21,6 @@ const NavbarStyled = styled.nav`
     height: 10vh;
     display: flex;
     justify-content: space-between;
+    padding: 0 20px;   // pour gerer l'espace des element à l'interieur de la nav(comme expliquer ont fait ça avec le parent pour ne pas modifier le composant reutilisable voir maquette figma il y'a 20px d'espace entre logo et le debut de nav et l'autre div a un peu plus)
     /* align-items: center; */
-
-    .left-side{
-      background: pink;
-    }
 `;
