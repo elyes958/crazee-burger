@@ -1,4 +1,5 @@
 import { theme } from "../../../theme";
+import { refreshPage } from "../../../utils/window";
 import Logo from "../../reusable-ui/Logo";
 import RightSide from "./RightSide";
 import styled from "styled-components";
@@ -6,7 +7,8 @@ import styled from "styled-components";
 export default function Navbar({ username }) {
     return (
         <NavbarStyled>
-            <Logo/>
+            {/* <Logo className={"logo-order-page"} onClick={() => window.location.reload()} /> */}
+            <Logo className={"logo-order-page"} onClick={refreshPage} />
             <RightSide username={username}/>
         </NavbarStyled>
     )
@@ -21,4 +23,7 @@ const NavbarStyled = styled.nav`
     border-top-left-radius: ${theme.borderRadius.extraRound};  // uniquement le coin haut gauche
     border-top-right-radius: ${theme.borderRadius.extraRound};
     /* align-items: center; */
+    .logo-order-page{
+        cursor: pointer;
+    }
 `;
