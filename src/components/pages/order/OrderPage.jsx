@@ -32,7 +32,7 @@ const OrderPageStyled = styled.div`
   /* padding-top: 25px; */
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
   .container{
   background: red;
