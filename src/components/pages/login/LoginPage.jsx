@@ -3,11 +3,11 @@ import LoginForm from "./LoginForm";
 import styled from "styled-components";
 import Logo from "../../reusable-ui/Logo";
 
-function LoginPage(params) {
+function LoginPage() {
     //affichage (render)
     return (
         <LoginPageStyled>
-            <Logo/>
+            <Logo className={"logo-login-page"} />
             <LoginForm/>
         </LoginPageStyled>
     )
@@ -35,6 +35,10 @@ const LoginPageStyled = styled.div`
     right: 0;
     bottom: 0;
     z-index: -1;
+  }
+
+  .logo-login-page{     // ont defini une classe dans le composant parent qu'on va passer en props en haut au composant enfant (ligne 10), c'est un composant importer donc on ne lui passe pas la classe sous forme html mais bien sous props alors que le composant reutilisable quand tu clik dessus c'est une div cree vis styleComponent et la tu peu passer la class sous format html
+    transform: scale(2.5);  // et dans le composant reutilisable logo ont va faire en sorte qu'ils puissent recevoir des props(voir ce composant) et du coup la comme il en recoit ont va pouvoir modifier son style ce que l'on voulais, par contre si il n'en recoit pas(des props) par sont composant parent alor ça ne changera rien il gardera son style par default
   }
 `;
 
