@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { theme } from "../../../theme";
 import { useState } from "react";
 import { fakeMenu2 } from "../../../fakeData/fakeMenu";
+import { formatPrice } from "../../../utils/maths";
 
 export default function Main() {
   // State
@@ -16,7 +17,7 @@ export default function Main() {
           <h3>{element.title}</h3>
           <div className="priceButton">
             <div>
-                <span>{element.price.toFixed(2)} €</span> 
+                <span>{formatPrice(element.price)}</span> 
             </div>
             <button>Ajouter</button>
           </div>
