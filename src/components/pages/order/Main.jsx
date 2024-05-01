@@ -30,7 +30,9 @@ export default function Main() {
   // Affichage
   return (
     <MainStyled>
-      {affichage}
+      <div className="basket">Basket</div>
+      <div className="menu">Menu</div>
+      {/* {affichage} */}
     </MainStyled>
   )
 }
@@ -44,12 +46,21 @@ const MainStyled = styled.main`
     // ont aurait pu egalement juste coller le border radius du ticket 0 0 15 15 = en bas a droite et a gauche pour les 2 15px
     box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset ;
     display: grid;
-    grid-template-columns: repeat(4, 240px);
+    /* grid-template-columns: repeat(4, 240px); */
+    grid-template-columns: 25% 1fr;
     grid-column-gap: 85px;
     grid-template-rows: repeat(4, 330px);
     grid-row-gap: 60px;
     padding: 50px 50px 150px;  // avec le padding ça marche, le margin que j'ai mis sur les éléments provoquer des erreurs ça ne fonctionner pas
     
+   .basket{
+    background: pink;
+   }
+   .menu{
+    background: purple;
+   }
+
+
    h3{
     font-family: "Amatic SC";
     font-weight: ${theme.fonts.weights.bold};
