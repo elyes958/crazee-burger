@@ -12,7 +12,8 @@ export default function Menu() {
     <MenuStyled  className="menu">
         {menu.map((produit) => {
             return (
-            <Product title={produit.title} imageSource={produit.imageSource} price={produit.price} />
+            // <Product title={produit.title} imageSource={produit.imageSource} price={produit.price} />
+            <Product {...produit} />  // meme chose que ligne 5, ecriture bc plus simple spread operator dans un objet, cet methode fonctionne que si vous etes certain que "produit" a tous les élements dont "Product" a besoin. Du coup la methode au dessus est preferable et conseiller.
         )})};
     </MenuStyled>
   )
