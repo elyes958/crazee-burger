@@ -3,6 +3,7 @@ import { theme } from "../../../../theme";
 import { useState } from "react";
 import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
 import { formatPrice } from "../../../../utils/maths";
+import Menu from "./Menu";
 
 export default function Main() {
   // State
@@ -30,8 +31,8 @@ export default function Main() {
   // Affichage
   return (
     <MainStyled>
-      {/* <div className="basket">Basket</div> */}
-      <div className="menu">Menu</div>
+      <div className="basket">Basket</div>
+      <Menu/>
       {/* {affichage} */}
     </MainStyled>
   )
@@ -56,9 +57,7 @@ const MainStyled = styled.main`
    .basket{
     background: pink;
    }
-   .menu{
-    background: purple;
-   }
+   
 
 
    h3{
