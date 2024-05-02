@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
+import { theme } from "../../../../theme";
 
 export default function Menu() {
   // state
@@ -17,12 +18,13 @@ export default function Menu() {
 
 
 const MenuStyled = styled.div`
-    background: purple;
+    background: ${theme.colors.background_white};
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-row-gap: 60px;
     padding: 50px 50px 150px;
     justify-items: center;  /* Centre les éléments horizontalement */
+    box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
 
     .produit{
         background: red;

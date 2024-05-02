@@ -25,6 +25,8 @@ const NavbarStyled = styled.nav`
     position: sticky;      // En utilisant position: sticky sur votre barre de navigation et en ajoutant une marge supérieure à votre conteneur principal, vos cartes passeront en dessous de la barre de navigation lors du défilement.
     top: 0;               /* Coller ma nav en haut de la fenêtre du navigateur */
     z-index: 2;           /* Assurez-vous que la barre de navigation reste au-dessus du reste du contenu la j'ai mis 2 mais tu peu mettre plus si besoin */
+    border-bottom: 1px solid ${theme.colors.greyLight};
+
     /* align-items: center; */
     .logo-order-page{
         cursor: pointer;
