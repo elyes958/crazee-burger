@@ -60,36 +60,36 @@ const MainStyled = styled.main`
     background: pink;
    } */ 
 
-   h3{
+   /* h3{
     font-family: "Amatic SC";
     font-weight: ${theme.fonts.weights.bold};
     font-size: ${theme.fonts.size.P4};
     margin: 20px 20px 0px 20px;
-   }
+   } */
 
-   div img {
+   /* div img {
     width: 200px;
-    height: 145px;
-    object-fit: cover; /* Empêche l'image de se déformer et la fait remplir le conteneur */
-    margin: 50px 20px 0px 20px;
-   }
+    height: 145px; */
+    /* object-fit: cover;  Empêche l'image de se déformer et la fait remplir le conteneur */
+    /* margin: 50px 20px 0px 20px;
+   } */
 
-   .carte{
+   /* .carte{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; */
     /* align-items: center; */
-    box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
+    /* box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
     border-radius: ${theme.borderRadius.extraRound};
-   }
+   } */
 
-  .priceButton{
+  /* .priceButton{
     display: flex;
     justify-content: space-around;
     align-items: center;
-  }
+  } */
 
-  .priceButton span{
+  /* .priceButton span{
     font-weight: ${theme.fonts.weights.regular};
     font-size: ${theme.fonts.size.P0};
     color: ${theme.colors.primary};
@@ -97,9 +97,9 @@ const MainStyled = styled.main`
 
   .priceButton div{
     padding: 22px, 50px, 22px, 0px;
-  }
+  } */
 
-  .priceButton button{
+  /* .priceButton button{
     background: ${theme.colors.primary};
     color: ${theme.colors.white};
     outline: none; // sert a enlever la bordure par default qui apparai au clic
@@ -113,5 +113,7 @@ const MainStyled = styled.main`
       background: ${theme.colors.primary};
       color: ${theme.colors.white};
     }
-  }
+    
+  } */
+  
 `;
