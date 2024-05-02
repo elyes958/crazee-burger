@@ -16,6 +16,7 @@ export default function Product({ title, imageSource, price }) {
     </ProductStyled>
   )
 }
+// ici aucun interet à decouper encore en sous composant car tout le jsx ne concerne qu'un seul objet(product)
 
 const ProductStyled = styled.div`
         background: red;
@@ -39,9 +40,45 @@ const ProductStyled = styled.div`
             }
         }
 
-        .description{
-          border: 1px solid blue;
+        .info-text{
+          border: 3px solid fuchsia;
+          display: grid;
+
+          .description{
+            border: 1px solid yellow;
+            .price{
+            border: 1px solid blue;   // oublie pas les border c'est pas mal pour identifier toutes tes balise surtout quand il y'a bc d'imbrication comme ici
+
+          }
+
+          .add-button{
+            border: 1px solid green;
+          }
+
+          }
+
         }
 `;
+
+
+
+
+// Petit conseil pour le CSS
+
+// Dans la "Card", tu as ajouté 20px à droite et à gauche et tu as modifié ensuite la largeur de la "Card" de 240px à 200px;
+// Pour éviter cela, tu peux ajouter la propriété "box-sizing: border-box;"
+
+// Sans
+// width: 240px;
+// padding-left: 20px;
+// padding-right: 20px;
+// La largeur total = 240 + 20 + 20 = 280px
+
+// Avec  box-sizing: border-box;
+// width: 240px;
+// padding-left: 20px;
+// padding-right: 20px;
+// La card va faire en sorte de garder la largeur initial de 240px et appliquer ensuite le padding à l'intérieur
+// Donc la largeur total = 240px sans devoir le modifier
 
 
