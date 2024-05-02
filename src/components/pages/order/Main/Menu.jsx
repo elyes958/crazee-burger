@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
 import { theme } from "../../../../theme";
+import Product from "./Product";
 
 export default function Menu() {
   // state
@@ -10,19 +11,9 @@ export default function Menu() {
   return (
     <MenuStyled  className="menu">
         {menu.map((produit) => {
-            return <div className="produit">
-                <div className="image">
-                    <img src={produit.imageSource} alt={produit.title} />
-                </div>
-                <div className="info-text">
-                    <div className="title">{produit.title}</div>
-                    <div className="description">
-                        <div className="price">{produit.price}</div>
-                        <button className="add-button">Ajouter</button>
-                    </div>
-                </div>
-            </div>
-        })};
+            return (
+            <Product title={produit.title} imageSource={produit.imageSource} price={produit.price} />
+        )})};
     </MenuStyled>
   )
 }
@@ -31,7 +22,7 @@ export default function Menu() {
 const MenuStyled = styled.div`
     background: ${theme.colors.background_white};
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);  // = 4 colonnes avec tout l'espace disponible
     grid-row-gap: 60px;
     padding: 50px 50px 150px;
     justify-items: center;  /* Centre les éléments horizontalement */
@@ -46,10 +37,18 @@ const MenuStyled = styled.div`
             border: 1px solid fuchsia; // permet de voir les contour de notre images dans notre div
             width: 100px;
             height: auto;
+
             img{
                 width: 100%;
                 height: 100%;
+                object-fit: cover;
             }
         }
+
+        .description{
+          border: 1px solid fuchsia;
+        }
     }
+
+   
 `;
