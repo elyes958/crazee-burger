@@ -7,25 +7,26 @@ import Menu from "./Menu";
 
 export default function Main() {
   // State
-  const [data, setData] = useState(fakeMenu2);
+  // const [data, setData] = useState(fakeMenu2);
 
   // Comportements
-  const affichage = data.map((element) => {
-    return(
-      <div className="carte">
-        <img src={element.imageSource} alt="image" />
-        <div>
-          <h3>{element.title}</h3>
-          <div className="priceButton">
-            <div>
-                <span>{formatPrice(element.price)}</span> 
-            </div>
-            <button>Ajouter</button>
-          </div>
-        </div>
-      </div>
-    )
-  });
+  // moi j'ai fait comme belivemy en passant par une const, lui il a direct map à partir du tableau du state voir composant Menu
+  // const affichage = data.map((element) => {
+  //   return(
+  //     <div className="carte">
+  //       <img src={element.imageSource} alt="image" />
+  //       <div>
+  //         <h3>{element.title}</h3>
+  //         <div className="priceButton">
+  //           <div>
+  //               <span>{formatPrice(element.price)}</span> 
+  //           </div>
+  //           <button>Ajouter</button>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   )
+  // });
 
 
   // Affichage
@@ -49,11 +50,12 @@ const MainStyled = styled.main`
     display: grid;
     /* grid-template-columns: repeat(4, 240px); */
     grid-template-columns: 1fr;
-    grid-column-gap: 85px;
-    grid-template-rows: repeat(4, 330px);
-    grid-row-gap: 60px;
-    padding: 50px 50px 150px;  // avec le padding ça marche, le margin que j'ai mis sur les éléments provoquer des erreurs ça ne fonctionner pas
-    
+    /* grid-column-gap: 85px; */
+    /* grid-template-rows: repeat(4, 330px); */
+    /* grid-row-gap: 60px; */
+    /* padding: 50px 50px 150px;  // avec le padding ça marche, le margin que j'ai mis sur les éléments provoquer des erreurs ça ne fonctionner pas */
+    overflow-y: scroll;  // pour que notre grille et nos elements ne depasse pas du container
+
    /* .basket{
     background: pink;
    } */ 
