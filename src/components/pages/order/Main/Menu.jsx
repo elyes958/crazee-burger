@@ -29,27 +29,5 @@ const MenuStyled = styled.div`
     justify-items: center;  /* Centre les éléments horizontalement */
     box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
 
-    .produit{
-        background: red;
-        width: 240px;
-        height: 330px;
-
-        .image{
-            border: 1px solid fuchsia; // permet de voir les contour de notre images dans notre div
-            width: 100px;
-            height: auto;
-
-            img{
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-
-        .description{
-          border: 1px solid fuchsia;
-        }
-    }
-
    
 `;
