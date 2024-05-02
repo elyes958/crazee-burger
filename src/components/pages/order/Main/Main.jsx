@@ -31,7 +31,7 @@ export default function Main() {
   // Affichage
   return (
     <MainStyled>
-      <div className="basket">Basket</div>
+      {/* <div className="basket">Basket</div> */}
       <Menu/>
       {/* {affichage} */}
     </MainStyled>
@@ -48,17 +48,15 @@ const MainStyled = styled.main`
     box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset ;
     display: grid;
     /* grid-template-columns: repeat(4, 240px); */
-    grid-template-columns: 25% 1fr;
+    grid-template-columns: 1fr;
     grid-column-gap: 85px;
     grid-template-rows: repeat(4, 330px);
     grid-row-gap: 60px;
     padding: 50px 50px 150px;  // avec le padding ça marche, le margin que j'ai mis sur les éléments provoquer des erreurs ça ne fonctionner pas
     
-   .basket{
+   /* .basket{
     background: pink;
-   }
-   
-
+   } */ 
 
    h3{
     font-family: "Amatic SC";
