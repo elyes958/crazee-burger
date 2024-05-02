@@ -1,6 +1,6 @@
-import { theme } from "../../../theme";
-import { refreshPage } from "../../../utils/window";
-import Logo from "../../reusable-ui/Logo";
+import { theme } from "../../../../theme";
+import { refreshPage } from "../../../../utils/window";
+import Logo from "../../../reusable-ui/Logo";
 import RightSide from "./RightSide";
 import styled from "styled-components";
 

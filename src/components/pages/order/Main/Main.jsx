@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { theme } from "../../../theme";
+import { theme } from "../../../../theme";
 import { useState } from "react";
-import { fakeMenu2 } from "../../../fakeData/fakeMenu";
-import { formatPrice } from "../../../utils/maths";
+import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
+import { formatPrice } from "../../../../utils/maths";
 
 export default function Main() {
   // State
@@ -30,7 +30,7 @@ export default function Main() {
   // Affichage
   return (
     <MainStyled>
-      <div className="basket">Basket</div>
+      {/* <div className="basket">Basket</div> */}
       <div className="menu">Menu</div>
       {/* {affichage} */}
     </MainStyled>
