@@ -1,4 +1,6 @@
+// Card.jsx remplace Product(du coup ont utilise plus ce fichier dans le projet,je le garde pour mes notes)
 import styled from "styled-components";
+import { theme } from "../../../../theme";
 
 export default function Product({ title, imageSource, price }) {
   return (
@@ -44,6 +46,7 @@ const ProductStyled = styled.div`
           border: 3px solid fuchsia;
           display: grid;
 
+
           .description{
             border: 1px solid yellow;
             .price{
@@ -54,8 +57,8 @@ const ProductStyled = styled.div`
           .add-button{
             border: 1px solid green;
           }
-
-          }
+        }
+          
 
         }
 `;
