@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Profile from './Profile';
+import ToggleButton from "./ToggleButton";
 
 export default function RightSide({ username }) {
 
@@ -7,6 +8,7 @@ export default function RightSide({ username }) {
  //affichage
   return (
       <RightSideStyled>
+          <ToggleButton />
           <Profile username={username} />
       </RightSideStyled>
   )
