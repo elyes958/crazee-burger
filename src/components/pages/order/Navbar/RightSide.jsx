@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Profile from './Profile';
-import ToggleButton from "./ToggleButton";
+import ToggleButton from "../../../reusable-ui/ToggleButton";
 
 export default function RightSide({ username }) {
 
