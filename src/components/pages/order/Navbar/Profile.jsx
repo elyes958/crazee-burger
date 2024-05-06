@@ -4,9 +4,9 @@ import styled from "styled-components"
 import { theme } from "../../../../theme"
 
 
-export default function Profile({ username }) {
+export default function Profile({ username, className }) {
   return (
-    <ProfileStyled>
+    <ProfileStyled className={className}>
       <div className="info">
         <p>
           Hey, <b>{username}</b>
@@ -29,6 +29,7 @@ const ProfileStyled = styled.div`
   align-items: center;
   justify-content: space-between;
   min-width: 100px;
+  /* padding-left: 50px; */ // en vrai comme il est pas reutilisable on peu direct mettre le padding la sans passer par une className comme on a fait la
 
   .info {
     text-align: right;

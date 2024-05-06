@@ -6,8 +6,8 @@ import { theme } from "../../theme";
 export default function ToggleButton({
   isChecked,
   onToggle,
-  labelIfChecked = "DÉSACTIVER LE MODE ADMIN",
-  labelIfUnchecked = "ACTIVER LE MODE ADMIN",
+  labelIfChecked = "Fermer",   // pareil ici pas de specifique, on essaye de laisser le composant (reutilisable tel qu'elle) et on fait remonter le specifque en props
+  labelIfUnchecked = "Ouvrir",
 }) {
   return (
     <ToggleButtonStyled>
@@ -32,7 +32,7 @@ const ToggleButtonStyled = styled.div`
   /* border: 1px solid red; */
 
   display: flex;
-  margin-right: 50px;
+  /* margin-right: 50px; */ // j'avais ajouter un margin ici mais il ne faut pas mettre du specifique dans un composant reutilisable, du coup ont va gerer ça via notre composant Profile qui n'est pas reutilisable
   input[type="checkbox"] {
     // Hides the square box but keeps the core "toggle functionality"
     &.toggle {
