@@ -8,9 +8,11 @@ export default function ToggleButton({
   onToggle,
   labelIfChecked = "Fermer",   // pareil ici pas de specifique, on essaye de laisser le composant (reutilisable tel qu'elle) et on fait remonter le specifque en props
   labelIfUnchecked = "Ouvrir",
+  couleurDuBackground,
+  couleurDuText,
 }) {
   return (
-    <ToggleButtonStyled>
+    <ToggleButtonStyled couleurDuBackground={couleurDuBackground} couleurDuText={couleurDuText} > 
       <input
         type="checkbox"
         className="toggle"
@@ -90,7 +92,8 @@ const ToggleButtonStyled = styled.div`
     }
 
     &.toggle:not(:checked) + label {
-      background-color: ${theme.colors.background_dark};
+      // background-color: ${theme.colors.background_dark};
+      background-color: ${(props) => props.couleurDuBackground ? props.couleurDuBackground : theme.colors.background_dark}; // on passe la props qu'on a récupérer ligne 14(voila comment on passe des props avec style components), et ont fait une condition ternaire pour les afficher ou afficher celle qui etait la de base
       /* text-align: right; */
     }
 
@@ -100,7 +103,7 @@ const ToggleButtonStyled = styled.div`
       right: 8px;
       left: auto;
       opacity: 1;
-      color: ${theme.colors.primary};
+      color: ${(props) => props.couleurDuText ? props.couleurDuText : theme.colors.primary};
       font-weight: ${theme.fonts.weights.bold};
     }
 
@@ -133,3 +136,5 @@ const ToggleButtonStyled = styled.div`
     }
   }
 `
+
+// ligne 14: couleurDuBackground={couleurDuBackground}, ont passe la props qu'on a recuperer du parent dans le component de style component
