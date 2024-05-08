@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Profile from './Profile';
 import ToggleButton from "../../../reusable-ui/ToggleButton";
-import { ToastContainer, toast } from "react-toastify"; // librairie react-tostify voir le site
-import "react-toastify/dist/ReactToastify.css";     // le style de la librairie 
 import { theme } from "../../../../theme";
 import { useState } from "react";
+import ToastAdmin from "./ToastAdmin";
+import { toast } from "react-toastify"; // librairie react-tostify voir le site
 
 export default function RightSide({ username }) {
   // state
@@ -41,8 +41,7 @@ export default function RightSide({ username }) {
           onToggle={notify}               // onToggle est un evenement de Js comme on  Click
           />
           <Profile username={username} className={"profile"} />
-          <ToastContainer className="toaster" bodyClassName="body-toast" />
-          {/* pareil on a recup les 2 classe dans le fichier NavbarRightSideIncomplet.js avec le css en bas */}
+          <ToastAdmin />
       </RightSideStyled>
   )
 }

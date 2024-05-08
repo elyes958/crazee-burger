@@ -1,3 +1,4 @@
+// code fournie dans le ticket F06(va voir si tu te rapelle pas)
 import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
