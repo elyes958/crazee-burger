@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export default function Tab({svg, texte, className}) {
+export default function Tab({svg, texte, className, onClick}) {
   return (
-    <TabStyled className={className}>{svg}{texte}</TabStyled>
+    <TabStyled onClick={onClick} className={className}>{svg}{texte}</TabStyled>
   )
 }
 

@@ -1,11 +1,20 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import PanelContext from "../../../../context/PanelContext";
 
 export default function AdminPanel() {
-  return (
-    <AdminPanelStyled>
-        <p>Ajouter un produit</p>
-    </AdminPanelStyled>
-  )
+  // State
+  const panelContext = useContext(PanelContext);
+
+  if(!panelContext.displayPanel){
+    return (
+      <AdminPanelStyled>
+          <p>Ajouter un produit</p>
+      </AdminPanelStyled>
+    )
+  } else {
+    return null;
+  }
 }
 
 const AdminPanelStyled = styled.div`
