@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from "styled-components";
 import { theme } from '../../../theme';
 import Navbar from './Navbar/Navbar';
 import Main from './Main/Main';
+import Admin from './AdminPanel/Admin';
+import AdminContext from '../../../context/AdminContext';
+
 
 export default function OrderPage() {
   //state
@@ -11,17 +14,25 @@ export default function OrderPage() {
   // la variable parametres contient un objet car useParams nous retourne un objet(la valeur des parametre qu'on a passer dans l'url via le : est la cle qui contient notre valeur)
   // console.log("username: ", username);
   // quand ont console.log en mettant dans une variable comme on a fait avant on voit que notre valeur ce trouver dans la cle username de l'objet
+  const [isModeAdmin, setIsModeAdmin] = useState(false);
 
   //comportements
+  const adminValue = {
+    isModeAdmin: isModeAdmin,
+    setIsModeAdmin: setIsModeAdmin
+  }
 
   //affichage
   return (
+    <AdminContext.Provider value={adminValue}>
     <OrderPageStyled>
        <div className='container'>
           <Navbar username={username} />
           <Main/>
+          <Admin/>
        </div>
     </OrderPageStyled>
+    </AdminContext.Provider>
   )
 }
 

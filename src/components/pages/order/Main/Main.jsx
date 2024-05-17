@@ -4,7 +4,6 @@ import { useState } from "react";
 import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
 import { formatPrice } from "../../../../utils/maths";
 import Menu from "./Menu";
-import Admin from "./Admin";
 
 export default function Main() {
   // State
@@ -36,7 +35,6 @@ export default function Main() {
       {/* <div className="basket">Basket</div> */}
       <Menu/>
       {/* {affichage} */}
-      <Admin/>
     </MainStyled>
   )
 }
