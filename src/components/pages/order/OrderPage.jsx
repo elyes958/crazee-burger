@@ -36,6 +36,7 @@ export default function OrderPage() {
   )
 }
 // ligne 32 le composant Admin que j'avais fait moi avant la correction
+// Le dossier AdminPanel et ce qu'il y'a dedans c'est tout ce que j'ai fait moi, le dossier Admin c'est la correction
 
 
 const OrderPageStyled = styled.div`

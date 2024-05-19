@@ -4,6 +4,7 @@ import { useState } from "react";
 import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
 import { formatPrice } from "../../../../utils/maths";
 import Menu from "./Menu";
+import Admin from "./Admin/Admin";
 
 export default function Main() {
   // State
@@ -35,7 +36,7 @@ export default function Main() {
       {/* <div className="basket">Basket</div> */}
       <div className="menu-and-admin">
         <Menu/>
-        <div className="admin">Admin</div>
+        <Admin/>
       </div>
       {/* {affichage} */}
     </MainStyled>
@@ -43,7 +44,7 @@ export default function Main() {
 }
 
 const MainStyled = styled.main`
-    border: 3px solid green;
+    /* border: 3px solid green; */
     background: ${theme.colors.background_white};
     height: calc(95vh - 10vh);  //on peu egalement faire ce qu'on a fait ligne 58 comme ça, mais la 2eme methode avec flex:1 parai plus simple*/ 
     /* flex: 1;  // quand on utilise flexbox cela permet de dire à l'element de prendre toute la place restante (ici dans notre container du coup notre main va bien j'usqu'a en bas) */
@@ -70,17 +71,6 @@ const MainStyled = styled.main`
     display: grid;  // en mettant ça en plus du overflow: scroll dans l'enfant ça fonctionne je ne sais pas pourquoi à chercher(meme sur la video F07 il a dit il sais pas pk)
     border-bottom-left-radius: ${theme.borderRadius.extraRound}; 
     border-bottom-right-radius: ${theme.borderRadius.extraRound};
-    
-    .admin{
-    background: red;
-    height: 250px;
-    // ces 4 propriete en dessous permette de prendre tout l'espace disponible de gauche à droite et de haut en bas
-    position: absolute;
-    // la position absolute d'un élement il va sortir du flow de tous les elements parents, et il va avoir en référent le premier element parent qu'il rencontre qui a la position relative si il y'en a pas alors par default c'est l'ecran. nous on veut que le premier element parent qui a la position relative soit : div className="menu-and-admin" 
-    bottom: 0;
-    left: 0;
-    right: 0;
-   }
 
    }
    
