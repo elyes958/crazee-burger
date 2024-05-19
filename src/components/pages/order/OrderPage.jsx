@@ -46,7 +46,7 @@ const OrderPageStyled = styled.div`
   /* flex-direction: column; */
   align-items: center;
   .container{
-  background: red;
+  /* background: red; */
   height: 95vh;
   width: 1400px;
   display: flex;
