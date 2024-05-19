@@ -29,12 +29,13 @@ export default function OrderPage() {
        <div className='container'>
           <Navbar username={username} />
           <Main/>
-          <Admin/>
+          {/* <Admin/> */}
        </div>
     </OrderPageStyled>
     </AdminContext.Provider>
   )
 }
+// ligne 32 le composant Admin que j'avais fait moi avant la correction
 
 
 const OrderPageStyled = styled.div`

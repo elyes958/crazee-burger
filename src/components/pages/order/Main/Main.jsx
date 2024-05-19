@@ -33,32 +33,57 @@ export default function Main() {
   return (
     <MainStyled>
       {/* <div className="basket">Basket</div> */}
-      <Menu/>
+      <div className="menu-and-admin">
+        <Menu/>
+        <div className="admin">Admin</div>
+      </div>
       {/* {affichage} */}
     </MainStyled>
   )
 }
 
 const MainStyled = styled.main`
+    border: 3px solid green;
     background: ${theme.colors.background_white};
-    /* height: calc(95vh - 10vh);  ont peu egalement faire ce qu'on a fait ligne 58 comme ça, mais la 2eme methode avec flex:1 parai plus simple*/ 
-    flex: 1;  // quand on utilise flexbox cela permet de dire à l'element de prendre toute la place restante (ici dans notre container du coup notre main va bien j'usqu'a en bas)
+    height: calc(95vh - 10vh);  //on peu egalement faire ce qu'on a fait ligne 58 comme ça, mais la 2eme methode avec flex:1 parai plus simple*/ 
+    /* flex: 1;  // quand on utilise flexbox cela permet de dire à l'element de prendre toute la place restante (ici dans notre container du coup notre main va bien j'usqu'a en bas) */
     border-bottom-left-radius: ${theme.borderRadius.extraRound};  // uniquement le coin en bas à gauche
     border-bottom-right-radius: ${theme.borderRadius.extraRound};
     // ont aurait pu egalement juste coller le border radius du ticket 0 0 15 15 = en bas a droite et a gauche pour les 2 15px
     box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset ;
     display: grid;
     /* grid-template-columns: repeat(4, 240px); */
-    grid-template-columns: 1fr;
+    grid-template-columns:  1fr;
     /* grid-column-gap: 85px; */
     /* grid-template-rows: repeat(4, 330px); */
     /* grid-row-gap: 60px; */
     /* padding: 50px 50px 150px;  // avec le padding ça marche, le margin que j'ai mis sur les éléments provoquer des erreurs ça ne fonctionner pas */
-    overflow-y: scroll;  // pour que notre grille et nos elements ne depasse pas du container
+    /* overflow-y: scroll;  // pour que notre grille et nos elements ne depasse pas du container */
 
    /* .basket{
     background: pink;
-   } */ 
+   }  */
+
+   .menu-and-admin{
+    position: relative;
+    overflow-y: hidden;  // le contenu qui depasse sur l'axe y don en hauteur on le met hidden car on veut qu'il soit cacher
+    display: grid;  // en mettant ça en plus du overflow: scroll dans l'enfant ça fonctionne je ne sais pas pourquoi à chercher(meme sur la video F07 il a dit il sais pas pk)
+    border-bottom-left-radius: ${theme.borderRadius.extraRound}; 
+    border-bottom-right-radius: ${theme.borderRadius.extraRound};
+    
+    .admin{
+    background: red;
+    height: 250px;
+    // ces 4 propriete en dessous permette de prendre tout l'espace disponible de gauche à droite et de haut en bas
+    position: absolute;
+    // la position absolute d'un élement il va sortir du flow de tous les elements parents, et il va avoir en référent le premier element parent qu'il rencontre qui a la position relative si il y'en a pas alors par default c'est l'ecran. nous on veut que le premier element parent qui a la position relative soit : div className="menu-and-admin" 
+    bottom: 0;
+    left: 0;
+    right: 0;
+   }
+
+   }
+   
 
    /* h3{
     font-family: "Amatic SC";
