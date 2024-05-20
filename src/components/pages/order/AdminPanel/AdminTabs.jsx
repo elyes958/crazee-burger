@@ -6,7 +6,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { useContext, useState } from "react";
 import PanelContext from "../../../../context/PanelContext";
 import selectTabContext from "../../../../context/selectTabContext";
-
+// ça c'est ce que j'ai fait moi attention car j'ai donner le meme nom à mes composant que ceux de la correction tout le dossier AdminPanel c'etait mon travail donc attention
 
 
 export default function AdminTabs() {
