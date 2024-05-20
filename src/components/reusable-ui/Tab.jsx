@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import { theme } from "../../theme/index.jsx"
 
-export default function Tab({ Icon, onClick, className }) {
+export default function Tab({ label, Icon, onClick, className }) {
   return (
     <TabStyled onClick={onClick} className={className}>
         <div className="icon">{Icon}</div>
+        {label && <span className="label">{label}</span>}
     </TabStyled>
   )
 }
+// ligne 8 on met label dans un span car c'est du texte, par contre span ajoute une marge donc quand pas besoin de label (cas du premier button) on le rend conditionel
 
 const TabStyled = styled.div`
   /* border: 1px solid blue; */
@@ -44,5 +46,9 @@ const TabStyled = styled.div`
   .icon{
     /* border: 1px solid red; */
     display: flex;
+  }
+
+  .label {
+    margin-left: 13px;
   }
 `;
