@@ -4,12 +4,12 @@ import Logo from "../../../reusable-ui/Logo";
 import RightSide from "./RightSide";
 import styled from "styled-components";
 
-export default function Navbar({ username }) {
+export default function Navbar({  }) {
     return (
         <NavbarStyled>
             {/* <Logo className={"logo-order-page"} onClick={() => window.location.reload()} /> */}
             <Logo className={"logo-order-page"} onClick={refreshPage} />
-            <RightSide username={username}/>
+            <RightSide />
         </NavbarStyled>
     )
 }

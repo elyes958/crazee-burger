@@ -1,13 +1,16 @@
 import styled from "styled-components";
 import { theme } from "../../../../theme";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
 import { formatPrice } from "../../../../utils/maths";
 import Menu from "./Menu";
 import Admin from "./Admin/Admin";
+import AdminContext from "../../../../context/AdminContext";
 
 export default function Main() {
   // State
+  const modeAdmin = useContext(AdminContext);
+
   // const [data, setData] = useState(fakeMenu2);
 
   // Comportements
@@ -36,12 +39,14 @@ export default function Main() {
       {/* <div className="basket">Basket</div> */}
       <div className="menu-and-admin">
         <Menu/>
-        <Admin/>
+        {modeAdmin.isModeAdmin && <Admin/>}  
       </div>
       {/* {affichage} */}
     </MainStyled>
   )
 }
+// ligne 42, raccourci quand la 2eme condition ternaire = null/undefined, on ecrit directement comme ça avec le &&,
+// ligne 42 = si la premiere expresion est true alor tu m'affiche le composant Admin sinon tu m'affiche rien
 
 const MainStyled = styled.main`
     /* border: 3px solid green; */

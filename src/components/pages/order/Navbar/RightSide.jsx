@@ -7,7 +7,7 @@ import ToastAdmin from "./ToastAdmin";
 import { toast } from "react-toastify"; // librairie react-tostify voir le site
 import AdminContext from "../../../../context/AdminContext";
 
-export default function RightSide({ username }) {
+export default function RightSide({  }) {
   // state
   // const [isModeAdmin, setIsModeAdmin] = useState(false); // on initialise à false pour que quand on recharge la page le mode Admin soit desactivé ce que l'on veut sur notre ticket
   const modeAdmin = useContext(AdminContext); // j'ai remplacer la ligne en haut par ça pour utiliser useContext en remontant ce state au composant parent de maniere a pouvoir l'utiliser ici et sur le composant Admin et du coup je modifie le state ici ce qui me permet de faire egalement apparaitre le panelAdmin qui est un enfant de la page order tout ça grace à context
@@ -41,7 +41,7 @@ export default function RightSide({ username }) {
           // couleurDuText={"blue"}
           onToggle={notify}               // onToggle est un evenement de Js comme on  Click
           />
-          <Profile username={username} className={"profile"} />
+          <Profile  className={"profile"} />
           <ToastAdmin />
       </RightSideStyled>
   )

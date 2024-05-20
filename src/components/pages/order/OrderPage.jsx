@@ -10,13 +10,15 @@ import AdminContext from '../../../context/AdminContext';
 
 export default function OrderPage() {
   //state
-  const {username} = useParams();
+  // const {username} = useParams();
   // la variable parametres contient un objet car useParams nous retourne un objet(la valeur des parametre qu'on a passer dans l'url via le : est la cle qui contient notre valeur)
   // console.log("username: ", username);
   // quand ont console.log en mettant dans une variable comme on a fait avant on voit que notre valeur ce trouver dans la cle username de l'objet
   const [isModeAdmin, setIsModeAdmin] = useState(false);
 
   //comportements
+
+  //value du context
   const adminValue = {
     isModeAdmin: isModeAdmin,
     setIsModeAdmin: setIsModeAdmin
@@ -27,7 +29,7 @@ export default function OrderPage() {
     <AdminContext.Provider value={adminValue}>
     <OrderPageStyled>
        <div className='container'>
-          <Navbar username={username} />
+          <Navbar />
           <Main/>
           {/* <Admin/> */}
        </div>
