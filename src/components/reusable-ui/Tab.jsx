@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { theme } from "../../theme/index.jsx"
 
-export default function Tab({ Icon }) {
+export default function Tab({ Icon, onClick, className }) {
   return (
-    <TabStyled>
+    <TabStyled onClick={onClick} className={className}>
         <div className="icon">{Icon}</div>
     </TabStyled>
   )
@@ -37,7 +37,7 @@ const TabStyled = styled.div`
   border-color: ${theme.colors.greyLight};
   border-radius: 5px 5px 0px 0px;
 
-  :hover{    // pseudo classe hover
+  &:hover{    // pseudo classe hover, sans le & l'effet ne fonctionner pas
     border-bottom: 2px solid ${theme.colors.white};
   }
 
