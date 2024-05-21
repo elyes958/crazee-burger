@@ -15,13 +15,26 @@ export default function OrderPage() {
   // console.log("username: ", username);
   // quand ont console.log en mettant dans une variable comme on a fait avant on voit que notre valeur ce trouver dans la cle username de l'objet
   const [isModeAdmin, setIsModeAdmin] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  // il a cree un state pour ajouter et un autre pour modifier qui permet de afficher/fermer la fenetre
+  const [isEditSelected, setIsEditSelected] = useState(false);
+  const [isAddSelected, setIsAddSelected] = useState(true);
 
   //comportements
 
   //value du context
   const adminValue = {
     isModeAdmin: isModeAdmin,
-    setIsModeAdmin: setIsModeAdmin
+    setIsModeAdmin: setIsModeAdmin,
+
+    isCollapsed: isCollapsed,
+    setIsCollapsed: setIsCollapsed,
+
+    isEditSelected: isEditSelected,
+    setIsEditSelected: setIsEditSelected,
+
+    isAddSelected: isAddSelected,
+    setIsAddSelected : setIsAddSelected,
   }
 
   //affichage
