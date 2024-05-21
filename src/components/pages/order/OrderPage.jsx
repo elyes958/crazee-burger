@@ -19,6 +19,7 @@ export default function OrderPage() {
   // il a cree un state pour ajouter et un autre pour modifier qui permet de afficher/fermer la fenetre
   const [isEditSelected, setIsEditSelected] = useState(false);
   const [isAddSelected, setIsAddSelected] = useState(true);
+  const [currentTabSelected, setCurrentTabSelected] = useState("add");
 
   //comportements
 
@@ -35,6 +36,9 @@ export default function OrderPage() {
 
     isAddSelected: isAddSelected,
     setIsAddSelected : setIsAddSelected,
+
+    currentTabSelected: currentTabSelected,
+    setCurrentTabSelected: setCurrentTabSelected,
   }
 
   //affichage

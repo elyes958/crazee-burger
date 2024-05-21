@@ -2,15 +2,16 @@ import styled from "styled-components";
 import Tab from "../../../../reusable-ui/Tab.jsx";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { theme } from "../../../../../theme/index.jsx";
-import { AiOutlinePlus } from "react-icons/ai";
+
 import { useContext, useState } from "react";
 import AdminContext from "../../../../../context/AdminContext.jsx";
-import { MdModeEditOutline } from "react-icons/md";
+
+import { getTabsConfig } from "./getTabsConfig.jsx";
 
 
 export default function AdminTabs() {
   // state
-  const {isAddSelected, setIsAddSelected, isCollapsed, setIsCollapsed, isEditSelected, setIsEditSelected, } = useContext(AdminContext);
+  const {isAddSelected, setIsAddSelected, isCollapsed, setIsCollapsed, isEditSelected, setIsEditSelected, currentTabSelected, setCurrentTabSelected } = useContext(AdminContext);
 
   // Comportement
   // const selectAddTab = () => {
@@ -27,51 +28,34 @@ export default function AdminTabs() {
 
   //refacto du code plus haut
   const selectTab = (tabSelected) => { 
-    setIsCollapsed(false);
+    setIsCollapsed(false); // ouvre moi le panel dans tt les cas
 
-    if(tabSelected === "add") {
-      setIsAddSelected(true);
-      setIsEditSelected(false);
-    }
+    // if(tabSelected === "add") {
+    //   setIsAddSelected(true);
+    //   setIsEditSelected(false);
+    // }
     
-    if(tabSelected === "edit") {
-      setIsEditSelected(true);
-      setIsAddSelected(false);
-    }
+    // if(tabSelected === "edit") {
+    //   setIsEditSelected(true);
+    //   setIsAddSelected(false);
+    // }
+
+    // encore de la refacto
+    setCurrentTabSelected(tabSelected); // réactualise l'onglet sélectionné
   }
 
-  // tu peu egalement mettre tout les propriete de tes tab dans ce tableau d'objet et les afficher avec la methode map, c'est une maniere de refacto
-  const tabsConfig = [
-    {
-      label: "",
-      Icon: isCollapsed ? <FiChevronUp/> : <FiChevronDown/>,
-      onClick: () => setIsCollapsed(!isCollapsed),
-      className: isCollapsed ? "is-active" : "",
-    },
+  const tabs = getTabsConfig(currentTabSelected); // on cree une variable sur laquelle on passe le state à tabsConfig qui en a besoin
 
-    {
-      label: "Ajouter un produit",
-      Icon: <AiOutlinePlus/>,
-      onClick: () => selectTab("add"),
-      className: isAddSelected ? "is-active" : "",
-    },
-
-    {
-      label: "Modifier un produit",
-      Icon: <MdModeEditOutline/>,
-      onClick: () => selectTab("edit"),
-      className: isEditSelected ? "is-active" : "",
-    }
-  ]
 
   return (
     <AdminTabsStyled>
+      <Tab label="" Icon={isCollapsed ? <FiChevronUp/> : <FiChevronDown/>} onClick={() => setIsCollapsed(!isCollapsed)} className={isCollapsed ? "is-active" : ""} />
         {/* <Tab label="" Icon={isCollapsed ? <FiChevronUp/> : <FiChevronDown/>} onClick={() => setIsCollapsed(!isCollapsed)} className={isCollapsed ? "is-active" : ""} />
         <Tab label="Ajouter un produit" Icon={<AiOutlinePlus/>} onClick={() => selectTab("add")} className={isAddSelected ? "is-active" : ""} />
         <Tab label="Modifier un produit" Icon={<MdModeEditOutline/>} onClick={() => selectTab("edit")} className={isEditSelected ? "is-active" : ""} /> */}
-        {tabsConfig.map((tab) => {
+        {tabs.map((tab) => {
           return (
-          <Tab label={tab.label} Icon={tab.Icon} onClick={tab.onClick} className={tab.className}/>
+          <Tab label={tab.label} Icon={tab.Icon} onClick={() => selectTab(tab.index)} className={tab.className}/>
           )
         })}
     </AdminTabsStyled>
