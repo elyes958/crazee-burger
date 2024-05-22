@@ -55,7 +55,7 @@ export default function AdminTabs() {
         <Tab label="Modifier un produit" Icon={<MdModeEditOutline/>} onClick={() => selectTab("edit")} className={isEditSelected ? "is-active" : ""} /> */}
         {tabs.map((tab) => {
           return (
-          <Tab label={tab.label} Icon={tab.Icon} onClick={() => selectTab(tab.index)} className={currentTabSelected === tab.index ? "is-active" : ""}/>
+          <Tab key={tab.index} label={tab.label} Icon={tab.Icon} onClick={() => selectTab(tab.index)} className={currentTabSelected === tab.index ? "is-active" : ""}/>
           )
         })}
     </AdminTabsStyled>
