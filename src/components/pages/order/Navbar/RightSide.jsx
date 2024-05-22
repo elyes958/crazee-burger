@@ -2,18 +2,19 @@ import styled from "styled-components";
 import Profile from './Profile';
 import ToggleButton from "../../../reusable-ui/ToggleButton";
 import { theme } from "../../../../theme";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ToastAdmin from "./ToastAdmin";
 import { toast } from "react-toastify"; // librairie react-tostify voir le site
+import AdminContext from "../../../../context/AdminContext";
 
-export default function RightSide({ username }) {
+export default function RightSide({  }) {
   // state
-  const [isModeAdmin, setIsModeAdmin] = useState(false); // on initialise à false pour que quand on recharge la page le mode Admin soit desactivé ce que l'on veut sur notre ticket
-
+  // const [isModeAdmin, setIsModeAdmin] = useState(false); // on initialise à false pour que quand on recharge la page le mode Admin soit desactivé ce que l'on veut sur notre ticket
+  const modeAdmin = useContext(AdminContext); // j'ai remplacer la ligne en haut par ça pour utiliser useContext en remontant ce state au composant parent de maniere a pouvoir l'utiliser ici et sur le composant Admin et du coup je modifie le state ici ce qui me permet de faire egalement apparaitre le panelAdmin qui est un enfant de la page order tout ça grace à context
 
   // Comportement
   const notify = () => {
-    if(!isModeAdmin){
+    if(!modeAdmin.isModeAdmin){
       toast.info("Mode admin activé", {           // toast.info ça vien direct de la librairie(= afficher une info toast) c'est quand tu choisit le type sur la page d'accueil
         // icon: <FaUserSecret size={30} />, // une icone qui vient de react icons
         theme: "dark",
@@ -26,7 +27,7 @@ export default function RightSide({ username }) {
         progress: undefined,
       });
     }
-    setIsModeAdmin(!isModeAdmin);   // quoi qu'il arrive on change le state au clic(de true à false et inversement)
+    modeAdmin.setIsModeAdmin(!modeAdmin.isModeAdmin);   // quoi qu'il arrive on change le state au clic(de true à false et inversement)
   }
 
 
@@ -40,7 +41,7 @@ export default function RightSide({ username }) {
           // couleurDuText={"blue"}
           onToggle={notify}               // onToggle est un evenement de Js comme on  Click
           />
-          <Profile username={username} className={"profile"} />
+          <Profile  className={"profile"} />
           <ToastAdmin />
       </RightSideStyled>
   )

@@ -29,7 +29,7 @@ const spacing = {
 }
 
 const fonts = {
-  size:{
+  size: {
     XXXS: "8px",
     XXS: "10px",
     XS: "12px",
@@ -42,14 +42,14 @@ const fonts = {
     P5: "48px",
     P6: "60px",
   },
-  weights:{
+  weights: {
     light: 300,
     regular: 400,
     medium: 500,
     semiBold: 600,
     bold: 700,
     heavy: 800,
-  }
+  },
 }
 const gridUnit = 8
 const borderRadius = {
@@ -58,6 +58,7 @@ const borderRadius = {
   extraRound: "15px",
   circle: "50%",
 }
+
 const shadows = {
   subtle: "0px -6px 8px -2px rgba(0, 0, 0, 0.1)",
   medium: "-8px 8px 20px 0px rgb(0 0 0 / 20%)",
