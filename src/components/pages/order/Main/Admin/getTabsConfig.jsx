@@ -17,7 +17,7 @@ export const getTabsConfig = (currentTabSelected) => [
     label: "Ajouter un produit",
     Icon: <AiOutlinePlus/>,
     // onClick: () => selectTab("add"),
-    className: currentTabSelected === "add" ? "is-active" : "",
+    // className: currentTabSelected === "add" ? "is-active" : "",
   },
 
   {
@@ -25,6 +25,6 @@ export const getTabsConfig = (currentTabSelected) => [
     label: "Modifier un produit",
     Icon: <MdModeEditOutline/>,
     // onClick: () => selectTab("edit"),
-    className: currentTabSelected === "edit" ? "is-active" : "",
+    // className: currentTabSelected === "edit" ? "is-active" : "",
   }
 ]
