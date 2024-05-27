@@ -17,7 +17,7 @@ export const getTabsConfig = (currentTabSelected) => [
     label: "Ajouter un produit",
     Icon: <AiOutlinePlus/>,
     // onClick: () => selectTab("add"),
-    // className: currentTabSelected === "add" ? "is-active" : "",
+    // className: currentTabSelected === "add" ? "is-active" : "",    // (currentTabSelected) on passe le state en parametre par rapport à ce genre de propriétes qui sont defini en fonction du state
   },
 
   {
