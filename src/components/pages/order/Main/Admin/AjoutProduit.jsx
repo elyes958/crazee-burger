@@ -11,12 +11,13 @@ export default function AjoutProduit() {
 
   //Comportements
   const handleChange = (e) => {
+    console.log(e);
     setImgUrl(e.target.value);
   };
 
   // Affichage  
   return (
-    <AjoutProduitStyled action="AJOUTER UN PRODUIT">
+    <AjoutProduitStyled imgUrl={imgUrl} action="AJOUTER UN PRODUIT">
           <div className="divImg">{imgUrl ? <img src={imgUrl} alt="Produit" /> : <p>Aucune Image</p>}</div>
           <div className="formAndButton">
               <div>
@@ -36,6 +37,7 @@ export default function AjoutProduit() {
     </AjoutProduitStyled>
   )
 }
+// ligne 20: si il y'a quelque chose dans le state tu m'affiche une balise img avec le contenu du state, sinon tu m'affiche la balise p aucune image
 
 const AjoutProduitStyled = styled.form`
    display : grid;
@@ -71,7 +73,7 @@ const AjoutProduitStyled = styled.form`
     width: 215px;
     height: 120px;
     top: -1px;
-    border: 1px #E4E5E9 solid;
+    border: ${props => props.imgUrl ? 'none' : '1px #E4E5E9 solid'};
     border-radius: 5px;
     /* padding: 48px 55px 48px 53px; */
     font-weight: 400;
@@ -82,7 +84,14 @@ const AjoutProduitStyled = styled.form`
     justify-content: center;
     align-items: center;
     overflow: hidden; // pour que l'image ne depasse pas de la div
+
+    img{
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;   // pour que l'image soit bien dimensionner dans la div et prenne tout l'espace du conteneur(Redimension, recadrage et pas de distorsion de l'image)
+    }
    }
+
    .formAndButton{
     display: grid;
     gap: 8px; // du couppas besoin de cree des colonne/row pour utiliser gap, display grid suffit
@@ -90,7 +99,7 @@ const AjoutProduitStyled = styled.form`
     div{
         width: 645px;
         height: 35px;
-        padding: 8px 16px 8px 24px;
+        padding: 8px 16px 0px 24px;
         border: #F5F5F7;
         border-radius: 5px;
         background-color: #F5F5F7;
