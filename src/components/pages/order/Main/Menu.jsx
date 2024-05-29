@@ -9,8 +9,7 @@ import AdminContext from "../../../../context/AdminContext";
 
 export default function Menu() {
   // state
-  const [menu, setMenu]               = useState(fakeMenu2);
-  const {isModeAdmin, setIsModeAdmin} = useContext(AdminContext);
+  const {isModeAdmin, setIsModeAdmin, menu, setMenu} = useContext(AdminContext);
 
   
     return (

@@ -6,6 +6,7 @@ import Navbar from './Navbar/Navbar';
 import Main from './Main/Main';
 import Admin from './AdminPanel/Admin';
 import AdminContext from '../../../context/AdminContext';
+import { fakeMenu2 } from '../../../fakeData/fakeMenu';
 
 
 export default function OrderPage() {
@@ -20,6 +21,7 @@ export default function OrderPage() {
   const [isEditSelected, setIsEditSelected] = useState(false);
   const [isAddSelected, setIsAddSelected] = useState(true);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
+  const [menu, setMenu] = useState(fakeMenu2);
 
   //comportements
 
@@ -39,6 +41,9 @@ export default function OrderPage() {
 
     currentTabSelected: currentTabSelected,
     setCurrentTabSelected: setCurrentTabSelected,
+
+    menu: menu,
+    setMenu: setMenu,
   }
 
   //affichage
