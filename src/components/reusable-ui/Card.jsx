@@ -4,10 +4,10 @@ import { theme } from "../../theme";
 import PrimaryButton from "./PrimaryButton";
 import { TiDelete } from "react-icons/ti";
 
-export default function Card({ title, imageSource, leftDescription, modeAdmin }) {
+export default function Card({ title, imageSource, leftDescription, modeAdmin, onClick }) {
   return (
     <CardStyled modeadmin={modeAdmin} className="produit">
-      {modeAdmin ? <TiDelete /> : null}
+      {modeAdmin ? <TiDelete onClick={onClick} /> : null}
       <div className="image">
         <img src={imageSource} alt={title} />
       </div>

@@ -24,12 +24,13 @@ export default function AjoutProduit() {
 
   };
 
+  
   const handleSubmit = (e) => {
     e.preventDefault(); // Empeche le rechargement de la page
     const newProduct = {
         imageSource: imgurl,
         title      : productName,
-        price      : price, 
+        price      : price,
     };
 
     if(newProduct.imageSource === ""){
@@ -57,7 +58,7 @@ export default function AjoutProduit() {
 
   // Affichage  
   return (
-    <AjoutProduitStyled onSubmit={handleSubmit} imgurl={imgurl} action="AJOUTER UN PRODUIT">
+    <AjoutProduitStyled onSubmit={handleSubmit} imgurl={imgurl} action="AJOUTER UN PRODUIT" >
           <div className="divImg">{imgurl ? <img src={imgurl} alt="Produit" /> : <p>Aucune Image</p>}</div>
           <div className="formAndButton">
               <div>
