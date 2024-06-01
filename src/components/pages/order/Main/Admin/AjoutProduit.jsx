@@ -1,3 +1,4 @@
+// ça c'est le code que j'ai fait moi, pas la correction
 import styled from "styled-components";
 import { FaHamburger } from "react-icons/fa";
 import { BsFillCameraFill } from "react-icons/bs";

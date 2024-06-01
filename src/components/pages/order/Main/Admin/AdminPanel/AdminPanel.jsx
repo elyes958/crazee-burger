@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { theme } from "../../../../../theme";
+import { theme } from "../../../../../../theme";
 import { useContext } from "react";
-import AdminContext from "../../../../../context/AdminContext";
-import { getTabsConfig } from "./getTabsConfig";
-import AjoutProduit from "./AjoutProduit";
+import AdminContext from "../../../../../../context/AdminContext";
+import { getTabsConfig } from "../getTabsConfig";
+import AjoutProduit from "../AjoutProduit";
 
 export default function AdminPanel() {
   const {isAddSelected,  isEditSelected, currentTabSelected } = useContext(AdminContext);
@@ -14,8 +14,8 @@ export default function AdminPanel() {
 
   return (
     <AdminPanelStyled>
-      {/* {currentTabSelected === tabSelected.index && tabSelected.label} */}
-      {currentTabSelected === "add" && <AjoutProduit/>}
+      {currentTabSelected === tabSelected.index && tabSelected.Content}  
+      {/* {currentTabSelected === "add" && <AjoutProduit/>} */}
       {/* {currentTabSelected === "add" && "Ajouter un produit"}
       {currentTabSelected === "edit" && "Modifier un produit"} */}
     </AdminPanelStyled>
