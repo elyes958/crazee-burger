@@ -24,6 +24,14 @@ export default function OrderPage() {
   const [menu, setMenu] = useState(fakeMenu2);
 
   //comportements
+  const handleAdd = (newProduct) => {
+    // Copie du tableau
+    const menuCopy = [...menu]
+    // manip de la copie du tableau
+    const menuUpdated = [newProduct, ...menuCopy]
+    // update du state
+    setMenu(menuUpdated)
+  }
 
   //value du context
   const adminValue = {
@@ -44,6 +52,7 @@ export default function OrderPage() {
 
     menu: menu,
     setMenu: setMenu,
+    handleAdd: handleAdd,
   }
 
   //affichage

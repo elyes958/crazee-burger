@@ -11,13 +11,17 @@ export default function Menu() {
   // state
   const {isModeAdmin, setIsModeAdmin, menu, setMenu} = useContext(AdminContext);
 
-  // Affichage
+  // Comportement
   const handleClicked = (id, menu) => {
+    // Copie du tableau
     const copy = [...menu];
+    // manip de la copie du tableau
     const filterProducts = copy.filter((product) => product.id !== id);
+    // update du state
     setMenu(filterProducts);
   }
   
+  // Affichage
   if(menu.length > 0){
     return (
       <MenuStyled className="menu">
