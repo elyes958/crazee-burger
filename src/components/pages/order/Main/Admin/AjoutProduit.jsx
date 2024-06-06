@@ -25,7 +25,7 @@ export default function AjoutProduit() {
 
   };
 
-  
+  // La solution a ton probleme pour definir des id unique etait de faire ça : id: new Date().getTime() du coup chaque eleemnt ajouter aura un id qui lui est propre qui n'empietra pas sur les id definir de base dans fakeMenu
   const handleSubmit = (e) => {
     e.preventDefault(); // Empeche le rechargement de la page
     const newProduct = {

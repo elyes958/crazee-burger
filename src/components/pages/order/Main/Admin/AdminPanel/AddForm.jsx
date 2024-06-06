@@ -1,31 +1,53 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import AdminContext from "../../../../../../context/AdminContext";
 
+const EMPTY_PRODUCT = {
+    id          : "",
+    title       : "",
+    imageSource : "",
+    price       : 0,
+}
+
 export default function AddForm() {
-  const { handleAdd } = useContext(AdminContext)
   // du coup ont peu egalement faire passer des comportement via le context en le remontant tout en haut dans le composant parent comme on a fait ci dessus
+  const { handleAdd } = useContext(AdminContext);
+  const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);  // plus propre de l'envoyer comme ça
 
-  const newProduct = { 
-    id: new Date().getTime(),
-    title: "Nouveau Produit",
-    imageSource: "",
-    price: 2.5,
- }
-
+  // Comportements
   const handleSubmit = (event) => { 
-    event.prevent.Default();
-    handleAdd(newProduct);
+    event.preventDefault();
+
+    const newProductToAdd = { 
+        // title: newProduct.title,
+        // imageSource: newProduct.imageSource,
+        // price: newProduct.price,
+        // plus simple d'ecrire comme ça ligne 26
+        ...newProduct,
+        id: new Date().getTime(),
+     }
+
+    handleAdd(newProductToAdd); 
    } 
 
-  
+   // Quand un evenement est lie a une balise html, l'evenement contient la balise au niveau de la propriete targer event.target(tout ce qui est associe à la balise)
+   const handleChange = (event) => { 
+    console.log("event.target.value", event.target.value);
+    console.log("event.target", event.target);
+    const newValue = event.target.value;
+    const name     = event.target.name;
+    setNewProduct({ ...newProduct, [name] : newValue });
+   }
+   // ligne 37: [name] = nom de propriete dynamique en JS(dynamic property name en anglais)
+
+  // Affichage
   return (
     <AddFormStyled onSubmit={handleSubmit}>
         <div className="image-prewiew">ImagePrewiew</div>
         <div className="input-fields">
-            <input type="text" placeholder="Nom" />
-            <input type="text" placeholder="Image URL" />
-            <input type="text" placeholder="Prix" />
+            <input name="title" value={newProduct.title} type="text" placeholder="Nom" onChange={handleChange} />
+            <input name="imageSource" value={newProduct.imageSource} type="text" placeholder="Image URL" onChange={handleChange} />
+            <input name="price" value={newProduct.price ? newProduct.price : ""} type="text" placeholder="Prix" onChange={handleChange} />
         </div>
         <button className="submit-button">Submit button</button>
     </AddFormStyled>

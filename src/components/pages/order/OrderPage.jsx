@@ -24,6 +24,7 @@ export default function OrderPage() {
   const [menu, setMenu] = useState(fakeMenu2);
 
   //comportements
+  // oublie pas un comportement qui modifie un state doit etre defini proche de ce state(bonne pratique), la seul exception c'est quand ont a des state assez simple comme un booleen, ou juste une string mais pas sur des state complexe avec array objet
   const handleAdd = (newProduct) => {
     // Copie du tableau
     const menuCopy = [...menu]
@@ -51,7 +52,7 @@ export default function OrderPage() {
     setCurrentTabSelected: setCurrentTabSelected,
 
     menu: menu,
-    setMenu: setMenu,
+    // setMenu: setMenu, faut pas l'envoyer du coup regle bonne pratique voir ligne 27
     handleAdd: handleAdd,
   }
 

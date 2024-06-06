@@ -19,7 +19,7 @@ export default createContext({
     
 
     menu: [],
-    setMenu: () => {},
+    // setMenu: () => {},
     handleAdd: () => {},
 });
 // createContext est une fct de la librairie React qui va prendre en parametre un objet et dans cet objet on aura un certain nombre de propriete qu'on voudra partager sur tt le reste de notre application
