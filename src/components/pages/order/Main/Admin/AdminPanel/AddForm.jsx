@@ -80,3 +80,5 @@ const AddFormStyled = styled.form`
   }
 `;
 
+// sinon pour generer les id il y'a la librairie uuid ou encore plus simple une methode natif à javascript ex: id : crypto.randomUUID() cet methode va generer un id unique
+
