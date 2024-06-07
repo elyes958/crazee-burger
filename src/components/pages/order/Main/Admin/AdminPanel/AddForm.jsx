@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import AdminContext from "../../../../../../context/AdminContext";
+import { FiCheckCircle } from "react-icons/fi";
 
 const EMPTY_PRODUCT = {
     id          : "",
@@ -13,6 +14,7 @@ export default function AddForm() {
   // du coup ont peu egalement faire passer des comportement via le context en le remontant tout en haut dans le composant parent comme on a fait ci dessus
   const { handleAdd } = useContext(AdminContext);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);  // plus propre de l'envoyer comme ça
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Comportements
   const handleSubmit = (event) => { 
@@ -29,7 +31,16 @@ export default function AddForm() {
 
     handleAdd(newProductToAdd);
     setNewProduct(EMPTY_PRODUCT); // on efface les champ après soumission du formulaire en vidant le state
-   } 
+
+    displaySuccessMessage(); // on met le code dans une fct(plus clean)
+  } 
+
+    const displaySuccessMessage = () => {
+        setIsSubmitted(true); // le formulaire a etait soumis donc on passe le state a true pour afficher le message
+        setTimeout(() => {      // premier param fct fléché, le 2eme temps en mili secondes
+            setIsSubmitted(false)   // instruction qui s'execute au bout de 2000 mili secondes(2 seconde)
+        }, 2000)
+    }
 
    // Quand un evenement est lie a une balise html, l'evenement contient la balise au niveau de la propriete targer event.target(tout ce qui est associe à la balise)
    const handleChange = (event) => { 
@@ -52,7 +63,15 @@ export default function AddForm() {
             <input name="imageSource" value={newProduct.imageSource} type="text" placeholder="Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)" onChange={handleChange} />
             <input name="price" value={newProduct.price ? newProduct.price : ""} type="text" placeholder="Prix" onChange={handleChange} />
         </div>
-        <button className="submit-button">Submit button</button>
+        <div className="submit">
+            <button className="submit-button">Submit button</button>
+            {isSubmitted && (
+                <div className="submit-message">
+                     <FiCheckCircle/>
+                     <span>Ajouté avec succés !</span>
+                </div>
+            )}
+        </div>
     </AddFormStyled>
   )
 }
@@ -85,11 +104,19 @@ const AddFormStyled = styled.form`
 
     display: grid; // il a partager nos 3 element input de maniere egale automatiquement
   }
-  .submit-button{
+  .submit{
     background: green;
     grid-area: 4 / -2 / -1 / -1;
-    width: 50%;
+    display: flex;
+    align-items: center;
+    
+    .submit-button{
+      width: 50%;
+    }
 
+    .submit-message{
+      border: 1px solid red;
+    }
   }
 `;
 
