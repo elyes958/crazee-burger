@@ -7,7 +7,10 @@ import { TiDelete } from "react-icons/ti";
 export default function Card({ title, imageSource, leftDescription, modeAdmin, onClick }) {
   return (
     <CardStyled modeadmin={modeAdmin} className="produit">
-      {modeAdmin ? <TiDelete onClick={onClick} /> : null}
+      <button className="delete-button" aria-label="delete-button">
+        <TiDelete className="icon"/>
+      </button>
+      {/* {modeAdmin ? <TiDelete onClick={onClick} /> : null} */}
       <div className="image">
         <img src={imageSource} alt={title} />
       </div>
@@ -23,19 +26,51 @@ export default function Card({ title, imageSource, leftDescription, modeAdmin, o
     </CardStyled>
   )
 }
+// ligne 10 ce que j'ai fait moi
 
 const CardStyled = styled.div`
   background: ${theme.colors.white};
   width: 200px;
   height: 300px;
   display: grid;
-  grid-template-rows: ${props => props.modeadmin ? '1px 65% 1fr' : '65% 1fr'};
+  grid-template-rows: 65% 1fr;
+  /* grid-template-rows: ${props => props.modeadmin ? '1px 65% 1fr' : '65% 1fr'}; */  // ce que j'ai fait moi
   padding: 20px;
   padding-bottom: 10px;
   box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
   border-radius: ${theme.borderRadius.extraRound};
+  position: relative;  // pour que .delete-button ce mette en position absolute par rapport à la carte on lui met position relative et il devient donc le premier parent en relative
 
-  svg{
+  .delete-button {
+    border: 1px solid red;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    color: ${theme.colors.primary};
+    z-index: 2;
+    padding: 0;
+    border: none;
+    background: none;
+
+    .icon{
+      height: 100%;
+      width: 100%;
+    }
+
+    :hover {
+      color: ${theme.colors.red};
+    }
+    :active{
+      color: ${theme.colors.primary};
+    }
+  }
+  // ligne 45, oublie pas quand tu met position absolute il ce met en fct du premier element parent qui a postion relative sinon l'ecran par default, il faut donc ajouter postion relative à la card
+
+  // svg = ce que j'ai fait moi
+  /* svg{
       color: ${theme.colors.primary};
       cursor: pointer;
       width: 30px;
@@ -44,7 +79,7 @@ const CardStyled = styled.div`
       &:hover{
         color: ${theme.colors.redSecondary};
       }
-  }
+  } */
 
   .image {
     width: 100%;

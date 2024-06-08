@@ -59,7 +59,7 @@ export default function AddForm() {
              { newProduct.imageSource ? <img src={newProduct.imageSource} alt={newProduct.title} /> : <div>Aucune Image</div>}
         </div>
         <div className="input-fields">
-            <input name="title" value={newProduct.title} type="text" placeholder="Nomcdu produit (ex: Super Burger)" onChange={handleChange} />
+            <input name="title" value={newProduct.title} type="text" placeholder="Nom du produit (ex: Super Burger)" onChange={handleChange} />
             <input name="imageSource" value={newProduct.imageSource} type="text" placeholder="Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)" onChange={handleChange} />
             <input name="price" value={newProduct.price ? newProduct.price : ""} type="text" placeholder="Prix" onChange={handleChange} />
         </div>
