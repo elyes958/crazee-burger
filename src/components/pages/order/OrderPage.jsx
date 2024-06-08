@@ -46,6 +46,10 @@ export default function OrderPage() {
     setMenu(filterProducts);   // ce comportement doit etre defini proche du state qu'il est en train de modifier
   }
 
+  const resetMenu = () => { // ont envoie le comportement dans le context pour eviter d'envoyer le settter qui lui doit rester dans le composant dans lequel il est defini(bonne pratique)
+    setMenu(fakeMenu2);
+  }
+
   //value du context
   const adminValue = {
     isModeAdmin: isModeAdmin,
@@ -66,7 +70,8 @@ export default function OrderPage() {
     menu: menu,
     // setMenu: setMenu, faut pas l'envoyer du coup regle bonne pratique voir ligne 27
     handleAdd: handleAdd,
-    handleDelete: handleDelete
+    handleDelete: handleDelete,
+    resetMenu: resetMenu,
   }
 
   //affichage

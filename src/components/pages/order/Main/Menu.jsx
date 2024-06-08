@@ -11,45 +11,63 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // state
-  const {isModeAdmin, menu, handleDelete} = useContext(AdminContext);
+  const {isModeAdmin, menu, handleDelete, resetMenu} = useContext(AdminContext);
 
   // Comportement
   const handleCardDelete = (idOfProductToDelete) => {
     handleDelete(idOfProductToDelete)  // il a qu'une instruction tu peu directement l'envoyer dans le onDelete de la card si tu veux
   }
+
+ 
   
   // Affichage
-  if(menu.length > 0){
-    return (
-      <MenuStyled className="menu">
-          {menu.map((produit) => {
-              return (
-              <Card
-               onDelete={() => handleCardDelete(produit.id)}
-               hasDeleteButton={isModeAdmin}
-               key={produit.id}
-               title={produit.title}
-               imageSource={produit.imageSource === "" ? IMAGE_BY_DEFAULT : produit.imageSource} 
-               leftDescription={formatPrice(produit.price)} 
-              /> 
-               // finalement comme on a rendu notre composant reutilisable et donc qu'on a fait remonter le specifique dans les props, alor on est obliger d'utiliser ça et pas l'autre methode en bas
-               // <Card {...produit} />  // meme chose que ligne 5, ecriture bc plus simple spread operator dans un objet, cet methode fonctionne que si vous etes certain que "produit" a tous les élements dont "Product" a besoin. Du coup la methode au dessus est preferable et conseiller.
-          )})};
-      </MenuStyled>
-    )
-  } else if(isModeAdmin) {
-    return (
-      <AdminMenuVide>
-          <span>LE MENU EST VIDE ?</span>
-          <span>CLIQUEZ CI-DESSOUS POUR LE RENITIALISER</span>
-          <button onClick={() => location.reload()}>Générer de nouveaux produits</button>
-      </AdminMenuVide>
-    )
-  } else {
-    return(
-      <span>VICTIME DE NOTRE SUCCES ! :D <br />DE NOUVELLES RECETTES SONT EN COURS DE PREPARATION <br />A TRES VITE !</span>
-    )
-  }
+  
+  if(menu.length === 0) return (
+   <div>
+     <span>Pas de produit</span>
+     <button onClick={resetMenu}>Générer de nouveaux produits</button>
+   </div>
+  )
+  // resetMenu ne prend rien param et n'a qu'une seul instruction donc on peu le definir direct dans le onClick
+
+  return (
+    <MenuStyled className="menu">
+      {menu.map((produit) => {
+        return (
+          <Card
+            onDelete={() => handleCardDelete(produit.id)}
+            hasDeleteButton={isModeAdmin}
+            key={produit.id}
+            title={produit.title}
+            imageSource={produit.imageSource === "" ? IMAGE_BY_DEFAULT : produit.imageSource}
+            leftDescription={formatPrice(produit.price)}
+          />
+          // finalement comme on a rendu notre composant reutilisable et donc qu'on a fait remonter le specifique dans les props, alor on est obliger d'utiliser ça et pas l'autre methode en bas
+          // <Card {...produit} />  // meme chose que ligne 5, ecriture bc plus simple spread operator dans un objet, cet methode fonctionne que si vous etes certain que "produit" a tous les élements dont "Product" a besoin. Du coup la methode au dessus est preferable et conseiller.
+        )
+      })};
+    </MenuStyled>
+  )
+
+
+
+  // ce que j'ai fait moi
+  // if(menu.length > 0){
+  // return (
+  //   <MenuStyled className="menu">
+  // } else if(isModeAdmin) {
+  //   return (
+  //     <AdminMenuVide>
+  //         <span>LE MENU EST VIDE ?</span>
+  //         <span>CLIQUEZ CI-DESSOUS POUR LE RENITIALISER</span>
+  //         <button onClick={() => location.reload()}>Générer de nouveaux produits</button>
+  //     </AdminMenuVide>
+  //   )
+  // } else {
+  //   return(
+  //     <span>VICTIME DE NOTRE SUCCES ! :D <br />DE NOUVELLES RECETTES SONT EN COURS DE PREPARATION <br />A TRES VITE !</span>
+  //   )
+  // }
     
  
 }
