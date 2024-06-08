@@ -11,16 +11,11 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // state
-  const {isModeAdmin, setIsModeAdmin, menu, setMenu} = useContext(AdminContext);
+  const {isModeAdmin, menu, handleDelete} = useContext(AdminContext);
 
   // Comportement
-  const handleClicked = (id, menu) => {
-    // Copie du tableau
-    const copy = [...menu];
-    // manip de la copie du tableau
-    const filterProducts = copy.filter((product) => product.id !== id);
-    // update du state
-    setMenu(filterProducts);
+  const handleCardDelete = (idOfProductToDelete) => {
+    handleDelete(idOfProductToDelete)  // il a qu'une instruction tu peu directement l'envoyer dans le onDelete de la card si tu veux
   }
   
   // Affichage
@@ -30,7 +25,7 @@ export default function Menu() {
           {menu.map((produit) => {
               return (
               <Card
-               onClick={() => handleClicked(produit.id, menu)}
+               onDelete={() => handleCardDelete(produit.id)}
                hasDeleteButton={isModeAdmin}
                key={produit.id}
                title={produit.title}

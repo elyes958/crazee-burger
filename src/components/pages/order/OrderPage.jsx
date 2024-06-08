@@ -34,6 +34,18 @@ export default function OrderPage() {
     setMenu(menuUpdated)
   }
 
+  const handleDelete = (idOfProductToDelete) => {
+    // Copie du tableau
+    const copy = [...menu];
+
+    // manip de la copie du tableau
+    const filterProducts = copy.filter((product) => product.id !== idOfProductToDelete);
+    console.log("filterProducts: ", filterProducts);
+
+    // update du state
+    setMenu(filterProducts);   // ce comportement doit etre defini proche du state qu'il est en train de modifier
+  }
+
   //value du context
   const adminValue = {
     isModeAdmin: isModeAdmin,
@@ -54,6 +66,7 @@ export default function OrderPage() {
     menu: menu,
     // setMenu: setMenu, faut pas l'envoyer du coup regle bonne pratique voir ligne 27
     handleAdd: handleAdd,
+    handleDelete: handleDelete
   }
 
   //affichage
