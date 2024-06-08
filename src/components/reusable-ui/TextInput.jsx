@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
 
-export default function TextInput({value, onChange, icon, ...restProps}) {
+export default function TextInput({value, onChange, icon, className, ...restProps}) {
     // console.log("restProps: ", restProps);
   return (
-      <InputStyled>
+      <InputStyled className={className}>
           <div className="icon">{icon && icon}</div>
           <input type="text"
               value={value}
@@ -22,7 +22,7 @@ export default function TextInput({value, onChange, icon, ...restProps}) {
 
 const InputStyled = styled.div`
         /* border: 1px solid red; */
-        background-color: #fff;
+        background-color: ${theme.colors.white};
         border-radius: ${theme.borderRadius.round};
         display: flex;
         align-items: center;
