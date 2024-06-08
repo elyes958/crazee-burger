@@ -4,12 +4,12 @@ import { theme } from "../../theme";
 import PrimaryButton from "./PrimaryButton";
 import { TiDelete } from "react-icons/ti";
 
-export default function Card({ title, imageSource, leftDescription, modeAdmin, onClick }) {
+export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onClick }) {
   return (
-    <CardStyled modeadmin={modeAdmin} className="produit">
-      <button className="delete-button" aria-label="delete-button">
+    <CardStyled hasDeleteButton={hasDeleteButton} className="produit">
+      {hasDeleteButton && <button className="delete-button" aria-label="delete-button">
         <TiDelete className="icon"/>
-      </button>
+      </button>}
       {/* {modeAdmin ? <TiDelete onClick={onClick} /> : null} */}
       <div className="image">
         <img src={imageSource} alt={title} />
