@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
 import styled from "styled-components";
-import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
-import { theme } from "../../../../theme";
-import Card from "../../../reusable-ui/Card";
-import { formatPrice } from "../../../../utils/maths";
-import AdminContext from "../../../../context/AdminContext";
+import { fakeMenu2 } from "../../../../../fakeData/fakeMenu";
+import { theme } from "../../../../../theme";
+import Card from "../../../../reusable-ui/Card";
+import { formatPrice } from "../../../../../utils/maths";
+import AdminContext from "../../../../../context/AdminContext";
+import EmptyMenuAdmin from "./EmptyMenuAdmin";
+import EmptyMenuClient from "./EmptyMenuClient";
 // import Product from "./Product";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
@@ -22,12 +24,10 @@ export default function Menu() {
   
   // Affichage
   
-  if(menu.length === 0) return (
-   <div>
-     <span>Pas de produit</span>
-     <button onClick={resetMenu}>Générer de nouveaux produits</button>
-   </div>
-  )
+  if(menu.length === 0) {
+  if (!isModeAdmin) return <EmptyMenuClient/>
+  return <EmptyMenuAdmin onReset={resetMenu} /> // on peu direct lui envoyer du specifique car on sais qu'on ne va pas rendre ce composant reutilisable
+ } 
   // resetMenu ne prend rien param et n'a qu'une seul instruction donc on peu le definir direct dans le onClick
 
   return (
