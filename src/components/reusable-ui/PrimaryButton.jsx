@@ -5,7 +5,7 @@ export default function PrimaryButton({label, icon}) {
       <PrimaryButtonStyled>
           {/* <Link to={`/order/${inputValue}`}> */}
           <span>{label}</span>
-          {icon}
+          <div className="icon">{icon && icon}</div>
           {/* </Link> */}
       </PrimaryButtonStyled>
   )
@@ -46,6 +46,13 @@ const PrimaryButtonStyled = styled.button`
         &:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+        }
+
+        .icon{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
         }
 `;
 
