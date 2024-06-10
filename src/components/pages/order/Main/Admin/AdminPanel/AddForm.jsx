@@ -3,6 +3,11 @@ import styled from "styled-components";
 import AdminContext from "../../../../../../context/AdminContext";
 import { FiCheckCircle } from "react-icons/fi";
 import { theme } from "../../../../../../theme";
+// import { TextInput } from "../../../../../reusable-ui/TextInput"; //ctrl shift H pour importe le lien toi meme(ici mon erreur a etait de l'importer entre {} on fait pas ça quand on importe un composant)
+import { FaHamburger } from "react-icons/fa";
+import { BsFillCameraFill } from "react-icons/bs";
+import { MdOutlineEuro } from "react-icons/md";
+import TextInput from "../../../../../reusable-ui/TextInput";
 
 const EMPTY_PRODUCT = {
     id          : "",
@@ -60,9 +65,36 @@ export default function AddForm() {
              { newProduct.imageSource ? <img src={newProduct.imageSource} alt={newProduct.title} /> : <div className="empty-image">Aucune Image</div>}
         </div>
         <div className="input-fields">
-            <input name="title" value={newProduct.title} type="text" placeholder="Nom du produit (ex: Super Burger)" onChange={handleChange} />
-            <input name="imageSource" value={newProduct.imageSource} type="text" placeholder="Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)" onChange={handleChange} />
-            <input name="price" value={newProduct.price ? newProduct.price : ""} type="text" placeholder="Prix" onChange={handleChange} />
+          <TextInput
+             name="title" 
+             value={newProduct.title} 
+             type="text" 
+             placeholder="Nom du produit (ex: Super Burger)" 
+             onChange={handleChange}
+             icon={<FaHamburger/>}
+            //  className={"inputDuAddForm"}
+             version="minimalist"
+          />
+          <TextInput 
+            name="imageSource" 
+            value={newProduct.imageSource} 
+            type="text" 
+            placeholder="Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)" 
+            onChange={handleChange}
+            icon={<BsFillCameraFill/>}
+            // className={"inputDuAddForm"}
+            version="minimalist"
+          />
+          <TextInput 
+            name="price" 
+            value={newProduct.price ? newProduct.price : ""} 
+            type="text" 
+            placeholder="Prix" 
+            onChange={handleChange}
+            icon={<MdOutlineEuro/>}
+            // className={"inputDuAddForm"}
+            version="minimalist"
+          />
         </div>
         <div className="submit">
             <button className="submit-button">Submit button</button>
@@ -86,6 +118,7 @@ const AddFormStyled = styled.form`
   width: 70%;
   grid-column-gap: 20px;
   grid-row-gap: 8px;
+
 
   .image-prewiew{
     /* background: red; */
@@ -114,10 +147,11 @@ const AddFormStyled = styled.form`
     }
   }
   .input-fields{
-    background: blue;
+    /* background: blue; */
     grid-area: 1 / 2 / -2 / 3;      // grid area d'abord la ligne puis la colonne: 1er valeur ligne 2eme valeur colonne pour coin superieur gauche puis la meme chose pour coin inferieur droit
 
     display: grid; // il a partager nos 3 element input de maniere egale automatiquement
+    grid-row-gap: 8px;
   }
   .submit{
     background: green;
