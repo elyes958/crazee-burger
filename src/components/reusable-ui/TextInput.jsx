@@ -59,10 +59,14 @@ const TextInputStyled = styled.div`
         ${(props) => (props.version === "minimalist" && extraMinimalistStyle)}; */
 
         // Refacto
-        ${(props) => {
+        /* ${(props) => {
             if (props.version === "normal") return extraNormalStyle
             if (props.version === "minimalist") return extraMinimalistStyle
-        }}
+        }} */
+
+        // ligne 100
+        ${(props) => extraStyle[props.version]}
+        // on peu meme destructurer props en faisant {version} pour extraire directement version et eviter d'ecrire props.version
 `;
 
 // on ajoute ici ce qui differe selon les version, on garde en haut le style qui est commun à tout les textInput
@@ -94,3 +98,9 @@ const extraMinimalistStyle = css`
         }
     }
 `;
+
+// exemple du "dictionnaire" refacto utiliser par les dev senior
+const extraStyle = {
+    normal: extraNormalStyle,
+    minimalist: extraMinimalistStyle,
+}
