@@ -1,7 +1,7 @@
 // Ticket f05 live ama 2 sur 3, fichier de corection pour aller plus vite avec le css qu'on a pas fait en video, Card remplace Products
 import styled from "styled-components";
 import { theme } from "../../theme";
-import PrimaryButton from "./PrimaryButton";
+import Button from "./Button";
 import { TiDelete } from "react-icons/ti";
 
 export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete }) {
@@ -19,7 +19,7 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
         <div className="description">
           <div className="left-description">{leftDescription}</div>
           <div className="right-description">
-            <PrimaryButton className="primary-button" label={"Ajouter"} />
+            <Button className="primary-button" label={"Ajouter"} />
           </div>
         </div>
       </div>

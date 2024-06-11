@@ -67,6 +67,7 @@ const TextInputStyled = styled.div`
         // ligne 100
         ${(props) => extraStyle[props.version]}
         // on peu meme destructurer props en faisant {version} pour extraire directement version et eviter d'ecrire props.version
+        // rappel les [] sur un objet = ont veu acceder à la valeur d'une propriete dynamiquement car on ne sais pas à l'avance laquelle sera passer
 `;
 
 // on ajoute ici ce qui differe selon les version, on garde en haut le style qui est commun à tout les textInput
