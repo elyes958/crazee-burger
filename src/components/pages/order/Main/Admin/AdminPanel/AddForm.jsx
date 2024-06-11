@@ -10,7 +10,7 @@ import { MdOutlineEuro } from "react-icons/md";
 import TextInput from "../../../../../reusable-ui/TextInput";
 import Button from "../../../../../reusable-ui/Button.jsx";
 
-const EMPTY_PRODUCT = {
+export const EMPTY_PRODUCT = {
     id          : "",
     title       : "",
     imageSource : "",
@@ -19,8 +19,7 @@ const EMPTY_PRODUCT = {
 
 export default function AddForm() {
   // du coup ont peu egalement faire passer des comportement via le context en le remontant tout en haut dans le composant parent comme on a fait ci dessus
-  const { handleAdd } = useContext(AdminContext);
-  const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);  // plus propre de l'envoyer comme ça
+  const { handleAdd, newProduct, setNewProduct } = useContext(AdminContext);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Comportements
