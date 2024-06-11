@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme } from "../../../../../../theme";
 
+
 export default function ImagePrewiew({ newProduct }) {
   return (
       <ImagePrewiewStyled>

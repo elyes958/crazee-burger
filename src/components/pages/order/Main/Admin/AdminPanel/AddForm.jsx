@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import AdminContext from "../../../../../../context/AdminContext";
-import { FiCheckCircle } from "react-icons/fi";
+
 import { theme } from "../../../../../../theme";
 // import { TextInput } from "../../../../../reusable-ui/TextInput"; //ctrl shift H pour importe le lien toi meme(ici mon erreur a etait de l'importer entre {} on fait pas ça quand on importe un composant)
 import { FaHamburger } from "react-icons/fa";
@@ -10,6 +10,7 @@ import { MdOutlineEuro } from "react-icons/md";
 import TextInput from "../../../../../reusable-ui/TextInput";
 import Button from "../../../../../reusable-ui/Button.jsx";
 import ImagePrewiew from "./ImagePrewiew.jsx";
+import SubmitMessage from "./SubmitMessage.jsx";
 
 export const EMPTY_PRODUCT = {
     id          : "",
@@ -98,10 +99,7 @@ export default function AddForm() {
         <div className="submit">
             <Button className="submit-button" label={"Ajouter un nouveau produit au menu"} version="success" />
             {isSubmitted && (
-                <div className="submit-message">
-                     <FiCheckCircle className="icon"/>
-                     <span className="message">Ajouté avec succés !</span>
-                </div>
+             <SubmitMessage/>
             )}
         </div>
     </AddFormStyled>
@@ -137,29 +135,6 @@ const AddFormStyled = styled.form`
     
     .submit-button{
       width: 50%;
-    }
-
-    .submit-message{
-      /* border: 1px solid red; */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-left: 5px;
-
-      .icon{
-        color: ${theme.colors.success};
-        margin-left: 10px;
-        width: 1em;
-        height: 1em;
-        border: 1px solid ${theme.colors.success};
-        border-radius: 50%;
-        vertical-align: middle;
-      }
-      .message{
-        margin-left: 5px;
-        font-size: ${theme.fonts.size.SM};
-        color: ${theme.colors.success};
-      }
     }
   }
 `;
