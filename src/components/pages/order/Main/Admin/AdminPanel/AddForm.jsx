@@ -9,6 +9,7 @@ import { BsFillCameraFill } from "react-icons/bs";
 import { MdOutlineEuro } from "react-icons/md";
 import TextInput from "../../../../../reusable-ui/TextInput";
 import Button from "../../../../../reusable-ui/Button.jsx";
+import ImagePrewiew from "./ImagePrewiew.jsx";
 
 export const EMPTY_PRODUCT = {
     id          : "",
@@ -61,9 +62,7 @@ export default function AddForm() {
   // Affichage
   return (
     <AddFormStyled onSubmit={handleSubmit}>
-        <div className="image-prewiew">
-             { newProduct.imageSource ? <img src={newProduct.imageSource} alt={newProduct.title} /> : <div className="empty-image">Aucune Image</div>}
-        </div>
+        <ImagePrewiew newProduct={newProduct} />
         <div className="input-fields">
           <TextInput
              name="title" 
@@ -120,32 +119,7 @@ const AddFormStyled = styled.form`
   grid-row-gap: 8px;
 
 
-  .image-prewiew{
-    /* background: red; */
-    grid-area: 1 / 1 / 4 / 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    img{
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        object-position: center;
-    }
-
-    .empty-image{
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid ${theme.colors.greyLight};
-      line-height: 1.5;
-      color: ${theme.colors.greySemiDark};
-      border-radius: ${theme.borderRadius.round};
-    }
-  }
+  
   .input-fields{
     /* background: blue; */
     grid-area: 1 / 2 / -2 / 3;      // grid area d'abord la ligne puis la colonne: 1er valeur ligne 2eme valeur colonne pour coin superieur gauche puis la meme chose pour coin inferieur droit
