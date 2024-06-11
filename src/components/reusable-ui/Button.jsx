@@ -3,16 +3,16 @@ import { theme } from "../../theme";
 
 export default function Button({label, icon, version="normal"}) {
   return (
-      <Button version={version}>
+      <ButtonStyled version={version}>
           {/* <Link to={`/order/${inputValue}`}> */}
           <span>{label}</span>
           <div className="icon">{icon && icon}</div>
           {/* </Link> */}
-      </Button>
+      </ButtonStyled>
   )
 }
 
-const Button = styled.button`
+const ButtonStyled = styled.button`
    ${(props) => props.version === "normal" && extraStylePrimary};
    ${(props) => props.version === "success" && extraStyleSuccess};
    
