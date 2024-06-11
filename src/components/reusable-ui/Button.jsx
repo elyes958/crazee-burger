@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 import { theme } from "../../theme";
 
-export default function Button({label, icon, version="normal"}) {
+export default function Button({label, icon, version="normal", onClick}) {
   return (
-      <ButtonStyled version={version}>
+      <ButtonStyled version={version} onClick={onClick}>
           {/* <Link to={`/order/${inputValue}`}> */}
           <span>{label}</span>
           <div className="icon">{icon && icon}</div>
