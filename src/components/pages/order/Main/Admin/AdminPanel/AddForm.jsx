@@ -4,13 +4,12 @@ import AdminContext from "../../../../../../context/AdminContext";
 
 import { theme } from "../../../../../../theme";
 // import { TextInput } from "../../../../../reusable-ui/TextInput"; //ctrl shift H pour importe le lien toi meme(ici mon erreur a etait de l'importer entre {} on fait pas ça quand on importe un composant)
-import { FaHamburger } from "react-icons/fa";
-import { BsFillCameraFill } from "react-icons/bs";
-import { MdOutlineEuro } from "react-icons/md";
+
 import TextInput from "../../../../../reusable-ui/TextInput";
 import Button from "../../../../../reusable-ui/Button.jsx";
 import ImagePrewiew from "./ImagePrewiew.jsx";
 import SubmitMessage from "./SubmitMessage.jsx";
+import { getInputTextsConfig } from "./inputTextConfig.jsx";
 
 export const EMPTY_PRODUCT = {
     id          : "",
@@ -60,12 +59,24 @@ export default function AddForm() {
    }
    // ligne 37: [name] = nom de propriete dynamique en JS(dynamic property name en anglais)
 
+  const inputTexts = getInputTextsConfig(newProduct);
+
   // Affichage
   return (
     <AddFormStyled onSubmit={handleSubmit}>
         <ImagePrewiew newProduct={newProduct} />
         <div className="input-fields">
-          <TextInput
+          {inputTexts.map((input) => (
+             <TextInput
+              name={input.name}
+              value={input.value} 
+              placeholder={input.placeholder} 
+              onChange={handleChange}
+              icon={input.Icon}
+              version="minimalist"
+              />
+            ))}
+          {/* <TextInput
              name="title" 
              value={newProduct.title} 
              type="text" 
@@ -94,7 +105,7 @@ export default function AddForm() {
             icon={<MdOutlineEuro/>}
             // className={"inputDuAddForm"}
             version="minimalist"
-          />
+          /> */}
         </div>
         <div className="submit">
             <Button className="submit-button" label={"Ajouter un nouveau produit au menu"} version="success" />
