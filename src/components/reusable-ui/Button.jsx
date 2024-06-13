@@ -13,10 +13,10 @@ export default function Button({label, icon, version="normal", onClick}) {
 }
 
 const ButtonStyled = styled.button`
-   ${(props) => props.version === "normal" && extraStylePrimary};
-   ${(props) => props.version === "success" && extraStyleSuccess};
+   /* ${(props) => props.version === "normal" && extraStylePrimary};
+   ${(props) => props.version === "success" && extraStyleSuccess}; */
    
-   ${(props) => extraStyle[props.version]};
+   ${(props) => extraStyle[props.version]}
 `;
 // Quand ont rend nos composant reutilisable comme celui la ont fait remonter les props dans le composant parent(tout le specifique quoi) et quand ont lui passe les props(envoie les donnee) ont appelle ça "hydrater un composant"
 
