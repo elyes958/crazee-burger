@@ -3,7 +3,7 @@ import { theme } from "../../../../theme";
 import { useContext, useState } from "react";
 import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
 import { formatPrice } from "../../../../utils/maths";
-import Menu from "./Menu";
+import Menu from "./Menu/Menu";
 import Admin from "./Admin/Admin";
 import AdminContext from "../../../../context/AdminContext";
 

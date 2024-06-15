@@ -6,6 +6,8 @@ import Navbar from './Navbar/Navbar';
 import Main from './Main/Main';
 import Admin from './AdminPanel/Admin';
 import AdminContext from '../../../context/AdminContext';
+import { fakeMenu2 } from '../../../fakeData/fakeMenu';
+import { EMPTY_PRODUCT } from './Main/Admin/AdminPanel/AddForm';
 
 
 export default function OrderPage() {
@@ -20,8 +22,35 @@ export default function OrderPage() {
   const [isEditSelected, setIsEditSelected] = useState(false);
   const [isAddSelected, setIsAddSelected] = useState(true);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
+  const [menu, setMenu] = useState(fakeMenu2);
+  const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);  // plus propre de l'envoyer comme ça
 
   //comportements
+  // oublie pas un comportement qui modifie un state doit etre defini proche de ce state(bonne pratique), la seul exception c'est quand ont a des state assez simple comme un booleen, ou juste une string mais pas sur des state complexe avec array objet
+  const handleAdd = (newProduct) => {
+    // Copie du tableau
+    const menuCopy = [...menu]
+    // manip de la copie du tableau
+    const menuUpdated = [newProduct, ...menuCopy]
+    // update du state
+    setMenu(menuUpdated)
+  }
+
+  const handleDelete = (idOfProductToDelete) => {
+    // Copie du tableau
+    const copy = [...menu];
+
+    // manip de la copie du tableau
+    const filterProducts = copy.filter((product) => product.id !== idOfProductToDelete);
+    console.log("filterProducts: ", filterProducts);
+
+    // update du state
+    setMenu(filterProducts);   // ce comportement doit etre defini proche du state qu'il est en train de modifier
+  }
+
+  const resetMenu = () => { // ont envoie le comportement dans le context pour eviter d'envoyer le settter qui lui doit rester dans le composant dans lequel il est defini(bonne pratique)
+    setMenu(fakeMenu2);
+  }
 
   //value du context
   const adminValue = {
@@ -39,6 +68,14 @@ export default function OrderPage() {
 
     currentTabSelected: currentTabSelected,
     setCurrentTabSelected: setCurrentTabSelected,
+
+    menu: menu,
+    // setMenu: setMenu, faut pas l'envoyer du coup regle bonne pratique voir ligne 27
+    handleAdd: handleAdd,
+    handleDelete: handleDelete,
+    resetMenu: resetMenu,
+    newProduct: newProduct,
+    setNewProduct: setNewProduct,
   }
 
   //affichage
