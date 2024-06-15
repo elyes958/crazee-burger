@@ -1,5 +1,5 @@
 // Ticket f05 live ama 2 sur 3, fichier de corection pour aller plus vite avec le css qu'on a pas fait en video, Card remplace Products
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../theme";
 import Button from "./Button";
 import { TiDelete } from "react-icons/ti";
@@ -19,7 +19,7 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
         <div className="description">
           <div className="left-description">{leftDescription}</div>
           <div className="right-description">
-            <Button className="primary-button" label={"Ajouter"} />
+            <Button className="primary-button" label={"Ajouter"} version="primary" />
           </div>
         </div>
       </div>
@@ -29,6 +29,8 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
 // ligne 10 ce que j'ai fait moi
 
 const CardStyled = styled.div`
+  ${(props) => (props.hasDeleteButton && modeAdmin) }
+
   background: ${theme.colors.white};
   width: 200px;
   height: 300px;
@@ -146,6 +148,14 @@ const CardStyled = styled.div`
     }
   }
 `
+
+const modeAdmin = css`
+  &:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+    border: 1px solid ${theme.colors.primary};
+  }
+`;
 
 // Explication ligne 9:
 
