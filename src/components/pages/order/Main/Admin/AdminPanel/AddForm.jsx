@@ -49,7 +49,7 @@ export default function AddForm() {
         }, 2000)
     }
 
-   // Quand un evenement est lie a une balise html, l'evenement contient la balise au niveau de la propriete targer event.target(tout ce qui est associe à la balise)
+   // Quand un evenement est lie a une balise html, l'evenement contient la balise au niveau de la propriete target event.target(tout ce qui est associe à la balise)
    const handleChange = (event) => { 
     console.log("event.target.value", event.target.value);
     console.log("event.target", event.target);

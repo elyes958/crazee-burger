@@ -13,15 +13,26 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // state
-  const {isModeAdmin, menu, handleDelete, resetMenu} = useContext(AdminContext);
+  const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, idEditCard, setIdEditCard, setIsCollapsed} = useContext(AdminContext);
 
   // Comportement
   const handleCardDelete = (idOfProductToDelete) => {
     handleDelete(idOfProductToDelete)  // il a qu'une instruction tu peu directement l'envoyer dans le onDelete de la card si tu veux
   }
-
- 
   
+  const handleClicked = (id) => { 
+    console.log("id : " + id);
+    setCurrentTabSelected("edit");
+    setIsCollapsed(false);
+
+    if(idEditCard === id){
+      setIdEditCard(null);
+    } else {
+      setIdEditCard(id);
+    }
+
+  }
+
   // Affichage
   
   if(menu.length === 0) {
@@ -41,6 +52,7 @@ export default function Menu() {
             title={produit.title}
             imageSource={produit.imageSource === "" ? IMAGE_BY_DEFAULT : produit.imageSource}
             leftDescription={formatPrice(produit.price)}
+            onClicked={() => handleClicked(produit.id)}
           />
           // finalement comme on a rendu notre composant reutilisable et donc qu'on a fait remonter le specifique dans les props, alor on est obliger d'utiliser ça et pas l'autre methode en bas
           // <Card {...produit} />  // meme chose que ligne 5, ecriture bc plus simple spread operator dans un objet, cet methode fonctionne que si vous etes certain que "produit" a tous les élements dont "Product" a besoin. Du coup la methode au dessus est preferable et conseiller.

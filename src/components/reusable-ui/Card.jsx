@@ -4,12 +4,12 @@ import { theme } from "../../theme";
 import Button from "./Button";
 import { TiDelete } from "react-icons/ti";
 
-export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete }) {
+export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked }) {
   return (
-    <CardStyled hasDeleteButton={hasDeleteButton} className="produit">
-      {hasDeleteButton && <button className="delete-button" aria-label="delete-button" onClick={onDelete}>
-        <TiDelete className="icon"/>
-      </button>}
+    <CardStyled hasDeleteButton={hasDeleteButton} className="produit" onClick={hasDeleteButton ? onClicked : null} >
+      {hasDeleteButton && (<button className="delete-button" aria-label="delete-button" onClick={onDelete}>
+        <TiDelete className="icon" />
+      </button>)}
       {/* {modeAdmin ? <TiDelete onClick={onClick} /> : null} */}
       <div className="image">
         <img src={imageSource} alt={title} />
@@ -29,7 +29,7 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
 // ligne 10 ce que j'ai fait moi
 
 const CardStyled = styled.div`
-  ${(props) => (props.hasDeleteButton && modeAdmin) }
+  ${(props) => (props.hasDeleteButton && modeAdmin)}
 
   background: ${theme.colors.white};
   width: 200px;
