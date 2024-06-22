@@ -24,13 +24,16 @@ export default createContext({
     handleDelete:() => {},
     resetMenu: () => {},
 
-    newProduct: [],
+    newProduct: {},
     setNewProduct:() => {},
 
-    idEditCard: null,
-    setIdEditCard: () => {},
+    // idEditCard: null,   // ce que j'ai fait moi
+    // setIdEditCard: () => {}, //
 
-    handleModify: () => {},
+    // handleModify: () => {}, //
+
+    productSelected: {},
+    setProductSelected: () => {},
 });
 // createContext est une fct de la librairie React qui va prendre en parametre un objet et dans cet objet on aura un certain nombre de propriete qu'on voudra partager sur tt le reste de notre application
 // pas besoin de cree plusieurs fichier context tu peu tous les mettre dans le meme comme on a fait la avec tous nos state

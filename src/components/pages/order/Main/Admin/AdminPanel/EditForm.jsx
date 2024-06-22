@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { HiCursorClick } from "react-icons/hi";
 import { useContext } from "react";
 import AdminContext from "../../../../../../context/AdminContext";
 import ImagePrewiew from "./ImagePrewiew";
@@ -11,7 +10,7 @@ import { theme } from "../../../../../../theme";
 import HintMessage from "./HintMessage";
 
 export default function EditForm() {
-  const { menu, currentTabSelected, idEditCard, handleModify } = useContext(AdminContext);
+  const { menu, currentTabSelected, idEditCard, handleModify, productSelected } = useContext(AdminContext);
 
   const cardToModify = menu.find((card) => card.id === idEditCard);
 

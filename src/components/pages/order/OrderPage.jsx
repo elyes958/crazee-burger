@@ -7,7 +7,8 @@ import Main from './Main/Main';
 import Admin from './AdminPanel/Admin';
 import AdminContext from '../../../context/AdminContext';
 import { fakeMenu2 } from '../../../fakeData/fakeMenu';
-import { EMPTY_PRODUCT } from './Main/Admin/AdminPanel/AddForm';
+import { EMPTY_PRODUCT } from '../../../enums/product';
+
 
 
 export default function OrderPage() {
@@ -24,7 +25,9 @@ export default function OrderPage() {
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
   const [menu, setMenu] = useState(fakeMenu2);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);  // plus propre de l'envoyer comme ça
-  const [idEditCard, setIdEditCard] = useState(null);
+  // const [idEditCard, setIdEditCard] = useState(null);  // ce que j'ai fait moi
+  const [productSelected, setProductSelected] = useState({EMPTY_PRODUCT});
+
 
   //comportements
   // oublie pas un comportement qui modifie un state doit etre defini proche de ce state(bonne pratique), la seul exception c'est quand ont a des state assez simple comme un booleen, ou juste une string mais pas sur des state complexe avec array objet
@@ -97,10 +100,13 @@ export default function OrderPage() {
     newProduct: newProduct,
     setNewProduct: setNewProduct,
 
-    idEditCard: idEditCard,
-    setIdEditCard: setIdEditCard,
+    // idEditCard: idEditCard,  // ce que j'ai fait moi
+    // setIdEditCard: setIdEditCard, // 
 
-    handleModify: handleModify,
+    // handleModify: handleModify, //
+
+    productSelected: productSelected,
+    setProductSelected: setProductSelected
   }
 
   //affichage

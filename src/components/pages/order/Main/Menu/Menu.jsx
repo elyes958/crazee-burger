@@ -13,23 +13,31 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // state
-  const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, idEditCard, setIdEditCard, setIsCollapsed} = useContext(AdminContext);
+  const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, idEditCard, setIdEditCard, setIsCollapsed, setProductSelected} = useContext(AdminContext);
 
   // Comportement
   const handleCardDelete = (idOfProductToDelete) => {
     handleDelete(idOfProductToDelete)  // il a qu'une instruction tu peu directement l'envoyer dans le onDelete de la card si tu veux
   }
   
-  const handleClicked = (id) => { 
-    console.log("id : " + id);
-    setCurrentTabSelected("edit");
-    setIsCollapsed(false);
+  const handleClicked = (idProductSelected) => {
+    // on fait une copie du state que quand on modifie le state la ce n'est pas le cas
+    console.log("idProductSelected: ", idProductSelected);
+    const productSelected = menu.find((product) => product.id === idProductSelected);
+    console.log("productSelected: ", productSelected);
+    setProductSelected(productSelected);
+    
 
-    if(idEditCard === id){
-      setIdEditCard(null);
-    } else {
-      setIdEditCard(id);
-    }
+    // ce que j'ai fait moi
+    // console.log("id : " + idProductSelected);
+    // setCurrentTabSelected("edit");
+    // setIsCollapsed(false);
+
+    // if(idEditCard === idProductSelected){
+    //   setIdEditCard(null);
+    // } else {
+    //   setIdEditCard(idProductSelected);
+    // }
 
   }
 

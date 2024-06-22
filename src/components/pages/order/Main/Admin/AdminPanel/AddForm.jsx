@@ -10,13 +10,9 @@ import Button from "../../../../../reusable-ui/Button.jsx";
 import ImagePrewiew from "./ImagePrewiew.jsx";
 import SubmitMessage from "./SubmitMessage.jsx";
 import { getInputTextsConfig } from "./inputTextConfig.jsx";
+import { EMPTY_PRODUCT } from "../../../../../../enums/product.js";
 
-export const EMPTY_PRODUCT = {
-    id          : "",
-    title       : "",
-    imageSource : "",
-    price       : 0,
-}
+
 
 export default function AddForm() {
   // du coup ont peu egalement faire passer des comportement via le context en le remontant tout en haut dans le composant parent comme on a fait ci dessus
