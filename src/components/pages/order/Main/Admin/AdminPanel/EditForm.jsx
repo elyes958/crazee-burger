@@ -8,6 +8,7 @@ import { FaHamburger } from "react-icons/fa";
 import { BsFillCameraFill } from "react-icons/bs";
 import { MdOutlineEuro } from "react-icons/md";
 import { theme } from "../../../../../../theme";
+import HintMessage from "./HintMessage";
 
 export default function EditForm() {
   const { menu, currentTabSelected, idEditCard, handleModify } = useContext(AdminContext);
@@ -27,9 +28,10 @@ export default function EditForm() {
 
   if(idEditCard === null){
     return (
-      <EditFormStyled>
-        CLIQUER SUR UN PRODUIT POUR LE MODIFIER <HiCursorClick />
-      </EditFormStyled>
+      // <EditFormStyled>
+      //   CLIQUER SUR UN PRODUIT POUR LE MODIFIER <HiCursorClick />
+      // </EditFormStyled>
+      <HintMessage/>
     )
   } else {
     return (
