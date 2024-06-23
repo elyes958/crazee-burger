@@ -8,6 +8,7 @@ import Admin from './AdminPanel/Admin';
 import AdminContext from '../../../context/AdminContext';
 import { fakeMenu2 } from '../../../fakeData/fakeMenu';
 import { EMPTY_PRODUCT } from '../../../enums/product';
+import { deepClone } from '../../../utils/array';
 
 
 
@@ -55,7 +56,7 @@ export default function OrderPage() {
   const handleEdit = (productBeingEdited) => {
     console.log("productBeingEdited: ", productBeingEdited);
     // Copie du state(deep clone) avec la methode JSON qui est bien mieux(voir explication F09 live 1 si tu te rapel plus pk)
-    const menuCopy = JSON.parse(JSON.stringify(menu));
+    const menuCopy = deepClone(menu);
 
     // manip de la copie du state
     const indexOfProductToEdit = menu.findIndex((product) => product.id === productBeingEdited.id);
