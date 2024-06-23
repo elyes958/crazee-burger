@@ -1,33 +1,35 @@
 import styled from "styled-components";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import AdminContext from "../../../../../../context/AdminContext";
 import ImagePrewiew from "./ImagePrewiew";
 import TextInput from "../../../../../reusable-ui/TextInput";
-import { FaHamburger } from "react-icons/fa";
-import { BsFillCameraFill } from "react-icons/bs";
-import { MdOutlineEuro } from "react-icons/md";
-import { theme } from "../../../../../../theme";
 import HintMessage from "./HintMessage";
 import { getInputTextsConfig } from "./inputTextConfig";
-import { EMPTY_PRODUCT } from "../../../../../../enums/product";
+
 
 export default function EditForm() {
-  const { menu, currentTabSelected, idEditCard, handleModify, productSelected } = useContext(AdminContext);
-  const [productBeingEdited, setProductBeingEdited] = useState({EMPTY_PRODUCT});
+  // state
+  const { productSelected, setProductSelected, handleEdit } = useContext(AdminContext);
 
   const inputTexts = getInputTextsConfig(productSelected);
 
+  // Comportement
   const handleChange = (event) => { 
     const { name, value } = event.target
-    setProductBeingEdited({
-      ...productBeingEdited,
-      [name] : value,
-    })
+
+    const productBeingUpdated = {
+        ...productSelected,
+        [name] : value,
+    }
+
+    setProductSelected(productBeingUpdated); // cet ligne update le formulaire
+    handleEdit(productBeingUpdated);            // cet ligne update le menu
   }
 
+  // Affichage
   return(
     <EditFormStyled>
-      <ImagePrewiew newProduct={productSelected.imageSource} title={productSelected.title} />
+      <ImagePrewiew newProduct={productSelected} title={productSelected} />
       <div className="input-fields">
         {inputTexts.map((input) => (
           <TextInput

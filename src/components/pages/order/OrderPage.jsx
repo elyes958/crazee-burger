@@ -41,7 +41,7 @@ export default function OrderPage() {
   }
 
   const handleDelete = (idOfProductToDelete) => {
-    // Copie du tableau
+    // Copie du tableau(je laisse l'ancienne facon de faire mais il faut utiliser la methode ligne 57 à partir de maintenant)
     const copy = [...menu];
 
     // manip de la copie du tableau
@@ -52,14 +52,30 @@ export default function OrderPage() {
     setMenu(filterProducts);   // ce comportement doit etre defini proche du state qu'il est en train de modifier
   }
 
-  const handleModify = (id, editCard) => { 
-    const copy = [...menu];
+  const handleEdit = (productBeingEdited) => {
+    console.log("productBeingEdited: ", productBeingEdited);
+    // Copie du state(deep clone) avec la methode JSON qui est bien mieux(voir explication F09 live 1 si tu te rapel plus pk)
+    const menuCopy = JSON.parse(JSON.stringify(menu));
 
-    const modify     = copy.filter((card) => card.id !== id);
-    const menuModify = [editCard, ...modify];
+    // manip de la copie du state
+    const indexOfProductToEdit = menu.findIndex((product) => product.id === productBeingEdited.id);
+    console.log("indexOfProductToEdit: ", indexOfProductToEdit);
 
-    setMenu(menuModify);
+    menuCopy[indexOfProductToEdit] = productBeingEdited;
+
+    // update du state
+    setMenu(menuCopy);
   }
+
+  // Ce que j'ai fait moi
+  // const handleModify = (id, editCard) => { 
+  //   const copy = [...menu];
+
+  //   const modify     = copy.filter((card) => card.id !== id);
+  //   const menuModify = [editCard, ...modify];
+
+  //   setMenu(menuModify);
+  // }
 
   const resetMenu = () => { // ont envoie le comportement dans le context pour eviter d'envoyer le settter qui lui doit rester dans le composant dans lequel il est defini(bonne pratique)
     setMenu(fakeMenu2);
@@ -106,7 +122,9 @@ export default function OrderPage() {
     // handleModify: handleModify, //
 
     productSelected: productSelected,
-    setProductSelected: setProductSelected
+    setProductSelected: setProductSelected,
+
+    handleEdit: handleEdit,
   }
 
   //affichage
