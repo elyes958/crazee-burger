@@ -30,7 +30,7 @@ export default function OrderPage() {
   const [productSelected, setProductSelected] = useState({EMPTY_PRODUCT});
 
 
-  //comportements
+  //comportements (gestionnaire de state ou "state handlers")
   // oublie pas un comportement qui modifie un state doit etre defini proche de ce state(bonne pratique), la seul exception c'est quand ont a des state assez simple comme un booleen, ou juste une string mais pas sur des state complexe avec array objet
   const handleAdd = (newProduct) => {
     // Copie du tableau

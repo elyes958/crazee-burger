@@ -32,8 +32,9 @@ const CardStyled = styled.div`
   ${(props) => (props.hasDeleteButton && modeAdmin)}
 
   background: ${theme.colors.white};
-  width: 200px;
-  height: 300px;
+  box-sizing: border-box;
+  width: 240px;
+  height: 330px;
   display: grid;
   grid-template-rows: 65% 1fr;
   /* grid-template-rows: ${props => props.modeadmin ? '1px 65% 1fr' : '65% 1fr'}; */  // ce que j'ai fait moi

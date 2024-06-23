@@ -15,7 +15,7 @@ export default function Menu() {
   // state
   const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, idEditCard, setIdEditCard, setIsCollapsed, setProductSelected} = useContext(AdminContext);
 
-  // Comportement
+  // Comportement (gestionnaire d'évenement ou "event handler")
   const handleCardDelete = (idOfProductToDelete) => {
     handleDelete(idOfProductToDelete)  // il a qu'une instruction tu peu directement l'envoyer dans le onDelete de la card si tu veux
   }
@@ -23,9 +23,9 @@ export default function Menu() {
   const handleClicked = (idProductSelected) => {
     // on fait une copie du state que quand on modifie le state la ce n'est pas le cas
     console.log("idProductSelected: ", idProductSelected);
-    const productSelected = menu.find((product) => product.id === idProductSelected);
-    console.log("productSelected: ", productSelected);
-    setProductSelected(productSelected);
+    const productClickedOn = menu.find((product) => product.id === idProductSelected);
+    console.log("productSelected: ", productClickedOn);
+    setProductSelected(productClickedOn);
     
 
     // ce que j'ai fait moi
