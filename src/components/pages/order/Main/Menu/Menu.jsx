@@ -61,6 +61,7 @@ export default function Menu() {
             imageSource={produit.imageSource === "" ? IMAGE_BY_DEFAULT : produit.imageSource}
             leftDescription={formatPrice(produit.price)}
             onClicked={() => handleClicked(produit.id)}
+            isHoverable={isModeAdmin}
           />
           // finalement comme on a rendu notre composant reutilisable et donc qu'on a fait remonter le specifique dans les props, alor on est obliger d'utiliser ça et pas l'autre methode en bas
           // <Card {...produit} />  // meme chose que ligne 5, ecriture bc plus simple spread operator dans un objet, cet methode fonctionne que si vous etes certain que "produit" a tous les élements dont "Product" a besoin. Du coup la methode au dessus est preferable et conseiller.

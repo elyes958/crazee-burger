@@ -4,9 +4,10 @@ import { theme } from "../../theme";
 import Button from "./Button";
 import { TiDelete } from "react-icons/ti";
 
-export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked }) {
+export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked , isHoverable }) {
   return (
-    <CardStyled hasDeleteButton={hasDeleteButton} className="produit" onClick={hasDeleteButton ? onClicked : null} >
+    <CardStyled hasDeleteButton={hasDeleteButton} className="produit"  isHoverable={isHoverable} onClick={onClicked}>
+      <div className="card">
       {hasDeleteButton && (<button className="delete-button" aria-label="delete-button" onClick={onDelete}>
         <TiDelete className="icon" />
       </button>)}
@@ -23,14 +24,19 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
           </div>
         </div>
       </div>
+      </div>
     </CardStyled>
   )
 }
 // ligne 10 ce que j'ai fait moi
+// ce que j'avais fait dans les props : onClick={hasDeleteButton ? onClicked : null} et onClicked que j'avais recuperer en props dans la fct
 
 const CardStyled = styled.div`
-  ${(props) => (props.hasDeleteButton && modeAdmin)}
+  /* {(props) => (props.hasDeleteButton && modeAdmin)}  ce que j'ai fait moi */
+  ${(props) => (props.isHoverable && hoverableStyle)}
+  border-radius: ${theme.borderRadius.extraRound};
 
+  .card{
   background: ${theme.colors.white};
   box-sizing: border-box;
   width: 240px;
@@ -148,14 +154,24 @@ const CardStyled = styled.div`
       }
     }
   }
+}
 `
+// ce que j'ai fait moi
+// const modeAdmin = css`
+//   &:hover{
+//     transform: scale(1.1);
+//     cursor: pointer;
+//     border: 1px solid ${theme.colors.primary};
+//   }
+// `;
 
-const modeAdmin = css`
+const hoverableStyle = css`
   &:hover{
-    transform: scale(1.1);
-    cursor: pointer;
-    border: 1px solid ${theme.colors.primary};
-  }
+  transform: scale(1.05);
+  transition: ease-out 0.4s;
+  box-shadow: ${theme.shadows.orangeHighlight};
+  cursor: pointer;
+}
 `;
 
 // Explication ligne 9:
