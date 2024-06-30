@@ -4,10 +4,10 @@ import { theme } from "../../theme";
 import Button from "./Button";
 import { TiDelete } from "react-icons/ti";
 
-export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked , isHoverable }) {
+export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked , isHoverable, isSelected }) {
   return (
     <CardStyled hasDeleteButton={hasDeleteButton} className="produit"  isHoverable={isHoverable} onClick={onClicked}>
-      <div className="card">
+      <div className="card" style={isSelected ? {background: "orange"} :  {}}>
       {hasDeleteButton && (<button className="delete-button" aria-label="delete-button" onClick={onDelete}>
         <TiDelete className="icon" />
       </button>)}
@@ -30,11 +30,13 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
 }
 // ligne 10 ce que j'ai fait moi
 // ce que j'avais fait dans les props : onClick={hasDeleteButton ? onClicked : null} et onClicked que j'avais recuperer en props dans la fct
+// style{} attend forcement un objet donc ne peu pas utiliser && avec lui, mais une ternaire obliger
 
 const CardStyled = styled.div`
   /* {(props) => (props.hasDeleteButton && modeAdmin)}  ce que j'ai fait moi */
   ${(props) => (props.isHoverable && hoverableStyle)}
   border-radius: ${theme.borderRadius.extraRound};
+  height: 330px;
 
   .card{
   background: ${theme.colors.white};
