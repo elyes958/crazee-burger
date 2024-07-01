@@ -6,8 +6,8 @@ import { TiDelete } from "react-icons/ti";
 
 export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked , isHoverable, isSelected }) {
   return (
-    <CardStyled hasDeleteButton={hasDeleteButton} className="produit"  isHoverable={isHoverable} onClick={onClicked}>
-      <div className="card" style={isSelected ? {background: "orange"} :  {}}>
+    <CardStyled hasDeleteButton={hasDeleteButton} className="produit"  isHoverable={isHoverable} onClick={onClicked} isSelected={isSelected}>
+      <div className="card">
       {hasDeleteButton && (<button className="delete-button" aria-label="delete-button" onClick={onDelete}>
         <TiDelete className="icon" />
       </button>)}
@@ -156,6 +156,8 @@ const CardStyled = styled.div`
       }
     }
   }
+  // on destructure de props, et on verifie si c'est true et alors ont affiche le style de selectedStyle
+  ${({isHoverable, isSelected}) => isHoverable && isSelected && selectedStyle}
 }
 `
 // ce que j'ai fait moi
@@ -175,6 +177,63 @@ const hoverableStyle = css`
   cursor: pointer;
 }
 `;
+
+const selectedStyle = css`
+ background: ${theme.colors.primary};
+ .primary-button {
+  color: ${theme.colors.primary};
+  background-color: ${theme.colors.white};
+  border: 1px solid ${theme.colors.white};
+  transition: all 200ms ease-out;
+  :hover{
+    color: ${theme.colors.white};
+    background-color: ${theme.colors.primary};
+    border: 1px solid ${theme.colors.white};
+    transition: all 200ms ease-out;
+  }
+  :active{
+    background-color: ${theme.colors.white};
+    color: ${theme.colors.primary};
+  }
+
+  &.is-disabled {
+    opacity: 50%;
+    cursor: not-allowed;
+    z-index: 2;
+  }
+
+  &.with-focus {
+    border: 1px solid white;
+    background-color: ${theme.colors.white};
+    color: ${theme.colors.primary};
+    :hover {
+      color: ${theme.colors.white};
+      background-color: ${theme.colors.primary};
+      border: 1px solid ${theme.colors.white};
+    }
+    :active {
+      background-color: ${theme.colors.white};
+      color: ${theme.colors.primary};
+    }
+  }
+ }
+
+ .delete-button {
+  color: ${theme.colors.white};
+
+  :active {  // = quand on clique dessus
+    color: ${theme.colors.white};
+  }
+}
+
+  .text-info {
+    .description {
+      .left-description {
+        color: ${theme.colors.white};
+      }
+    }
+  }
+`
 
 // Explication ligne 9:
 
