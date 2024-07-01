@@ -22,6 +22,7 @@ export default function Menu() {
   }
   
   const handleClicked = (idProductSelected) => {
+    if(!isModeAdmin) return;  // si ont est pas en modeAdmin ont execute pas cet fct
     // on fait une copie du state que quand on modifie le state la ce n'est pas le cas
     console.log("idProductSelected: ", idProductSelected);
     const productClickedOn = menu.find((product) => product.id === idProductSelected);
@@ -45,7 +46,7 @@ export default function Menu() {
   const checkIfProductIsClicked = (idProductInMenu, idProductClickedOn) => { 
     return idProductInMenu=== idProductClickedOn ? true : false;
   }
-  
+
 
   // Affichage
   
