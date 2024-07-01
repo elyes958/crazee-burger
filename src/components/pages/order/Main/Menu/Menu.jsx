@@ -16,7 +16,8 @@ export default function Menu() {
   const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, idEditCard, setIdEditCard, setIsCollapsed, productSelected, setProductSelected} = useContext(AdminContext);
 
   // Comportement (gestionnaire d'évenement ou "event handler")
-  const handleCardDelete = (idOfProductToDelete) => {
+  const handleCardDelete = (event, idOfProductToDelete) => {
+    event.stopPropagation();
     handleDelete(idOfProductToDelete)  // il a qu'une instruction tu peu directement l'envoyer dans le onDelete de la card si tu veux
   }
   
@@ -44,6 +45,7 @@ export default function Menu() {
   const checkIfProductIsClicked = (idProductInMenu, idProductClickedOn) => { 
     return idProductInMenu=== idProductClickedOn ? true : false;
   }
+  
 
   // Affichage
   
@@ -53,12 +55,13 @@ export default function Menu() {
  } 
   // resetMenu ne prend rien param et n'a qu'une seul instruction donc on peu le definir direct dans le onClick
 
+
   return (
     <MenuStyled className="menu">
       {menu.map((produit) => {
         return (
           <Card
-            onDelete={() => handleCardDelete(produit.id)}
+            onDelete={(event) => handleCardDelete(event, produit.id)}
             hasDeleteButton={isModeAdmin}
             key={produit.id}
             title={produit.title}
