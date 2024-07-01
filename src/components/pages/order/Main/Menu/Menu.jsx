@@ -23,6 +23,10 @@ export default function Menu() {
   
   const handleClicked = (idProductSelected) => {
     if(!isModeAdmin) return;  // si ont est pas en modeAdmin ont execute pas cet fct
+
+    setIsCollapsed(false); // au clic on ouvre le panel Admin
+    setCurrentTabSelected("edit"); // et on le met sur l'onglet edit
+
     // on fait une copie du state que quand on modifie le state la ce n'est pas le cas
     console.log("idProductSelected: ", idProductSelected);
     const productClickedOn = menu.find((product) => product.id === idProductSelected);
