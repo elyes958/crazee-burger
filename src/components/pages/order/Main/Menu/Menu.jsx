@@ -13,7 +13,7 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // state
-  const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, idEditCard, setIdEditCard, setIsCollapsed, productSelected, setProductSelected} = useContext(AdminContext);
+  const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, idEditCard, setIdEditCard, setIsCollapsed, productSelected, setProductSelected, titleEditRef} = useContext(AdminContext);
 
   // Comportement (gestionnaire d'évenement ou "event handler")
   const handleCardDelete = (event, idOfProductToDelete) => {
@@ -21,17 +21,22 @@ export default function Menu() {
     handleDelete(idOfProductToDelete)  // il a qu'une instruction tu peu directement l'envoyer dans le onDelete de la card si tu veux
   }
   
-  const handleClicked = (idProductSelected) => {
+  const handleClicked = async (idProductSelected) => {    // mot cle async, handleClicked devient une fct asynchrone
     if(!isModeAdmin) return;  // si ont est pas en modeAdmin ont execute pas cet fct
-
-    setIsCollapsed(false); // au clic on ouvre le panel Admin
-    setCurrentTabSelected("edit"); // et on le met sur l'onglet edit
 
     // on fait une copie du state que quand on modifie le state la ce n'est pas le cas
     console.log("idProductSelected: ", idProductSelected);
     const productClickedOn = menu.find((product) => product.id === idProductSelected);
     console.log("productSelected: ", productClickedOn);
-    setProductSelected(productClickedOn);
+    
+    await setProductSelected(productClickedOn);   // et donc ont met un await devant tous nos setters pour dire d'attendre la fin de leur execution avant de passer à la suite
+    await setIsCollapsed(false); // au clic on ouvre le panel Admin
+    await setCurrentTabSelected("edit"); // et on le met sur l'onglet edit
+
+    // un setter a un comportement asynchrone il ne va pas terminer de s'executer tout de suite, donc il faut qu'ont attende que les setters s'executent avant d'executer le titleEditRef.current.focus() pour eviter le bug qu'on a eu
+    // il faut donc que ces fct soit comprise dans une fct qui est asynchrone
+
+    titleEditRef.current.focus(); // il faut attendre avant d'executer cet ligne la car le panelAdmin et Edit ne sont pas encore ouvert avant d'actualiser la page ce qui provoque une erreur et ne met pas le focus sur le premier element cliquer
     
 
     // ce que j'ai fait moi

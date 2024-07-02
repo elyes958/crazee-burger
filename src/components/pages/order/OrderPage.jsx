@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from "styled-components";
 import { theme } from '../../../theme';
@@ -28,6 +28,8 @@ export default function OrderPage() {
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);  // plus propre de l'envoyer comme ça
   // const [idEditCard, setIdEditCard] = useState(null);  // ce que j'ai fait moi
   const [productSelected, setProductSelected] = useState({EMPTY_PRODUCT});
+  const titleEditRef = useRef();
+
 
 
   //comportements (gestionnaire de state ou "state handlers")
@@ -126,6 +128,8 @@ export default function OrderPage() {
     setProductSelected: setProductSelected,
 
     handleEdit: handleEdit,
+    
+    titleEditRef: titleEditRef
   }
 
   //affichage

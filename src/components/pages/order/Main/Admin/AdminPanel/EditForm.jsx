@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import AdminContext from "../../../../../../context/AdminContext";
 import ImagePrewiew from "./ImagePrewiew";
 import TextInput from "../../../../../reusable-ui/TextInput";
@@ -9,8 +9,7 @@ import { getInputTextsConfig } from "./inputTextConfig";
 
 export default function EditForm() {
   // state
-  const { productSelected, setProductSelected, handleEdit } = useContext(AdminContext);
-
+  const { productSelected, setProductSelected, handleEdit, titleEditRef } = useContext(AdminContext);
   const inputTexts = getInputTextsConfig(productSelected);
 
   // Comportement (gestionnaire d'évenement ou "event handler")
@@ -40,11 +39,13 @@ export default function EditForm() {
             onChange={handleChange}
             icon={input.Icon}
             version="minimalist"
+            ref={input.name === "title" ? titleEditRef : null}
           />
         ))}
       </div>
     </EditFormStyled>
   )
+  // ligne 43 comme className et style ont est obliger d'utiliser une ternaire sinon ça fait des bugs, pas de && ici
 
 
   // Ce que j'ai fait moi

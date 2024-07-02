@@ -1,7 +1,9 @@
 import styled, { css } from "styled-components";
 import { theme } from "../../theme";
+import React from "react";
 
-export default function TextInput({value, onChange, icon, className, version = "normal", ...restProps}) {
+// React.forwardRef doit etre utiliser avec une fct fléches dans une const et non une fct classique
+const TextInput = React.forwardRef(({value, onChange, icon, className, version = "normal", ...restProps}, ref) => {
     // console.log("restProps: ", restProps);
   return (
       <TextInputStyled className={className} version={version}>
@@ -10,10 +12,13 @@ export default function TextInput({value, onChange, icon, className, version = "
               value={value}
               onChange={onChange}
               {...restProps}
+              ref={ref}
           />
       </TextInputStyled>
-  )
-}
+   )
+ }
+)
+export default TextInput;
 // ligne 3 ont a recuperer les props via le destructuring, ont aurais pu egalement passer props en param et faire props.inputValue et props.handleChange
 // ...restProps = le reste des props toutes les autres props qu'ont aura passer via notre composant Input, restProps est un objet qui contiendra toute les autre props comme placeholder par exemple. cet objet resProps sera destructuré
 // restProps est un objet qu'on va vouloir destructuré comme ça {...restProps} et en faisant ça ont pourra recuperer toute les props restante de ...restProps
