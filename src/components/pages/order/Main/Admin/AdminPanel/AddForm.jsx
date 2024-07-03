@@ -1,16 +1,9 @@
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import AdminContext from "../../../../../../context/AdminContext";
-
-import { theme } from "../../../../../../theme";
 // import { TextInput } from "../../../../../reusable-ui/TextInput"; //ctrl shift H pour importe le lien toi meme(ici mon erreur a etait de l'importer entre {} on fait pas ça quand on importe un composant)
-
-import TextInput from "../../../../../reusable-ui/TextInput";
-import Button from "../../../../../reusable-ui/Button.jsx";
-import ImagePrewiew from "./ImagePrewiew.jsx";
-import SubmitMessage from "./SubmitMessage.jsx";
-import { getInputTextsConfig } from "./inputTextConfig.jsx";
 import { EMPTY_PRODUCT } from "../../../../../../enums/product.js";
+import Form from "./Form.jsx";
 
 
 
@@ -55,62 +48,16 @@ export default function AddForm() {
    }
    // ligne 37: [name] = nom de propriete dynamique en JS(dynamic property name en anglais)
 
-  const inputTexts = getInputTextsConfig(newProduct);
+ 
 
   // Affichage
   return (
-    <AddFormStyled onSubmit={handleSubmit}>
-        <ImagePrewiew newProduct={newProduct} />
-        <div className="input-fields">
-          {inputTexts.map((input) => (
-             <TextInput
-              key={input.id}
-              name={input.name}
-              value={input.value} 
-              placeholder={input.placeholder} 
-              onChange={handleChange}
-              icon={input.Icon}
-              version="minimalist"
-              />
-            ))}
-          {/* <TextInput
-             name="title" 
-             value={newProduct.title} 
-             type="text" 
-             placeholder="Nom du produit (ex: Super Burger)" 
-             onChange={handleChange}
-             icon={<FaHamburger/>}
-            //  className={"inputDuAddForm"}
-             version="minimalist"
-          />
-          <TextInput 
-            name="imageSource" 
-            value={newProduct.imageSource} 
-            type="text" 
-            placeholder="Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)" 
-            onChange={handleChange}
-            icon={<BsFillCameraFill/>}
-            // className={"inputDuAddForm"}
-            version="minimalist"
-          />
-          <TextInput 
-            name="price" 
-            value={newProduct.price ? newProduct.price : ""} 
-            type="text" 
-            placeholder="Prix" 
-            onChange={handleChange}
-            icon={<MdOutlineEuro/>}
-            // className={"inputDuAddForm"}
-            version="minimalist"
-          /> */}
-        </div>
-        <div className="submit">
-            <Button className="submit-button" label={"Ajouter un nouveau produit au menu"} version="success" />
-            {isSubmitted && (
-             <SubmitMessage/>
-            )}
-        </div>
-    </AddFormStyled>
+    <Form 
+    product={newProduct}
+    onSubmit={handleSubmit}
+    onChange={handleChange}
+    isSubmitted={isSubmitted}
+    />
   )
 }
 
