@@ -5,6 +5,7 @@ import ImagePrewiew from "./ImagePrewiew";
 import TextInput from "../../../../../reusable-ui/TextInput";
 import HintMessage from "./HintMessage";
 import { getInputTextsConfig } from "./inputTextConfig";
+import { theme } from "../../../../../../theme";
 
 
 export default function EditForm() {
@@ -42,6 +43,12 @@ export default function EditForm() {
             ref={input.name === "title" ? titleEditRef : null}
           />
         ))}
+      </div>
+      <div className="submit">
+        <span className="sentence">
+           Cliquer sur un produit du menu pour le modifier{" "}
+           <span className="live-update">en temps réel</span>
+        </span>
       </div>
     </EditFormStyled>
   )
@@ -111,10 +118,13 @@ const EditFormStyled = styled.form`
     align-items: center;
     position: relative;
     top: 3px;
-    
-    .submit-button{
-      /* width: 50%; */
-      height: 100%;
+
+    .sentence {
+      color: ${theme.colors.primary};
+      font-size: ${theme.fonts.size.SM};
+      .live-update {
+        text-decoration: underline;
+      }
     }
   }
 `;
