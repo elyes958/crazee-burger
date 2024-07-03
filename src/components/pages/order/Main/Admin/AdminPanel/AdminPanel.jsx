@@ -2,19 +2,30 @@ import styled from "styled-components";
 import { theme } from "../../../../../../theme";
 import { useContext } from "react";
 import AdminContext from "../../../../../../context/AdminContext";
-import { getTabsConfig } from "../getTabsConfig";
+import { getTabSelected, getTabsConfig } from "../getTabsConfig";
 import AjoutProduit from "../AjoutProduit";
+import { EMPTY_PRODUCT } from "../../../../../../enums/product";
 
 export default function AdminPanel() {
-  const {isAddSelected,  isEditSelected, currentTabSelected } = useContext(AdminContext);
+  const {currentTabSelected, productSelected } = useContext(AdminContext);
 
-  const tabs        = getTabsConfig(currentTabSelected);
-  const tabSelected = tabs.find((tab) => tab.index === currentTabSelected);
-  // La méthode find va parcourir le tableau tabs et retourner le premier objet dont la propriété index est égale à la valeur de currentTabSelected. 
+  const hasAlreadyBeenClicked = productSelected !== EMPTY_PRODUCT;
+  // console.log("productSelected: ", productSelected);
+  // console.log("hasAlreadyBeenClicked: ", hasAlreadyBeenClicked);
+  const tabs                  = getTabsConfig(hasAlreadyBeenClicked);
+  const tabSelected           = getTabSelected(tabs, currentTabSelected);
+  // console.log("tabs: ", tabs);
+  // console.log("tabSelected: ", tabSelected);
+
+  // code d'avant
+  // const tabs        = getTabsConfig(currentTabSelected);
+  // const tabSelected = tabs.find((tab) => tab.index === currentTabSelected);
+  // La méthode find va parcourir le tableau tabs et retourner le premier objet dont la propriété index est égale à la valeur de currentTabSelected.
 
   return (
     <AdminPanelStyled>
-      {currentTabSelected === tabSelected.index && tabSelected.Content}  
+      {tabSelected && tabSelected.Content}
+      {/* {currentTabSelected === tabSelected.index && tabSelected.Content}   */}
       {/* {currentTabSelected === "add" && <AjoutProduit/>} */}
       {/* {currentTabSelected === "add" && "Ajouter un produit"}
       {currentTabSelected === "edit" && "Modifier un produit"} */}

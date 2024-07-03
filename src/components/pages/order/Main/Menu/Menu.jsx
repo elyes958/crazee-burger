@@ -7,6 +7,7 @@ import { formatPrice } from "../../../../../utils/maths";
 import AdminContext from "../../../../../context/AdminContext";
 import EmptyMenuAdmin from "./EmptyMenuAdmin";
 import EmptyMenuClient from "./EmptyMenuClient";
+import { EMPTY_PRODUCT } from "../../../../../enums/product";
 // import Product from "./Product";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
@@ -18,7 +19,9 @@ export default function Menu() {
   // Comportement (gestionnaire d'évenement ou "event handler")
   const handleCardDelete = (event, idOfProductToDelete) => {
     event.stopPropagation();
-    handleDelete(idOfProductToDelete)  // il a qu'une instruction tu peu directement l'envoyer dans le onDelete de la card si tu veux
+    handleDelete(idOfProductToDelete);
+    idOfProductToDelete === productSelected.id  && setProductSelected(EMPTY_PRODUCT); // permet d'ecrire une condition sur une ligne sans utiliser de if
+    titleEditRef.current.focus();
   }
   
   const handleClicked = async (idProductSelected) => {    // mot cle async, handleClicked devient une fct asynchrone

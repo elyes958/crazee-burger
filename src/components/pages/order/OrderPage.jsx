@@ -27,7 +27,7 @@ export default function OrderPage() {
   const [menu, setMenu] = useState(fakeMenu2);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);  // plus propre de l'envoyer comme ça
   // const [idEditCard, setIdEditCard] = useState(null);  // ce que j'ai fait moi
-  const [productSelected, setProductSelected] = useState({EMPTY_PRODUCT});
+  const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const titleEditRef = useRef();
 
 
