@@ -4,6 +4,8 @@ import AdminContext from "../../../../../../context/AdminContext";
 // import { TextInput } from "../../../../../reusable-ui/TextInput"; //ctrl shift H pour importe le lien toi meme(ici mon erreur a etait de l'importer entre {} on fait pas ça quand on importe un composant)
 import { EMPTY_PRODUCT } from "../../../../../../enums/product.js";
 import Form from "./Form.jsx";
+import SubmitMessage from "./SubmitMessage.jsx";
+import Button from "../../../../../reusable-ui/Button.jsx";
 
 
 
@@ -57,9 +59,20 @@ export default function AddForm() {
     onSubmit={handleSubmit}
     onChange={handleChange}
     isSubmitted={isSubmitted}
-    />
+    >
+    <>
+    <Button
+     className="submit-button"
+     label={"Ajouter un nouveau produit au menu"}
+     version="success"
+     />
+     {isSubmitted && <SubmitMessage/>}
+   </>
+   </Form>
   )
 }
+// ligne 61 les fragments <></> ou React.fragment sont ignoré dans le render du HTML, donc permet d'envoyer plusieurs element par ex en props sans utiliser de div
+// ligne 63 notre button entre fragment est un enfant de form donc on rajoute la 2eme balise fermante pour le mettre entre les deux et on le passe à notre composant via le mot cle children de React ce qui nous evite de passer tout ça dans un props ce qui fonctionne aussi, si on change le mot et on ne met pas children ça ne fonctionera pas, childen est un mot cle de react
 
 const AddFormStyled = styled.form`
   /* border: 2px solid black; */

@@ -7,12 +7,12 @@ import HintMessage from "./HintMessage";
 import { getInputTextsConfig } from "./inputTextConfig";
 import { theme } from "../../../../../../theme";
 import EditInfoMessage from "./EditInfoMessage";
+import Form from "./Form";
 
 
 export default function EditForm() {
   // state
   const { productSelected, setProductSelected, handleEdit, titleEditRef } = useContext(AdminContext);
-  const inputTexts = getInputTextsConfig(productSelected);
 
   // Comportement (gestionnaire d'évenement ou "event handler")
   const handleChange = (event) => { 
@@ -29,26 +29,33 @@ export default function EditForm() {
 
   // Affichage
   return(
-    <EditFormStyled>
-      <ImagePrewiew newProduct={productSelected} title={productSelected} />
-      <div className="input-fields">
-        {inputTexts.map((input) => (
-          <TextInput
-            key={input.id}
-            name={input.name}
-            value={input.value}
-            placeholder={input.placeholder}
-            onChange={handleChange}
-            icon={input.Icon}
-            version="minimalist"
-            ref={input.name === "title" ? titleEditRef : null}
-          />
-        ))}
-      </div>
-      <div className="submit">
-        <EditInfoMessage/>
-      </div>
-    </EditFormStyled>
+    // <EditFormStyled>
+    //   <ImagePrewiew newProduct={productSelected} title={productSelected} />
+    //   <div className="input-fields">
+    //     {inputTexts.map((input) => (
+    //       <TextInput
+    //         key={input.id}
+    //         name={input.name}
+    //         value={input.value}
+    //         placeholder={input.placeholder}
+    //         onChange={handleChange}
+    //         icon={input.Icon}
+    //         version="minimalist"
+    //         ref={input.name === "title" ? titleEditRef : null}
+    //       />
+    //     ))}
+    //   </div>
+    //   <div className="submit">
+    //     <EditInfoMessage/>
+    //   </div>
+    // </EditFormStyled>
+    <Form 
+    product={productSelected}
+    onChange={handleChange}
+    ref={titleEditRef}
+    >
+    <EditInfoMessage/>
+    </Form>
   )
   // ligne 43 comme className et style ont est obliger d'utiliser une ternaire sinon ça fait des bugs, pas de && ici
 

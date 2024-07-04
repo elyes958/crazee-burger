@@ -5,27 +5,14 @@ import Button from "../../../../../reusable-ui/Button.jsx";
 import ImagePrewiew from "./ImagePrewiew.jsx";
 import SubmitMessage from "./SubmitMessage.jsx";
 import { getInputTextsConfig } from "./inputTextConfig.jsx";
+import React from "react";
 
 
 
 
-export default function Form({product, onSubmit, onChange, isSubmitted}) {
-  // du coup ont peu egalement faire passer des comportement via le context en le remontant tout en haut dans le composant parent comme on a fait ci dessus
-  
- 
-
-  // Comportements
-  
-
-    const displaySuccessMessage = () => {
-        setIsSubmitted(true); // le formulaire a etait soumis donc on passe le state a true pour afficher le message
-        setTimeout(() => {      // premier param fct fléché, le 2eme temps en mili secondes
-            setIsSubmitted(false)   // instruction qui s'execute au bout de 2000 mili secondes(2 seconde)
-        }, 2000)
-    }
-
+const Form = React.forwardRef(({product, onSubmit, onChange, children}, ref) => {
    
-    const inputTexts = getInputTextsConfig(product);
+  const inputTexts = getInputTextsConfig(product);
 
 
   // Affichage
@@ -42,6 +29,7 @@ export default function Form({product, onSubmit, onChange, isSubmitted}) {
               onChange={onChange}
               icon={input.Icon}
               version="minimalist"
+              ref={ref && input.name === "title" ? ref : null}
               />
             ))}
           {/* <TextInput
@@ -75,15 +63,12 @@ export default function Form({product, onSubmit, onChange, isSubmitted}) {
             version="minimalist"
           /> */}
         </div>
-        <div className="submit">
-            <Button className="submit-button" label={"Ajouter un nouveau produit au menu"} version="success" />
-            {isSubmitted && (
-             <SubmitMessage/>
-            )}
-        </div>
+        <div className="submit">{children}</div>
     </FormStyled>
   )
-}
+})
+export default Form;
+// ligne 66 on affiche le button seulment si on recoit le props onSubmit(si on a un button on a forcement l'evenement onSubmit) de l'evenement onSubmit car l'autre onglet(modifier n'a pas besoin de ce button mais affiche simplement un message)
 
 const FormStyled = styled.form`
   /* border: 2px solid black; */
