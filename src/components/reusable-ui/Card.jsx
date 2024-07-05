@@ -1,15 +1,16 @@
 // Ticket f05 live ama 2 sur 3, fichier de corection pour aller plus vite avec le css qu'on a pas fait en video, Card remplace Products
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../theme";
 import Button from "./Button";
 import { TiDelete } from "react-icons/ti";
 
-export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete }) {
+export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked , isHoverable, isSelected }) {
   return (
-    <CardStyled hasDeleteButton={hasDeleteButton} className="produit">
-      {hasDeleteButton && <button className="delete-button" aria-label="delete-button" onClick={onDelete}>
-        <TiDelete className="icon"/>
-      </button>}
+    <CardStyled hasDeleteButton={hasDeleteButton} className="produit"  isHoverable={isHoverable} onClick={onClicked} isSelected={isSelected} >
+      <div className="card">
+      {hasDeleteButton && (<button className="delete-button" aria-label="delete-button" onClick={onDelete}>
+        <TiDelete className="icon" />
+      </button>)}
       {/* {modeAdmin ? <TiDelete onClick={onClick} /> : null} */}
       <div className="image">
         <img src={imageSource} alt={title} />
@@ -19,19 +20,29 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
         <div className="description">
           <div className="left-description">{leftDescription}</div>
           <div className="right-description">
-            <Button className="primary-button" label={"Ajouter"} />
+            <Button className="primary-button" label={"Ajouter"} version="primary" onClick={(event) => event.stopPropagation()} />
           </div>
         </div>
+      </div>
       </div>
     </CardStyled>
   )
 }
 // ligne 10 ce que j'ai fait moi
+// ce que j'avais fait dans les props : onClick={hasDeleteButton ? onClicked : null} et onClicked que j'avais recuperer en props dans la fct
+// style{} attend forcement un objet donc ne peu pas utiliser && avec lui, mais une ternaire obliger
 
 const CardStyled = styled.div`
+  /* {(props) => (props.hasDeleteButton && modeAdmin)}  ce que j'ai fait moi */
+  ${(props) => (props.isHoverable && hoverableStyle)}
+  border-radius: ${theme.borderRadius.extraRound};
+  height: 330px;
+
+  .card{
   background: ${theme.colors.white};
-  width: 200px;
-  height: 300px;
+  box-sizing: border-box;
+  width: 240px;
+  height: 330px;
   display: grid;
   grid-template-rows: 65% 1fr;
   /* grid-template-rows: ${props => props.modeadmin ? '1px 65% 1fr' : '65% 1fr'}; */  // ce que j'ai fait moi
@@ -142,6 +153,83 @@ const CardStyled = styled.div`
           cursor: pointer;
           padding: 12px;
         }
+      }
+    }
+  }
+  // on destructure de props, et on verifie si c'est true et alors ont affiche le style de selectedStyle
+  ${({isHoverable, isSelected}) => isHoverable && isSelected && selectedStyle}
+}
+`
+// ce que j'ai fait moi
+// const modeAdmin = css`
+//   &:hover{
+//     transform: scale(1.1);
+//     cursor: pointer;
+//     border: 1px solid ${theme.colors.primary};
+//   }
+// `;
+
+const hoverableStyle = css`
+  &:hover{
+  transform: scale(1.05);
+  transition: ease-out 0.4s;
+  box-shadow: ${theme.shadows.orangeHighlight};
+  cursor: pointer;
+}
+`;
+
+const selectedStyle = css`
+ background: ${theme.colors.primary};
+ .primary-button {
+  color: ${theme.colors.primary};
+  background-color: ${theme.colors.white};
+  border: 1px solid ${theme.colors.white};
+  transition: all 200ms ease-out;
+  :hover{
+    color: ${theme.colors.white};
+    background-color: ${theme.colors.primary};
+    border: 1px solid ${theme.colors.white};
+    transition: all 200ms ease-out;
+  }
+  :active{
+    background-color: ${theme.colors.white};
+    color: ${theme.colors.primary};
+  }
+
+  &.is-disabled {
+    opacity: 50%;
+    cursor: not-allowed;
+    z-index: 2;
+  }
+
+  &.with-focus {
+    border: 1px solid white;
+    background-color: ${theme.colors.white};
+    color: ${theme.colors.primary};
+    :hover {
+      color: ${theme.colors.white};
+      background-color: ${theme.colors.primary};
+      border: 1px solid ${theme.colors.white};
+    }
+    :active {
+      background-color: ${theme.colors.white};
+      color: ${theme.colors.primary};
+    }
+  }
+ }
+
+ .delete-button {
+  color: ${theme.colors.white};
+
+  :active {  // = quand on clique dessus
+    color: ${theme.colors.white};
+  }
+}
+
+  .text-info {
+    .description {
+      .left-description {
+        color: ${theme.colors.white};
       }
     }
   }

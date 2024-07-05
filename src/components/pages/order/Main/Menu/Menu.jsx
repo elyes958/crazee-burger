@@ -7,21 +7,59 @@ import { formatPrice } from "../../../../../utils/maths";
 import AdminContext from "../../../../../context/AdminContext";
 import EmptyMenuAdmin from "./EmptyMenuAdmin";
 import EmptyMenuClient from "./EmptyMenuClient";
+import { EMPTY_PRODUCT } from "../../../../../enums/product";
 // import Product from "./Product";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // state
-  const {isModeAdmin, menu, handleDelete, resetMenu} = useContext(AdminContext);
+  const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, idEditCard, setIdEditCard, setIsCollapsed, productSelected, setProductSelected, titleEditRef} = useContext(AdminContext);
 
-  // Comportement
-  const handleCardDelete = (idOfProductToDelete) => {
-    handleDelete(idOfProductToDelete)  // il a qu'une instruction tu peu directement l'envoyer dans le onDelete de la card si tu veux
+  // Comportement (gestionnaire d'évenement ou "event handler")
+  const handleCardDelete = (event, idOfProductToDelete) => {
+    event.stopPropagation();
+    handleDelete(idOfProductToDelete);
+    idOfProductToDelete === productSelected.id  && setProductSelected(EMPTY_PRODUCT); // permet d'ecrire une condition sur une ligne sans utiliser de if
+    titleEditRef.current.focus();
+  }
+  
+  const handleClicked = async (idProductSelected) => {    // mot cle async, handleClicked devient une fct asynchrone
+    if(!isModeAdmin) return;  // si ont est pas en modeAdmin ont execute pas cet fct
+
+    // on fait une copie du state que quand on modifie le state la ce n'est pas le cas
+    console.log("idProductSelected: ", idProductSelected);
+    const productClickedOn = menu.find((product) => product.id === idProductSelected);
+    console.log("productSelected: ", productClickedOn);
+    
+    await setProductSelected(productClickedOn);   // et donc ont met un await devant tous nos setters pour dire d'attendre la fin de leur execution avant de passer à la suite
+    await setIsCollapsed(false); // au clic on ouvre le panel Admin
+    await setCurrentTabSelected("edit"); // et on le met sur l'onglet edit
+
+    // un setter a un comportement asynchrone il ne va pas terminer de s'executer tout de suite, donc il faut qu'ont attende que les setters s'executent avant d'executer le titleEditRef.current.focus() pour eviter le bug qu'on a eu
+    // il faut donc que ces fct soit comprise dans une fct qui est asynchrone
+
+    titleEditRef.current.focus(); // il faut attendre avant d'executer cet ligne la car le panelAdmin et Edit ne sont pas encore ouvert avant d'actualiser la page ce qui provoque une erreur et ne met pas le focus sur le premier element cliquer
+    
+
+    // ce que j'ai fait moi
+    // console.log("id : " + idProductSelected);
+    // setCurrentTabSelected("edit");
+    // setIsCollapsed(false);
+
+    // if(idEditCard === idProductSelected){
+    //   setIdEditCard(null);
+    // } else {
+    //   setIdEditCard(idProductSelected);
+    // }
+
   }
 
- 
-  
+  const checkIfProductIsClicked = (idProductInMenu, idProductClickedOn) => { 
+    return idProductInMenu=== idProductClickedOn ? true : false;
+  }
+
+
   // Affichage
   
   if(menu.length === 0) {
@@ -30,17 +68,21 @@ export default function Menu() {
  } 
   // resetMenu ne prend rien param et n'a qu'une seul instruction donc on peu le definir direct dans le onClick
 
+
   return (
     <MenuStyled className="menu">
       {menu.map((produit) => {
         return (
           <Card
-            onDelete={() => handleCardDelete(produit.id)}
+            onDelete={(event) => handleCardDelete(event, produit.id)}
             hasDeleteButton={isModeAdmin}
             key={produit.id}
             title={produit.title}
             imageSource={produit.imageSource === "" ? IMAGE_BY_DEFAULT : produit.imageSource}
             leftDescription={formatPrice(produit.price)}
+            onClicked={() => handleClicked(produit.id)}
+            isHoverable={isModeAdmin}
+            isSelected={checkIfProductIsClicked(produit.id, productSelected.id)}
           />
           // finalement comme on a rendu notre composant reutilisable et donc qu'on a fait remonter le specifique dans les props, alor on est obliger d'utiliser ça et pas l'autre methode en bas
           // <Card {...produit} />  // meme chose que ligne 5, ecriture bc plus simple spread operator dans un objet, cet methode fonctionne que si vous etes certain que "produit" a tous les élements dont "Product" a besoin. Du coup la methode au dessus est preferable et conseiller.

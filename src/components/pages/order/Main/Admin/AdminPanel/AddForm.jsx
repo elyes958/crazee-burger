@@ -1,22 +1,13 @@
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import AdminContext from "../../../../../../context/AdminContext";
-
-import { theme } from "../../../../../../theme";
 // import { TextInput } from "../../../../../reusable-ui/TextInput"; //ctrl shift H pour importe le lien toi meme(ici mon erreur a etait de l'importer entre {} on fait pas ça quand on importe un composant)
-
-import TextInput from "../../../../../reusable-ui/TextInput";
-import Button from "../../../../../reusable-ui/Button.jsx";
-import ImagePrewiew from "./ImagePrewiew.jsx";
+import { EMPTY_PRODUCT } from "../../../../../../enums/product.js";
+import Form from "./Form.jsx";
 import SubmitMessage from "./SubmitMessage.jsx";
-import { getInputTextsConfig } from "./inputTextConfig.jsx";
+import Button from "../../../../../reusable-ui/Button.jsx";
 
-export const EMPTY_PRODUCT = {
-    id          : "",
-    title       : "",
-    imageSource : "",
-    price       : 0,
-}
+
 
 export default function AddForm() {
   // du coup ont peu egalement faire passer des comportement via le context en le remontant tout en haut dans le composant parent comme on a fait ci dessus
@@ -49,7 +40,7 @@ export default function AddForm() {
         }, 2000)
     }
 
-   // Quand un evenement est lie a une balise html, l'evenement contient la balise au niveau de la propriete targer event.target(tout ce qui est associe à la balise)
+   // Quand un evenement est lie a une balise html, l'evenement contient la balise au niveau de la propriete target event.target(tout ce qui est associe à la balise)
    const handleChange = (event) => { 
     console.log("event.target.value", event.target.value);
     console.log("event.target", event.target);
@@ -59,64 +50,29 @@ export default function AddForm() {
    }
    // ligne 37: [name] = nom de propriete dynamique en JS(dynamic property name en anglais)
 
-  const inputTexts = getInputTextsConfig(newProduct);
+ 
 
   // Affichage
   return (
-    <AddFormStyled onSubmit={handleSubmit}>
-        <ImagePrewiew newProduct={newProduct} />
-        <div className="input-fields">
-          {inputTexts.map((input) => (
-             <TextInput
-              key={input.id}
-              name={input.name}
-              value={input.value} 
-              placeholder={input.placeholder} 
-              onChange={handleChange}
-              icon={input.Icon}
-              version="minimalist"
-              />
-            ))}
-          {/* <TextInput
-             name="title" 
-             value={newProduct.title} 
-             type="text" 
-             placeholder="Nom du produit (ex: Super Burger)" 
-             onChange={handleChange}
-             icon={<FaHamburger/>}
-            //  className={"inputDuAddForm"}
-             version="minimalist"
-          />
-          <TextInput 
-            name="imageSource" 
-            value={newProduct.imageSource} 
-            type="text" 
-            placeholder="Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)" 
-            onChange={handleChange}
-            icon={<BsFillCameraFill/>}
-            // className={"inputDuAddForm"}
-            version="minimalist"
-          />
-          <TextInput 
-            name="price" 
-            value={newProduct.price ? newProduct.price : ""} 
-            type="text" 
-            placeholder="Prix" 
-            onChange={handleChange}
-            icon={<MdOutlineEuro/>}
-            // className={"inputDuAddForm"}
-            version="minimalist"
-          /> */}
-        </div>
-        <div className="submit">
-            <Button className="submit-button" label={"Ajouter un nouveau produit au menu"} version="success" />
-            {isSubmitted && (
-             <SubmitMessage/>
-            )}
-        </div>
-    </AddFormStyled>
+    <Form 
+    product={newProduct}
+    onSubmit={handleSubmit}
+    onChange={handleChange}
+    isSubmitted={isSubmitted}
+    >
+    <>
+    <Button
+     className="submit-button"
+     label={"Ajouter un nouveau produit au menu"}
+     version="success"
+     />
+     {isSubmitted && <SubmitMessage/>}
+   </>
+   </Form>
   )
 }
+// ligne 61 les fragments <></> ou React.fragment sont ignoré dans le render du HTML, donc permet d'envoyer plusieurs element par ex en props sans utiliser de div
+// ligne 63 notre button entre fragment est un enfant de form donc on rajoute la 2eme balise fermante pour le mettre entre les deux et on le passe à notre composant via le mot cle children de React ce qui nous evite de passer tout ça dans un props ce qui fonctionne aussi, si on change le mot et on ne met pas children ça ne fonctionera pas, childen est un mot cle de react
 
 const AddFormStyled = styled.form`
   /* border: 2px solid black; */
