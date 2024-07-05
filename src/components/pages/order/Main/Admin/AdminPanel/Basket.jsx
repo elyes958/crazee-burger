@@ -32,6 +32,7 @@ const BasketStyled = styled.div`
     .body{
       flex : 1;    // en ecrivant cela, c'est comme avec grid il prendre tout le reste de l'espace disponible
       background: ${theme.colors.background_white};
+      box-shadow: ${theme.shadows.basket};
     }
     .footer{
       background: ${theme.colors.background_dark};
