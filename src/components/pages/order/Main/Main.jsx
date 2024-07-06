@@ -4,7 +4,8 @@ import { useContext, useState } from "react";
 import Menu from "./Menu/Menu";
 import Admin from "./Admin/Admin";
 import AdminContext from "../../../../context/AdminContext";
-import Basket from "./Admin/AdminPanel/Basket";
+import Basket from "./Basket/Basket";
+
 
 export default function Main() {
   // State
