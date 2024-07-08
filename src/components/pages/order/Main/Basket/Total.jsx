@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
+import Header from "../../../../reusable-ui/Header";
 
 export default function Total({ amountToPay }) {
   return (
-    <TotalStyled>
-        <span className="total">Total</span>
-        <span className="amount">{amountToPay}</span>
-    </TotalStyled>
+      <Header>
+          <TotalStyled>
+              <span className="total">Total</span>
+              <span className="amount">{amountToPay}</span>
+          </TotalStyled>
+      </Header>
   )
 }
 

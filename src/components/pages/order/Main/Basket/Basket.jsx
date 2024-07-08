@@ -3,15 +3,14 @@ import { theme } from "../../../../../theme";
 import Header from "../../../../reusable-ui/Header";
 import Total from "./Total";
 import { formatPrice } from "../../../../../utils/maths";
+import Footer from "./Footer";
 
 export default function Basket() {
   return (
     <BasketStyled>
-        <Header>
-          <Total amountToPay={formatPrice(0)}/>
-        </Header>
+        <Total amountToPay={formatPrice(0)}/>
         <div className="body">Body</div>
-        <Header>footer</Header>
+        <Footer/>
         {/* <div className="ttc">
           <div>
               <span>TOTAL</span>
