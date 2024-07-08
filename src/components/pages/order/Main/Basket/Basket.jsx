@@ -1,15 +1,16 @@
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
-import Header from "../../../../reusable-ui/Header";
 import Total from "./Total";
 import { formatPrice } from "../../../../../utils/maths";
 import Footer from "./Footer";
+import BasketBody from "./BasketBody";
+
 
 export default function Basket() {
   return (
     <BasketStyled>
         <Total amountToPay={formatPrice(0)}/>
-        <div className="body">Body</div>
+        <BasketBody/>
         <Footer/>
         {/* <div className="ttc">
           <div>
@@ -28,13 +29,6 @@ const BasketStyled = styled.div`
     background: pink;
     display: flex;
     flex-direction: column;
-
-    .body{
-      flex : 1;    // en ecrivant cela, c'est comme avec grid il prendre tout le reste de l'espace disponible
-      background: ${theme.colors.background_white};
-      box-shadow: ${theme.shadows.basket};
-    }
-
     
     /* border: 1px solid red;
     height: 834,69px;
