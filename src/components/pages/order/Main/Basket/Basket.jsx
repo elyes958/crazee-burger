@@ -83,3 +83,5 @@ const BasketStyled = styled.div`
     align-items: center;
    } */
 `;
+
+
