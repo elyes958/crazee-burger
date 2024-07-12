@@ -1,5 +1,5 @@
 // on essaye de cree un custom hooks, qui est juste une fonction qui contient des hooks, on aura dedans seulment du state et des comportements
-// convention on nomme le fichier comme ça avec use au debut. Du coup en utilisant ça on peu extraire de la logique state et du comportement d'un composant pour n'en garder que l'affichage et eventuellement des gestionaire d'evenement(handle)
+//  on nomme le fichier comme ça avec use au debut. Du coup en utilisant ça on peu extraire de la logique state et du comportement d'un composant pour n'en garder que l'affichage et eventuellement des gestionaire d'evenement(handle)
 
 import { useState } from "react";
 
