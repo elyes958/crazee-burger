@@ -119,8 +119,8 @@ const MenuStyled = styled.div`
     /* border: 1px solid blue; */
     background: ${theme.colors.background_white};
     display: grid;
-    grid-template-columns: repeat(4, 1fr);  // = 4 colonnes avec tout l'espace disponible
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  // 2 colonne, minimum 300px et si jamais y'a encore de la place tu prend le reste. auto-fit = tu me met autant de colonne possible tant que ça rentre dedans
+    grid-template-columns: repeat(3, 1fr);  // = 4 colonnes avec tout l'espace disponible
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  // 2 colonne, minimum 300px et si jamais y'a encore de la place tu prend le reste. auto-fit = tu me met autant de colonne possible tant que ça rentre dedans */
     grid-row-gap: 60px;
     padding: 50px 50px 150px;
     justify-items: center;  /* Centre les éléments horizontalement */

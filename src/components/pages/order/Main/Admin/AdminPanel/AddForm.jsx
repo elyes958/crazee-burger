@@ -6,6 +6,7 @@ import { EMPTY_PRODUCT } from "../../../../../../enums/product.js";
 import Form from "./Form.jsx";
 import SubmitMessage from "./SubmitMessage.jsx";
 import Button from "../../../../../reusable-ui/Button.jsx";
+import { useSuccessMessage } from "../../../../../../hooks/useDisplaySuccessMessage.js";
 
 
 
@@ -13,6 +14,7 @@ export default function AddForm() {
   // du coup ont peu egalement faire passer des comportement via le context en le remontant tout en haut dans le composant parent comme on a fait ci dessus
   const { handleAdd, newProduct, setNewProduct } = useContext(AdminContext);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  // const {isSubmitted, displaySuccessMessage} = useSuccessMessage() // on l'appelle avec des () car c'est une fonction, useSuccessMessage est notre custom hook, il nous return ici un hook(le state isSubmited) et un comportement
 
   // Comportements
   const handleSubmit = (event) => { 
@@ -109,4 +111,4 @@ const AddFormStyled = styled.form`
 `;
 
 // sinon pour generer les id il y'a la librairie uuid ou encore plus simple une methode natif à javascript ex: id : crypto.randomUUID() cet methode va generer un id unique
-
+// Une custom hook est une fonction qui contient des hooks

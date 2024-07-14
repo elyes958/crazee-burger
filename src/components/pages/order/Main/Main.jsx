@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { theme } from "../../../../theme";
 import { useContext, useState } from "react";
-import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
-import { formatPrice } from "../../../../utils/maths";
 import Menu from "./Menu/Menu";
 import Admin from "./Admin/Admin";
 import AdminContext from "../../../../context/AdminContext";
+import Basket from "./Basket/Basket";
+
 
 export default function Main() {
   // State
@@ -36,7 +36,7 @@ export default function Main() {
   // Affichage
   return (
     <MainStyled>
-      {/* <div className="basket">Basket</div> */}
+      <Basket/>
       <div className="menu-and-admin">
         <Menu/>
         {modeAdmin.isModeAdmin && <Admin/>}  
@@ -59,7 +59,8 @@ const MainStyled = styled.main`
     box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset ;
     display: grid;
     /* grid-template-columns: repeat(4, 240px); */
-    grid-template-columns:  1fr;
+    grid-template-columns: 25% 1fr;
+    overflow: hidden;
     /* grid-column-gap: 85px; */
     /* grid-template-rows: repeat(4, 330px); */
     /* grid-row-gap: 60px; */
@@ -74,10 +75,12 @@ const MainStyled = styled.main`
     position: relative;
     overflow-y: hidden;  // le contenu qui depasse sur l'axe y don en hauteur on le met hidden car on veut qu'il soit cacher
     display: grid;  // en mettant ça en plus du overflow: scroll dans l'enfant ça fonctionne je ne sais pas pourquoi à chercher(meme sur la video F07 il a dit il sais pas pk)
-    border-bottom-left-radius: ${theme.borderRadius.extraRound}; 
+    /* border-bottom-left-radius: ${theme.borderRadius.extraRound};  */
     border-bottom-right-radius: ${theme.borderRadius.extraRound};
 
    }
+
+   
    
 
    /* h3{
