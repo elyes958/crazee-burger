@@ -3,7 +3,7 @@ import { theme } from "../../../../../theme";
 import Total from "./Total";
 import { formatPrice } from "../../../../../utils/maths";
 import Footer from "./Footer";
-import BasketBody from "./BasketBody";
+import EmptyBasket from "./EmptyBasket.jsx";
 import { useContext } from "react";
 import AdminContext from "../../../../../context/AdminContext";
 import BasketCompleted from "./BasketCompleted";
@@ -22,7 +22,7 @@ export default function Basket() {
   return (
     <BasketStyled>
         <Total amountToPay={formatPrice(totalPrice)}/>
-        {basket.length > 0  ? <BasketCompleted/> : <BasketBody/>}
+        {basket.length > 0  ? <BasketCompleted/> : <EmptyBasket/>}
         <Footer/>
         {/* <div className="ttc">
           <div>
