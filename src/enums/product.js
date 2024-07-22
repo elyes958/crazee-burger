@@ -4,5 +4,6 @@ export const EMPTY_PRODUCT = Object.freeze({
     title       : "",
     imageSource : "",
     price       : 0,
+    quantity    : 0,
 })
 // Object.freeze sert a protéger notre objet pour qu'on ne puisse plus le modifier ni lui ajouter d'autres valeurs

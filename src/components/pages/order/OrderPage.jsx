@@ -29,8 +29,28 @@ export default function OrderPage() {
   // const [idEditCard, setIdEditCard] = useState(null);  // ce que j'ai fait moi
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const titleEditRef = useRef();
-  const {menu, setMenu, handleAdd, handleDelete, handleEdit, resetMenu} = useMenu();
-  // setMenu est gerer proche de son state donc dans useMenu voila pourquoi il n'est pas utiliser ici
+  const {menu, setMenu, handleAdd, handleDelete, handleEdit, resetMenu} = useMenu();   // setMenu est gerer proche de son state donc dans useMenu voila pourquoi il n'est pas utiliser ici
+  const [basket, setBasket] = useState([]);
+
+  const handleAddToBasket = (infoProductSelected) => { 
+    const copy = deepClone(basket);
+    copy.unshift(infoProductSelected);
+    setBasket(copy);
+  }
+
+  const majQuantity = (inBasket) => { 
+    const copy = deepClone(basket);
+    const updateQuantity = copy.map(product => product.id === inBasket.id ? inBasket : product);
+    setBasket(updateQuantity);
+  }
+
+  const handleDeleteInBasket = (id) => { 
+    const copy = [...basket];
+
+    const filterProducts = copy.filter((product) => product.id !== id);
+
+    setBasket(filterProducts);
+  }
 
   //value du context
   const adminValue = {
@@ -70,7 +90,13 @@ export default function OrderPage() {
 
     handleEdit: handleEdit,
     
-    titleEditRef: titleEditRef
+    titleEditRef: titleEditRef,
+
+    basket              : basket,
+    setBasket           : setBasket,
+    handleAddToBasket   : handleAddToBasket,
+    majQuantity         : majQuantity,
+    handleDeleteInBasket: handleDeleteInBasket,
   }
 
   //affichage

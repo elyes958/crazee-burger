@@ -4,13 +4,25 @@ import Total from "./Total";
 import { formatPrice } from "../../../../../utils/maths";
 import Footer from "./Footer";
 import BasketBody from "./BasketBody";
+import { useContext } from "react";
+import AdminContext from "../../../../../context/AdminContext";
+import BasketCompleted from "./BasketCompleted";
 
 
 export default function Basket() {
+  const {basket} = useContext(AdminContext);
+
+  let totalPrice = 0;
+
+  for (let i = 0; i < basket.length; i++) {
+    totalPrice += (basket[i].price * basket[i].quantity);
+  }
+
+  // Affichage
   return (
     <BasketStyled>
-        <Total amountToPay={formatPrice(0)}/>
-        <BasketBody/>
+        <Total amountToPay={formatPrice(totalPrice)}/>
+        {basket.length > 0  ? <BasketCompleted/> : <BasketBody/>}
         <Footer/>
         {/* <div className="ttc">
           <div>
@@ -29,6 +41,8 @@ const BasketStyled = styled.div`
     background: pink;
     display: flex;
     flex-direction: column;
+    overflow: hidden; // ont cache ce qui depasse du panier en mettant hiden sur le parent puis on le rend visible au scroll en utilisant overflow: scroll sur l'enfant
+    
     
     /* border: 1px solid red;
     height: 834,69px;

@@ -4,7 +4,7 @@ import { theme } from "../../theme";
 import Button from "./Button";
 import { TiDelete } from "react-icons/ti";
 
-export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked , isHoverable, isSelected }) {
+export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked , isHoverable, isSelected, selectInBasket }) {
   return (
     <CardStyled hasDeleteButton={hasDeleteButton} className="produit"  isHoverable={isHoverable} onClick={onClicked} isSelected={isSelected} >
       <div className="card">
@@ -20,7 +20,7 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
         <div className="description">
           <div className="left-description">{leftDescription}</div>
           <div className="right-description">
-            <Button className="primary-button" label={"Ajouter"} version="primary" onClick={(event) => event.stopPropagation()} />
+            <Button className="primary-button" label={"Ajouter"} version="primary" onClick={selectInBasket} />
           </div>
         </div>
       </div>

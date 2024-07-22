@@ -14,12 +14,13 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // state
-  const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, idEditCard, setIdEditCard, setIsCollapsed, productSelected, setProductSelected, titleEditRef} = useContext(AdminContext);
+  const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, setIsCollapsed, productSelected, setProductSelected, titleEditRef, basket, handleAddToBasket, majQuantity, handleDeleteInBasket} = useContext(AdminContext);
 
   // Comportement (gestionnaire d'évenement ou "event handler")
   const handleCardDelete = (event, idOfProductToDelete) => {
     event.stopPropagation();
     handleDelete(idOfProductToDelete);
+    handleDeleteInBasket(idOfProductToDelete); // je le supprime egalement du basket
     idOfProductToDelete === productSelected.id  && setProductSelected(EMPTY_PRODUCT); // permet d'ecrire une condition sur une ligne sans utiliser de if
     titleEditRef.current.focus();
   }
@@ -59,6 +60,31 @@ export default function Menu() {
     return idProductInMenu=== idProductClickedOn ? true : false;
   }
 
+  const handleSelectInBasket = (event, idProductSelected) => {
+    event.stopPropagation();
+
+    const productClickedOn = menu.find((product) => product.id === idProductSelected);
+
+    const inBasket = basket.find((product) => product.id === idProductSelected);
+
+    if(!inBasket){
+      const infoProductSelected = {
+        image   : productClickedOn.imageSource,
+        title   : productClickedOn.title,
+        price   : productClickedOn.price,
+        quantity: productClickedOn.quantity + 1,
+        // id      : new Date().getTime(),
+        id      : idProductSelected
+      }
+  
+      handleAddToBasket(infoProductSelected);
+    } else{
+      inBasket.quantity += 1;
+      majQuantity(inBasket);
+    }
+  
+  }
+
 
   // Affichage
   
@@ -83,6 +109,7 @@ export default function Menu() {
             onClicked={() => handleClicked(produit.id)}
             isHoverable={isModeAdmin}
             isSelected={checkIfProductIsClicked(produit.id, productSelected.id)}
+            selectInBasket={(event) => handleSelectInBasket(event, produit.id)}
           />
           // finalement comme on a rendu notre composant reutilisable et donc qu'on a fait remonter le specifique dans les props, alor on est obliger d'utiliser ça et pas l'autre methode en bas
           // <Card {...produit} />  // meme chose que ligne 5, ecriture bc plus simple spread operator dans un objet, cet methode fonctionne que si vous etes certain que "produit" a tous les élements dont "Product" a besoin. Du coup la methode au dessus est preferable et conseiller.
