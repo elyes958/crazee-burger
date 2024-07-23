@@ -10,6 +10,7 @@ import { fakeMenu2 } from '../../../fakeData/fakeMenu';
 import { EMPTY_PRODUCT } from '../../../enums/product';
 import { deepClone } from '../../../utils/array';
 import { useMenu } from '../../../hooks/useMenu';
+import { useBasket } from '../../../hooks/useBasket';
 
 
 
@@ -30,7 +31,7 @@ export default function OrderPage() {
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const titleEditRef = useRef();
   const {menu, setMenu, handleAdd, handleDelete, handleEdit, resetMenu} = useMenu();   // setMenu est gerer proche de son state donc dans useMenu voila pourquoi il n'est pas utiliser ici
-  const [basket, setBasket] = useState([]);
+  const { basket, setBasket } = useBasket();
 
   const handleAddToBasket = (infoProductSelected) => { 
     const copy = deepClone(basket);
