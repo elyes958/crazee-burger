@@ -69,7 +69,7 @@ export default function Menu() {
 
     if(!inBasket){
       const infoProductSelected = {
-        image   : productClickedOn.imageSource,
+        imageSource   : productClickedOn.imageSource,
         title   : productClickedOn.title,
         price   : productClickedOn.price,
         quantity: productClickedOn.quantity + 1,

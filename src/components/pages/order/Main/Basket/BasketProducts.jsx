@@ -48,10 +48,10 @@ const BasketProductsStyled = styled.div`
   margin: 10px 16px;
   height: 86px;
   box-sizing: border-box;
-  :first-child {
+  &:first-child {         // Attention ne pas oublier le & devant juste à cause de ça mon css ne fonctionner pas! je crois dans la nouvelle version de react il faut tout le temps le mettre à voir !
     margin-top: 20px;
   }
-  :last-child{
+  &:last-child{
     margin-bottom: 20px;
   }
  }
