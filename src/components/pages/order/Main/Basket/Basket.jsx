@@ -3,14 +3,29 @@ import { theme } from "../../../../../theme";
 import Total from "./Total";
 import { formatPrice } from "../../../../../utils/maths";
 import Footer from "./Footer";
-import BasketBody from "./BasketBody";
+import EmptyBasket from "./EmptyBasket.jsx";
+import { useContext } from "react";
+import AdminContext from "../../../../../context/AdminContext";
+import BasketProducts from "./BasketProducts.jsx";
 
 
 export default function Basket() {
+  const {basket} = useContext(AdminContext);
+
+  let totalPrice = 0;
+
+  for (let i = 0; i < basket.length; i++) {
+    // if(isNaN(basket[i].price)){
+    //   continue;
+    // }   // on va gerer ça dans un autre ticket
+    totalPrice += (basket[i].price * basket[i].quantity);
+  }
+
+  // Affichage
   return (
     <BasketStyled>
-        <Total amountToPay={formatPrice(0)}/>
-        <BasketBody/>
+        <Total amountToPay={formatPrice(totalPrice)}/>
+        {basket.length > 0  ? <BasketProducts/> : <EmptyBasket/>}
         <Footer/>
         {/* <div className="ttc">
           <div>
@@ -25,10 +40,14 @@ export default function Basket() {
 }
 
 const BasketStyled = styled.div`
-
-    background: pink;
+    background: ${theme.colors.background_white};
+    box-shadow: ${theme.shadows.basket};
     display: flex;
     flex-direction: column;
+    border-bottom-left-radius: ${theme.borderRadius.extraRound};
+    height: 85vh;
+    /* overflow: hidden; // ont cache ce qui depasse du panier en mettant hiden sur le parent puis on le rend visible au scroll en utilisant overflow: scroll sur l'enfant */
+    
     
     /* border: 1px solid red;
     height: 834,69px;

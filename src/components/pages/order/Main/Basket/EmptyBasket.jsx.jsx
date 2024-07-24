@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
 
-export default function BasketBody() {
+export default function EmptyBasket() {
   return (
-    <BasketBodyStyled><span className="empty-message">Votre commande est vide.</span></BasketBodyStyled>
+    <EmptyBasketStyled><span className="empty-message">Votre commande est vide.</span></EmptyBasketStyled>
   )
 }
 
-const BasketBodyStyled = styled.div`
+const EmptyBasketStyled = styled.div`
   flex : 1;    // en ecrivant cela, c'est comme avec grid il prendre tout le reste de l'espace disponible
   background: ${theme.colors.background_white};
   box-shadow: ${theme.shadows.basket};

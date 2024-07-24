@@ -10,6 +10,7 @@ import { fakeMenu2 } from '../../../fakeData/fakeMenu';
 import { EMPTY_PRODUCT } from '../../../enums/product';
 import { deepClone } from '../../../utils/array';
 import { useMenu } from '../../../hooks/useMenu';
+import { useBasket } from '../../../hooks/useBasket';
 
 
 
@@ -29,8 +30,9 @@ export default function OrderPage() {
   // const [idEditCard, setIdEditCard] = useState(null);  // ce que j'ai fait moi
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const titleEditRef = useRef();
-  const {menu, setMenu, handleAdd, handleDelete, handleEdit, resetMenu} = useMenu();
-  // setMenu est gerer proche de son state donc dans useMenu voila pourquoi il n'est pas utiliser ici
+  const {menu, setMenu, handleAdd, handleDelete, handleEdit, resetMenu} = useMenu();   // setMenu est gerer proche de son state donc dans useMenu voila pourquoi il n'est pas utiliser ici
+  const { basket, handleAddToBasket, majQuantity, handleDeleteInBasket } = useBasket();
+  
 
   //value du context
   const adminValue = {
@@ -70,7 +72,12 @@ export default function OrderPage() {
 
     handleEdit: handleEdit,
     
-    titleEditRef: titleEditRef
+    titleEditRef: titleEditRef,
+
+    basket              : basket,
+    handleAddToBasket   : handleAddToBasket,
+    majQuantity         : majQuantity,
+    handleDeleteInBasket: handleDeleteInBasket,
   }
 
   //affichage
