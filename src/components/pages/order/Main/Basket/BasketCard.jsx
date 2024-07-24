@@ -6,8 +6,8 @@ import { MdDeleteForever } from "react-icons/md";
 export default function BasketCard({ title, image, price, quantity, onDelete, isModeAdmin }) {
   return (
     <BasketCardStyled isModeAdmin={isModeAdmin} >
-        <div className="delete-button">
-            <MdDeleteForever onClick={onDelete} className="icon"/>
+        <div className="delete-button" onClick={onDelete}>
+            <MdDeleteForever className="icon"/>
         </div>
         <div className="image">
             <img src={image} alt={title} />
@@ -233,11 +233,9 @@ const hoverableStyle = css`
         }
 
         &:hover {
-            text-decoration: underline;
-
-            .icon {
-                color: ${theme.colors.black};
-            }
+           .icon {
+              color: ${theme.colors.dark};
+          }
         }
       }
     }
