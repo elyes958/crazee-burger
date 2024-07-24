@@ -66,6 +66,7 @@ export default function Menu() {
     const productClickedOn = menu.find((product) => product.id === idProductSelected);
 
     const inBasket = basket.find((product) => product.id === idProductSelected);
+    // find nous renvoie "undefined" si le produit n'est pas deja dans le basket
 
     if(!inBasket){
       const infoProductSelected = {

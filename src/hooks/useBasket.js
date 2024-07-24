@@ -6,8 +6,11 @@ export const useBasket = () => {
     const [basket, setBasket] = useState(fakeBasket.EMPTY);
 
     const handleAddToBasket = (infoProductSelected) => {
+        // 1. copie du state
         const copy = deepClone(basket);
+        // 2. manip de la copie du state
         copy.unshift(infoProductSelected);
+        // 3. update du state
         setBasket(copy);
     }
 
