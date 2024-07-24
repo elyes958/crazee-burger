@@ -21,7 +21,7 @@ export const useBasket = () => {
     }
 
     const handleDeleteInBasket = (id) => {
-        const copy = [...basket];
+        const copy = deepClone(basket);
 
         const filterProducts = copy.filter((product) => product.id !== id);
 

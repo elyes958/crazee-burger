@@ -237,6 +237,11 @@ const hoverableStyle = css`
               color: ${theme.colors.dark};
           }
         }
+        &:active {
+          .icon {
+            color: ${theme.colors.white};
+          }
+        }
       }
     }
 ` 
