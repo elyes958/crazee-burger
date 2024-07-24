@@ -28,6 +28,7 @@ export default function BasketCard({ title, image, price, quantity, onDelete, is
 }
 
 const BasketCardStyled = styled.div`
+    cursor: ${({isModeAdmin}) => (isModeAdmin ? "pointer" : "auto")};
     box-sizing: border-box;
     height: 86px;
     padding: 8px 16px;
@@ -53,6 +54,7 @@ const BasketCardStyled = styled.div`
     }
 
     .text-info {
+        user-select: none;
         box-sizing: border-box;
         display: grid;
         grid-template-columns: 70% 1fr;
@@ -107,7 +109,42 @@ const BasketCardStyled = styled.div`
         z-index: 1;
     }
 
-    ${(props) => props.isModeAdmin && hoverableStyle}
+    &:hover {
+      .delete-button {
+        border: none;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 76px;
+        border-top-right-radius: ${theme.borderRadius.round};
+        border-bottom-right-radius: ${theme.borderRadius.round};
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: ${theme.colors.red};
+        color: ${theme.colors.white};
+        cursor: pointer;
+
+        .icon {
+            width: ${theme.fonts.size.P3};
+            height: ${theme.fonts.size.P3};
+        }
+
+        &:hover {
+           .icon {
+              color: ${theme.colors.dark};
+          }
+        }
+        &:active {
+          .icon {
+            color: ${theme.colors.white};
+          }
+        }
+      }
+    }
 
    // à partir de la c'est le css que j'avais fait moi
   /* display: flex;
@@ -207,41 +244,6 @@ const BasketCardStyled = styled.div`
   } */
 `;
 
-const hoverableStyle = css`
-   &:hover {
-      .delete-button {
-        border: none;
-        box-sizing: border-box;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 76px;
-        border-top-right-radius: ${theme.borderRadius.round};
-        border-bottom-right-radius: ${theme.borderRadius.round};
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: ${theme.colors.red};
-        color: ${theme.colors.white};
-        cursor: pointer;
 
-        .icon {
-            width: ${theme.fonts.size.P3};
-            height: ${theme.fonts.size.P3};
-        }
+  
 
-        &:hover {
-           .icon {
-              color: ${theme.colors.dark};
-          }
-        }
-        &:active {
-          .icon {
-            color: ${theme.colors.white};
-          }
-        }
-      }
-    }
-` 
