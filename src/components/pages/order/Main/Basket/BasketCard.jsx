@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../../../../theme";
 import { MdDeleteForever } from "react-icons/md";
 
 
-export default function BasketCard({ title, image, price, quantity, onDelete }) {
+export default function BasketCard({ title, image, price, quantity, onDelete, isModeAdmin }) {
   return (
-    <BasketCardStyled>
+    <BasketCardStyled isModeAdmin={isModeAdmin} >
         <div className="delete-button">
             <MdDeleteForever onClick={onDelete} className="icon"/>
         </div>
@@ -107,39 +107,7 @@ const BasketCardStyled = styled.div`
         z-index: 1;
     }
 
-    :hover {
-      .delete-button-pokemon {
-        border: none;
-        box-sizing: border-box;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 76px;
-        border-top-right-radius: ${theme.borderRadius.round};
-        border-bottom-right-radius: ${theme.borderRadius.round};
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: ${theme.colors.red};
-        color: ${theme.colors.white};
-        cursor: pointer;
-
-        .icon {
-            width: ${theme.fonts.size.P3};
-            height: ${theme.fonts.size.P3};
-        }
-
-        :hover {
-            text-decoration: underline;
-
-            .icon {
-                color: ${theme.colors.black};
-            }
-        }
-      }
-    }
+    ${(props) => props.isModeAdmin && hoverableStyle}
 
    // à partir de la c'est le css que j'avais fait moi
   /* display: flex;
@@ -238,3 +206,39 @@ const BasketCardStyled = styled.div`
     }
   } */
 `;
+
+const hoverableStyle = css`
+   &:hover {
+      .delete-button {
+        border: none;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 76px;
+        border-top-right-radius: ${theme.borderRadius.round};
+        border-bottom-right-radius: ${theme.borderRadius.round};
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: ${theme.colors.red};
+        color: ${theme.colors.white};
+        cursor: pointer;
+
+        .icon {
+            width: ${theme.fonts.size.P3};
+            height: ${theme.fonts.size.P3};
+        }
+
+        &:hover {
+            text-decoration: underline;
+
+            .icon {
+                color: ${theme.colors.black};
+            }
+        }
+      }
+    }
+` 

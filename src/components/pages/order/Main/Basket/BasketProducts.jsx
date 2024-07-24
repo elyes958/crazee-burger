@@ -8,7 +8,7 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function BasketProducts() {
   // State
-  const {basket, handleDeleteInBasket} = useContext(AdminContext);
+  const {basket, handleDeleteInBasket, isModeAdmin} = useContext(AdminContext);
 
   // Comportement
   const handleDelete = (id) => { 
@@ -28,6 +28,7 @@ export default function BasketProducts() {
                     quantity={product.quantity}
                     key={product.id}
                     onDelete={() => handleDelete(product.id)}
+                    isModeAdmin={isModeAdmin}
                 />
                 </div>
             )

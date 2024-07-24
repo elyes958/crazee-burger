@@ -15,10 +15,9 @@ export default function Basket() {
   let totalPrice = 0;
 
   for (let i = 0; i < basket.length; i++) {
-    if(isNaN(basket[i].price)){
-      continue;
-    }
-
+    // if(isNaN(basket[i].price)){
+    //   continue;
+    // }   // on va gerer ça dans un autre ticket
     totalPrice += (basket[i].price * basket[i].quantity);
   }
 
