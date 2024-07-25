@@ -1,18 +1,13 @@
 import styled from "styled-components";
 import { useContext, useRef } from "react";
 import AdminContext from "../../../../../../context/AdminContext";
-import ImagePrewiew from "./ImagePrewiew";
-import TextInput from "../../../../../reusable-ui/TextInput";
-import HintMessage from "./HintMessage";
-import { getInputTextsConfig } from "./inputTextConfig";
-import { theme } from "../../../../../../theme";
 import EditInfoMessage from "./EditInfoMessage";
 import Form from "./Form";
 
 
 export default function EditForm() {
   // state
-  const { productSelected, setProductSelected, handleEdit, titleEditRef } = useContext(AdminContext);
+  const { productSelected, setProductSelected, handleEdit, titleEditRef, handleEditInBasket } = useContext(AdminContext);
 
   // Comportement (gestionnaire d'évenement ou "event handler")
   const handleChange = (event) => { 
@@ -25,6 +20,7 @@ export default function EditForm() {
 
     setProductSelected(productBeingUpdated); // cet ligne update le formulaire
     handleEdit(productBeingUpdated);            // cet ligne update le menu
+    handleEditInBasket(productBeingUpdated);    // cet ligne update le basket
   }
 
   // Affichage

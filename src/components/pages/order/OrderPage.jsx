@@ -31,7 +31,7 @@ export default function OrderPage() {
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const titleEditRef = useRef();
   const {menu, setMenu, handleAdd, handleDelete, handleEdit, resetMenu} = useMenu();   // setMenu est gerer proche de son state donc dans useMenu voila pourquoi il n'est pas utiliser ici
-  const { basket, handleAddToBasket, majQuantity, handleDeleteInBasket } = useBasket();
+  const { basket, handleAddToBasket, majQuantity, handleDeleteInBasket, handleEditInBasket } = useBasket();
   
 
   //value du context
@@ -78,6 +78,7 @@ export default function OrderPage() {
     handleAddToBasket   : handleAddToBasket,
     majQuantity         : majQuantity,
     handleDeleteInBasket: handleDeleteInBasket,
+    handleEditInBasket  : handleEditInBasket,
   }
 
   //affichage

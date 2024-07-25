@@ -3,9 +3,9 @@ import { theme } from "../../../../../theme";
 import { MdDeleteForever } from "react-icons/md";
 
 
-export default function BasketCard({ title, image, price, quantity, onDelete, isModeAdmin }) {
+export default function BasketCard({ title, image, price, quantity, onDelete, isModeAdmin, onClicked, isSelected }) {
   return (
-    <BasketCardStyled isModeAdmin={isModeAdmin} >
+    <BasketCardStyled isModeAdmin={isModeAdmin} onClick={onClicked} isSelected={isSelected} >
         <div className="delete-button" onClick={onDelete}>
             <MdDeleteForever className="icon"/>
         </div>
@@ -145,6 +145,8 @@ const BasketCardStyled = styled.div`
         }
       }
     }
+  
+  ${(props) => props.isModeAdmin && props.isSelected && selectedStyle}
 
    // à partir de la c'est le css que j'avais fait moi
   /* display: flex;
@@ -243,6 +245,16 @@ const BasketCardStyled = styled.div`
     }
   } */
 `;
+
+const selectedStyle = css`
+  background: ${theme.colors.primary};
+  .price{
+    color: ${theme.colors.white};
+  }
+  .quantity{
+    color: ${theme.colors.white};
+  }
+`
 
 
   

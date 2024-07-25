@@ -1,9 +1,7 @@
 import styled from "styled-components";
 // import { TextInput } from "../../../../../reusable-ui/TextInput"; //ctrl shift H pour importe le lien toi meme(ici mon erreur a etait de l'importer entre {} on fait pas ça quand on importe un composant)
 import TextInput from "../../../../../reusable-ui/TextInput.jsx";
-import Button from "../../../../../reusable-ui/Button.jsx";
 import ImagePrewiew from "./ImagePrewiew.jsx";
-import SubmitMessage from "./SubmitMessage.jsx";
 import { getInputTextsConfig } from "./inputTextConfig.jsx";
 import React from "react";
 
