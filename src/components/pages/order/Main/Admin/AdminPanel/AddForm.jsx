@@ -7,6 +7,7 @@ import Form from "./Form.jsx";
 import SubmitMessage from "./SubmitMessage.jsx";
 import Button from "../../../../../reusable-ui/Button.jsx";
 import { useSuccessMessage } from "../../../../../../hooks/useDisplaySuccessMessage.js";
+import { replaceFrenchCommaWithDot } from "../../../../../../utils/maths.jsx";
 
 
 
@@ -27,6 +28,7 @@ export default function AddForm() {
         // plus simple d'ecrire comme ça ligne 26
         ...newProduct,
         id: new Date().getTime(),
+        price: replaceFrenchCommaWithDot(newProduct.price),
      }
 
     handleAdd(newProductToAdd);

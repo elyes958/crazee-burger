@@ -11,12 +11,13 @@ export default function BasketProducts() {
   const {basket, handleDeleteInBasket, isModeAdmin, setIsCollapsed, setProductSelected, setCurrentTabSelected, productSelected} = useContext(AdminContext);
 
   // Comportement
-  const handleDelete = (id) => { 
+  const handleDelete = (event, id) => {
+    event.stopPropagation();
     handleDeleteInBasket(id);
   }
 
   const handleClicked = (idCardInBadket) => {
-    if(!isModeAdmin){   // su le contraire de isModeAdmin actuel nous renvoie true.(donc si isAdmin actuel = false = on est pas en mode Admin)
+    if(!isModeAdmin){   // si le contraire de isModeAdmin actuel nous renvoie true.(donc si isAdmin actuel = false = on est pas en mode Admin)
       return
     }
 
@@ -42,7 +43,7 @@ export default function BasketProducts() {
                     image={product.imageSource === "" ? IMAGE_BY_DEFAULT : product.imageSource}
                     price={formatPrice(product.price)}
                     quantity={product.quantity}
-                    onDelete={() => handleDelete(product.id)}
+                    onDelete={(event) => handleDelete(event, product.id)}
                     isModeAdmin={isModeAdmin}
                     onClicked={() => handleClicked(product.id)}
                     isSelected={checkIsSelected(product.id, productSelected.id)}

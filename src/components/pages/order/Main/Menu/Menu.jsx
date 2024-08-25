@@ -22,7 +22,7 @@ export default function Menu() {
     handleDelete(idOfProductToDelete);
     handleDeleteInBasket(idOfProductToDelete); // je le supprime egalement du basket
     idOfProductToDelete === productSelected.id  && setProductSelected(EMPTY_PRODUCT); // permet d'ecrire une condition sur une ligne sans utiliser de if
-    titleEditRef.current.focus();
+    // titleEditRef.current.focus();
   }
   
   const handleClicked = async (idProductSelected) => {    // mot cle async, handleClicked devient une fct asynchrone
