@@ -1,30 +1,38 @@
 import styled from "styled-components";
 import { useContext, useRef } from "react";
 import AdminContext from "../../../../../../context/AdminContext";
-import ImagePrewiew from "./ImagePrewiew";
-import TextInput from "../../../../../reusable-ui/TextInput";
-import HintMessage from "./HintMessage";
-import { getInputTextsConfig } from "./inputTextConfig";
-import { theme } from "../../../../../../theme";
 import EditInfoMessage from "./EditInfoMessage";
 import Form from "./Form";
+import { replaceFrenchCommaWithDot } from "../../../../../../utils/maths";
 
 
 export default function EditForm() {
   // state
-  const { productSelected, setProductSelected, handleEdit, titleEditRef } = useContext(AdminContext);
+  const { productSelected, setProductSelected, handleEdit, titleEditRef, handleEditInBasket, basket } = useContext(AdminContext);
 
   // Comportement (gestionnaire d'évenement ou "event handler")
   const handleChange = (event) => { 
     const { name, value } = event.target
 
-    const productBeingUpdated = {
+    let productBeingUpdated = {
         ...productSelected,
         [name] : value,
     }
 
     setProductSelected(productBeingUpdated); // cet ligne update le formulaire
     handleEdit(productBeingUpdated);            // cet ligne update le menu
+
+    let inBasket = basket.find((product) => product.id === productBeingUpdated.id);
+    console.log("inBasket: " , inBasket); // faire clg comme ça pour afficher le contenu d'un objet
+
+    // nous permet d'eviter le bug qui met la quantité du basket à 0 quand ont le modifie en cliquant sur le menu
+    const productBeingUpdatedInBasket = {
+      ...productBeingUpdated,
+      quantity : inBasket.quantity,
+      price    : replaceFrenchCommaWithDot(productBeingUpdated.price),   // cet ligne me regle le probleme du calcul du prix quand je modifie a partir du menu avec un chiffre à , ex: 1,4
+    }
+
+    handleEditInBasket(productBeingUpdatedInBasket);    // cet ligne update le basket
   }
 
   // Affichage

@@ -22,11 +22,14 @@ export default function Menu() {
     handleDelete(idOfProductToDelete);
     handleDeleteInBasket(idOfProductToDelete); // je le supprime egalement du basket
     idOfProductToDelete === productSelected.id  && setProductSelected(EMPTY_PRODUCT); // permet d'ecrire une condition sur une ligne sans utiliser de if
-    titleEditRef.current.focus();
+    // titleEditRef.current.focus();
   }
   
   const handleClicked = async (idProductSelected) => {    // mot cle async, handleClicked devient une fct asynchrone
     if(!isModeAdmin) return;  // si ont est pas en modeAdmin ont execute pas cet fct
+    // si le contraire de la valeur de isModeAdmin est = à true alors on execute ce code et on sort de la fct(ici on a initialiser à false le modeAdmin donc si c'est false la condition devien true et on sort de la fct)
+    // dans la condition c'est que vaut le contraire de isModeAdmin(actuel) pas si isModeAdmin actuel = le contraire de isModeAdmin de base
+    // en gros il faut regarder si le contraire de isModeAdmin actuel te renvoie true pour entrer dans la condition, donc il faut regarder ce que vaut le contraire de isModeAdmin actuel, pas ce que vaut le contraire de isModeAdmin de base(la ou on la initialiser)
 
     // on fait une copie du state que quand on modifie le state la ce n'est pas le cas
     console.log("idProductSelected: ", idProductSelected);
@@ -57,7 +60,7 @@ export default function Menu() {
   }
 
   const checkIfProductIsClicked = (idProductInMenu, idProductClickedOn) => { 
-    return idProductInMenu=== idProductClickedOn ? true : false;
+    return idProductInMenu === idProductClickedOn ? true : false;
   }
 
   const handleSelectInBasket = (event, idProductSelected) => {

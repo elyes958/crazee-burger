@@ -28,5 +28,15 @@ export const useBasket = () => {
         setBasket(filterProducts);
     }
 
-    return { basket, handleAddToBasket, majQuantity, handleDeleteInBasket }
+    const handleEditInBasket = (productBeingUpdated) => { 
+        const copy = deepClone(basket);
+
+        const findIndexInBasket = copy.findIndex((product) => product.id === productBeingUpdated.id);
+
+        copy[findIndexInBasket] = productBeingUpdated;
+
+        setBasket(copy);
+    }
+
+    return { basket, handleAddToBasket, majQuantity, handleDeleteInBasket, handleEditInBasket}
 }
