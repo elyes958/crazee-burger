@@ -11,6 +11,7 @@ import { EMPTY_PRODUCT } from '../../../enums/product';
 import { deepClone } from '../../../utils/array';
 import { useMenu } from '../../../hooks/useMenu';
 import { useBasket } from '../../../hooks/useBasket';
+import { getUser } from '../../../api/user';
 
 
 
@@ -80,6 +81,21 @@ export default function OrderPage() {
     handleDeleteInBasket: handleDeleteInBasket,
     handleEditInBasket  : handleEditInBasket,
   }
+
+  // appel API pour récupérer l'utilisateur "Alex"
+  getUser("Alex");
+
+  console.log('import.meta.env.REACT_APP_API_KEY: ', import.meta.env.VITE_APP_API_KEY);   // nous permet de lire la valeur de cet variable d'environnement dans le fichier env, ne pas oublier process.env. avant le nom de la variable
+//   Pour ceux qui rencontrent le même problème que moi en utilisant VITE
+// "process is not defined"
+// il faut utiliser import.meta.env. au lieu de process.env.
+// ET renommer le nom de vos clés api en les faisant commencer par VITE_ exemple :
+// VITE_AUTH_DOMAIN =
+// VITE_API_KEY =
+// VITE_PROJECT_ID =
+// VITE_STORAGE_BUCKET =
+// VITE_MESSAGING_SENDER_ID =
+// VITE_APP_ID =
 
   //affichage
   return (

@@ -11,6 +11,7 @@ import { IoChevronForward } from "react-icons/io5";
 import TextInput from '../../reusable-ui/TextInput';
 import { BsPersonCircle } from "react-icons/bs";
 import Button from '../../reusable-ui/Button';
+import { createUser } from '../../../api/user';
 
 
 
@@ -24,6 +25,7 @@ export default function LoginForm() {
     // comportement
     const handleSubmit = (event) => {
         event.preventDefault();
+        createUser(inputValue);   // fct setter de firestore sur firebase voir(user.js)
         // console.log(event);
         // console.log(event.target[0].value);
         // alert(`Bonjour ${event.target[0].value}`);
