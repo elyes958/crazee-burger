@@ -12,6 +12,7 @@ import TextInput from '../../reusable-ui/TextInput';
 import { BsPersonCircle } from "react-icons/bs";
 import Button from '../../reusable-ui/Button';
 import { authenticateUser, createUser, getUser } from '../../../api/user';
+import Welcome from './Welcome';
 
 
 
@@ -51,11 +52,7 @@ export default function LoginForm() {
     return (
         <LoginFormStyled action="submit" onSubmit={handleSubmit}>
 
-            <div>
-                <h1>Bienvenue chez nous !</h1>
-                <hr />
-                <h2>Connectez-vous</h2>
-            </div>
+            <Welcome/>
 
             <div>
                 {/* pour faire des composant generique reutilisable comme ici avec notre Input qu'on a cree en sous composant, ont ne met rien de specifique à l'interieur du composant donc ici input.jsx on ne met que du generique et ici à l'exterieur ont lui passe tout le specifique au composant ce qui nous donne un composant reutilisable */}
