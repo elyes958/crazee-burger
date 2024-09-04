@@ -83,7 +83,7 @@ export default function OrderPage() {
   }
 
   // appel API pour récupérer l'utilisateur "Alex"
-  getUser("Alex");
+  // getUser("Alex");
 
   console.log('import.meta.env.REACT_APP_API_KEY: ', import.meta.env.VITE_APP_API_KEY);   // nous permet de lire la valeur de cet variable d'environnement dans le fichier env, ne pas oublier process.env. avant le nom de la variable
 //   Pour ceux qui rencontrent le même problème que moi en utilisant VITE

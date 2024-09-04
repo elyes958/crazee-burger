@@ -1,6 +1,6 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";  // getDoc est le getter de firestore, dans la CRUD ça nous sert a read(recuperer les info dans une bdd), setDoc est le setter de firestore ont fait le reste du crud avec
 import { db } from "./firebase-config";    // la reference à notre bdd qu'on importe ici
-import { fakeMenu2 } from "../fakeData/fakeMenu";
+import { fakeMenu1, fakeMenu2 } from "../fakeData/fakeMenu";
 
 // fct pour le getter de firestore -> getDoc
 export const getUser = async (idUser) => { 
@@ -11,7 +11,8 @@ export const getUser = async (idUser) => {
     if (docSnapshot.exists()) { // exist et la methode dans l'objet que nous return la promesse qui permet de verifier si l'idUser dans notre fct ici existe dans la bdd, il nous return true ou false
         const userReceived = docSnapshot.data()
         console.log("userReceived: ", userReceived);
-    }
+        return userReceived; // atention avant je n'avais pas mis ça du coup la fct ne retourner rien et il n'y avais jamais rien dans ma variavle existingUser dans loginForm
+    } // sinon il return rien, rien = undefined à ne pas confondre avec null qui est = ça n'existe meme pas
 }
 // ligne 7 quand tu survole getDoc , celui ci nous return un "Documentsnapshot" qui est une photographie de la bdd au moment ou il a fini d'executer la promesse
 
@@ -35,4 +36,17 @@ export const createUser = (userId) => {
 
     // setDoc(CACHETTE, NOURRITURE) ce sont les 2 param que prend setDoc, explication de la video comme ci ct une taupe qui cherche un chemin(dans la bdd) et y place sa nouritture. la cachette c'est tout simplement docRef
     setDoc(docRef, newDoc); // setDoc nous return une promesse mais c'est seulment pour verifier si ça c'est bien executer cotés front-end, on peu le verfier directement dans la collection sur firebase si ça a bien été ajouter
+}
+
+
+
+export const authenticateUser = async (userId) => { 
+     // 1. récupère un existingUser
+     const existingUser = await getUser(userId); // getUser est une promesse il va donc mettre du temp à s'executer
+     console.log("existingUser: ", existingUser);
+
+     // 2. sinon tu créé un newUser
+     if (!existingUser){
+         createUser(userId);   // fct setter de firestore sur firebase voir(user.js)
+     }
 }

@@ -11,13 +11,13 @@ import { IoChevronForward } from "react-icons/io5";
 import TextInput from '../../reusable-ui/TextInput';
 import { BsPersonCircle } from "react-icons/bs";
 import Button from '../../reusable-ui/Button';
-import { createUser } from '../../../api/user';
+import { authenticateUser, createUser, getUser } from '../../../api/user';
 
 
 
 export default function LoginForm() {
     // state
-    const [inputValue, setInputValue] = useState("");
+    const [username, setUsername] = useState("");
     // on utilise le hook useNavigate pour forcer la redirection vers une autre page
     const navigate = useNavigate();
     // on l'appelle navigate car ça a du sens, à chaque fois qu'on va appeler navigate il va nous executer cet fct(ce hook)
@@ -25,21 +25,23 @@ export default function LoginForm() {
     // comportement
     const handleSubmit = (event) => {
         event.preventDefault();
-        createUser(inputValue);   // fct setter de firestore sur firebase voir(user.js)
+
+        authenticateUser(username); // on a pas besoin d'attendre la fin de lexecution de cet fct pour passer aux instruction suivante donc ici le await est inutile par contre dans le cas contraire il aurais fallu un await
+
         // console.log(event);
         // console.log(event.target[0].value);
         // alert(`Bonjour ${event.target[0].value}`);
         // je me suis casser la tete a faire ça mais ont pouvez simplement recuperer la valeur via le state comme en dessous car avec onChange a chaque fois qu'on tape quelque chose le state est mis à jour
-        // alert(`Bonjour ${inputValue}`)
-        setInputValue("");
+        // alert(`Bonjour ${username}`)
+        setUsername("");
         // on execute navigate au moment de la soumission, qui va prendre en parametre le nom de la page vers laquelle je veux rediriger mon utilisateur
-        navigate(`/order/${inputValue}`);
+        navigate(`/order/${username}`);
         // avec navigate oublie pas le / avant order j'avais un petit probleme
     }
 
     const handleChange = (event) => {
         console.log(event);
-        setInputValue(event.target.value);
+        setUsername(event.target.value);
     }
 
     // methode Object style
@@ -58,7 +60,7 @@ export default function LoginForm() {
             <div>
                 {/* pour faire des composant generique reutilisable comme ici avec notre Input qu'on a cree en sous composant, ont ne met rien de specifique à l'interieur du composant donc ici input.jsx on ne met que du generique et ici à l'exterieur ont lui passe tout le specifique au composant ce qui nous donne un composant reutilisable */}
                 <TextInput
-                value={inputValue}
+                value={username}
                 onChange={handleChange}
                 placeholder={"Entrez votre prénom"}
                 required
