@@ -23,7 +23,7 @@ export const useMenu = () => {
         syncBothMenus(username, menuUpdated)
     }
 
-    const handleDelete = (idOfProductToDelete) => {
+    const handleDelete = (idOfProductToDelete, username) => {
         // Copie du tableau(je laisse l'ancienne facon de faire mais il faut utiliser la methode ligne 57 à partir de maintenant)
         const copy = [...menu];
 
@@ -33,6 +33,7 @@ export const useMenu = () => {
 
         // update du state
         setMenu(filterProducts);   // ce comportement doit etre defini proche du state qu'il est en train de modifier
+        syncBothMenus(username, filterProducts);
     }
 
     const handleEdit = (productBeingEdited) => {

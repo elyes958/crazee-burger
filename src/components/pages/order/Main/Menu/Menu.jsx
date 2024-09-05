@@ -14,12 +14,12 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // state
-  const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, setIsCollapsed, productSelected, setProductSelected, titleEditRef, basket, handleAddToBasket, majQuantity, handleDeleteInBasket} = useContext(AdminContext);
+  const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, setIsCollapsed, productSelected, setProductSelected, titleEditRef, basket, handleAddToBasket, majQuantity, handleDeleteInBasket, username} = useContext(AdminContext);
 
   // Comportement (gestionnaire d'évenement ou "event handler")
   const handleCardDelete = (event, idOfProductToDelete) => {
     event.stopPropagation();
-    handleDelete(idOfProductToDelete);
+    handleDelete(idOfProductToDelete, username);
     handleDeleteInBasket(idOfProductToDelete); // je le supprime egalement du basket
     idOfProductToDelete === productSelected.id  && setProductSelected(EMPTY_PRODUCT); // permet d'ecrire une condition sur une ligne sans utiliser de if
     // titleEditRef.current.focus();
