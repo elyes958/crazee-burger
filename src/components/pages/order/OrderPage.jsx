@@ -12,6 +12,8 @@ import { deepClone } from '../../../utils/array';
 import { useMenu } from '../../../hooks/useMenu';
 import { useBasket } from '../../../hooks/useBasket';
 import { getUser } from '../../../api/user';
+import { useEffect } from 'react';
+import { getMenu } from '../../../api/product';
 
 
 
@@ -34,6 +36,18 @@ export default function OrderPage() {
   const {menu, setMenu, handleAdd, handleDelete, handleEdit, resetMenu} = useMenu();   // setMenu est gerer proche de son state donc dans useMenu voila pourquoi il n'est pas utiliser ici
   const { basket, handleAddToBasket, majQuantity, handleDeleteInBasket, handleEditInBasket } = useBasket();
   const {username} = useParams();
+
+  const initialiseMenu = async () =>  {
+    const menuReceived = await getMenu(username); // on met async et await pour attendre que la promesse ce termine est avoir un resultat negatif ou positif et non une promesse en cours(voir la fct getMenu pour comprendre)
+    console.log("menuReceived: ", menuReceived);
+    setMenu(menuReceived);
+  }
+
+  //Un composant qui est render = un composant qui est appele comme une fonction est appele(autrement dit toutes les instructions de la fct sont éxecuté)
+  // quand un composant est execute il va faire 2 lecture la premiere en "ignorant" tout les useEffect puis une 2 eme lecture ou il va executer les useEffect
+  useEffect(() => {
+    initialiseMenu()
+  }, []); // useEffect nous met une erreur dans la console quand on lui met une fct asynchrone avec async await comme juste au dessus, du coup on fait comme ça pour contourner cet erreur
   
 
   //value du context
