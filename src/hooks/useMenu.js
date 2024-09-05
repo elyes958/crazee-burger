@@ -36,7 +36,7 @@ export const useMenu = () => {
         syncBothMenus(username, filterProducts);
     }
 
-    const handleEdit = (productBeingEdited) => {
+    const handleEdit = (username, productBeingEdited) => {
         console.log("productBeingEdited: ", productBeingEdited);
         // Copie du state(deep clone) avec la methode JSON qui est bien mieux(voir explication F09 live 1 si tu te rapel plus pk)
         const menuCopy = deepClone(menu);
@@ -49,6 +49,7 @@ export const useMenu = () => {
 
         // update du state
         setMenu(menuCopy);
+        syncBothMenus(username, menuCopy)
     }
 
     // Ce que j'ai fait moi

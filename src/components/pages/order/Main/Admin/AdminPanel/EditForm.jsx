@@ -8,7 +8,7 @@ import { replaceFrenchCommaWithDot } from "../../../../../../utils/maths";
 
 export default function EditForm() {
   // state
-  const { productSelected, setProductSelected, handleEdit, titleEditRef, handleEditInBasket, basket } = useContext(AdminContext);
+  const { productSelected, setProductSelected, handleEdit, titleEditRef, handleEditInBasket, basket, username } = useContext(AdminContext);
 
   // Comportement (gestionnaire d'évenement ou "event handler")
   const handleChange = (event) => { 
@@ -20,7 +20,7 @@ export default function EditForm() {
     }
 
     setProductSelected(productBeingUpdated); // cet ligne update le formulaire
-    handleEdit(productBeingUpdated);            // cet ligne update le menu
+    handleEdit(username, productBeingUpdated);   // cet ligne update le menu
 
     let inBasket = basket.find((product) => product.id === productBeingUpdated.id);
     console.log("inBasket: " , inBasket); // faire clg comme ça pour afficher le contenu d'un objet
