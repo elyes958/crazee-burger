@@ -14,7 +14,11 @@ import Button from '../../reusable-ui/Button';
 import { authenticateUser, createUser, getUser } from '../../../api/user';
 import Welcome from './Welcome';
 
-
+// Les 4 endroit ou on peu retrouver de la data
+// Backend(base de données, API)
+// local storage(navigateur)
+// global state (redux, context)
+// local state(useState)
 
 export default function LoginForm() {
     // state

@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { fakeMenu2 } from "../fakeData/fakeMenu";
 import { deepClone } from "../utils/array";
+import { syncBothMenus } from "../api/product";
 
 export const useMenu = () => {
     const [menu, setMenu] = useState(fakeMenu2);
@@ -12,13 +13,14 @@ export const useMenu = () => {
 
     //comportements (gestionnaire de state ou "state handlers")
     // oublie pas un comportement qui modifie un state doit etre defini proche de ce state(bonne pratique), la seul exception c'est quand ont a des state assez simple comme un booleen, ou juste une string mais pas sur des state complexe avec array objet
-    const handleAdd = (newProduct) => {
+    const handleAdd = (newProduct, username) => {  // double clique sur handleAdd(ou n'importe quel fct) + ctrl shift F pour voir ou on l'utilise dans le projet
         // Copie du tableau
         const menuCopy = [...menu]
         // manip de la copie du tableau
         const menuUpdated = [newProduct, ...menuCopy]
         // update du state
-        setMenu(menuUpdated)
+        setMenu(menuUpdated);
+        syncBothMenus(username, menuUpdated)
     }
 
     const handleDelete = (idOfProductToDelete) => {

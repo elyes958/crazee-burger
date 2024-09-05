@@ -33,6 +33,7 @@ export default function OrderPage() {
   const titleEditRef = useRef();
   const {menu, setMenu, handleAdd, handleDelete, handleEdit, resetMenu} = useMenu();   // setMenu est gerer proche de son state donc dans useMenu voila pourquoi il n'est pas utiliser ici
   const { basket, handleAddToBasket, majQuantity, handleDeleteInBasket, handleEditInBasket } = useBasket();
+  const {username} = useParams();
   
 
   //value du context
@@ -80,6 +81,7 @@ export default function OrderPage() {
     majQuantity         : majQuantity,
     handleDeleteInBasket: handleDeleteInBasket,
     handleEditInBasket  : handleEditInBasket,
+    username            : username,
   }
 
   // appel API pour récupérer l'utilisateur "Alex"
