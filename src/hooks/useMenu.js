@@ -61,8 +61,9 @@ export const useMenu = () => {
     //   setMenu(menuModify);
     // }
 
-    const resetMenu = () => { // ont envoie le comportement dans le context pour eviter d'envoyer le settter qui lui doit rester dans le composant dans lequel il est defini(bonne pratique)
+    const resetMenu = (username) => { // ont envoie le comportement dans le context pour eviter d'envoyer le settter qui lui doit rester dans le composant dans lequel il est defini(bonne pratique)
         setMenu(fakeMenu2);
+        syncBothMenus(username, fakeMenu2);
     }
 
     // const handleModify = (idOfProductToModify, newTitle, newImageSource, newPrice) => {

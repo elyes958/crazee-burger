@@ -97,7 +97,7 @@ export default function Menu() {
   
   if(menu.length === 0) {
   if (!isModeAdmin) return <EmptyMenuClient/>
-  return <EmptyMenuAdmin onReset={resetMenu} /> // on peu direct lui envoyer du specifique car on sais qu'on ne va pas rendre ce composant reutilisable
+  return <EmptyMenuAdmin onReset={() => resetMenu(username)} /> // on peu direct lui envoyer du specifique car on sais qu'on ne va pas rendre ce composant reutilisable
  } 
   // resetMenu ne prend rien param et n'a qu'une seul instruction donc on peu le definir direct dans le onClick
 
