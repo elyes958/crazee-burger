@@ -9,6 +9,7 @@ import EmptyMenuAdmin from "./EmptyMenuAdmin";
 import EmptyMenuClient from "./EmptyMenuClient";
 import { EMPTY_PRODUCT } from "../../../../../enums/product";
 // import Product from "./Product";
+import Loader from "./Loader.jsx"  // ctrl shift h pour importer le chemin
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -91,6 +92,8 @@ export default function Menu() {
 
 
   // Affichage
+
+  if (menu === undefined) return <Loader/>  // une seul instruction dans le if donc pas besoin d'accolades, nous permet d'afficher ce composant pdt le chargement de la pasge et la recuperations des donnee via l'API sur firebase(firestore)
   
   if(menu.length === 0) {
   if (!isModeAdmin) return <EmptyMenuClient/>

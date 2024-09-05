@@ -7,7 +7,7 @@ import { deepClone } from "../utils/array";
 import { syncBothMenus } from "../api/product";
 
 export const useMenu = () => {
-    const [menu, setMenu] = useState(fakeMenu2);
+    const [menu, setMenu] = useState();
 
 
 
