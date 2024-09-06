@@ -1,14 +1,18 @@
 import styled from "styled-components";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import AdminContext from "../../../../../../context/AdminContext";
 import EditInfoMessage from "./EditInfoMessage";
 import Form from "./Form";
 import { replaceFrenchCommaWithDot } from "../../../../../../utils/maths";
+import SavingMessage from "./SavingMessage";
+import { useSuccessMessage } from "../../../../../../hooks/useDisplaySuccessMessage";
 
 
 export default function EditForm() {
   // state
   const { productSelected, setProductSelected, handleEdit, titleEditRef, handleEditInBasket, basket, username } = useContext(AdminContext);
+  const [valueOnFocus, setValueOnFocus] = useState();
+  const { isSubmitted : isSaved, displaySuccessMessage } = useSuccessMessage(); // :isSaved = je renomme le isSubmitted que je récupère dans useSuccessMessage en isSaved. ICI on importe le customHooks useDisplaySuccessMessage et ont extrait avec le destructuring ce qu'il nous return en sachant qu'il nous le return sous forme d'objet
 
   // Comportement (gestionnaire d'évenement ou "event handler")
   const handleChange = (event) => { 
@@ -33,6 +37,21 @@ export default function EditForm() {
     }
 
     handleEditInBasket(productBeingUpdatedInBasket);    // cet ligne update le basket
+  }
+
+  const handleOnFocus = (event) => {
+    const inputvalueOnFocus = event.target.value;
+    setValueOnFocus(inputvalueOnFocus);
+    console.log("inputvalueOnFocus", inputvalueOnFocus);
+  }
+
+  const handleonBlur = (event) => {
+    const valueonBlur = event.target.value;
+    if (valueOnFocus !== valueonBlur) {
+      console.log("ça a changé !");
+      displaySuccessMessage();
+    }
+    console.log("handleonBlur", valueonBlur);
   }
 
   // Affichage
@@ -60,13 +79,17 @@ export default function EditForm() {
     <Form 
     product={productSelected}
     onChange={handleChange}
+    onFocus={handleOnFocus}  // permet de recuperer la valeur quand on est sur le focus
+    onBlur={handleonBlur}     // permet de recuperer la valeur quand on sort du focus
     ref={titleEditRef}
     >
+    {isSaved ? <SavingMessage/>  : 
     <EditInfoMessage/>
+    }
     </Form>
   )
   // ligne 43 comme className et style ont est obliger d'utiliser une ternaire sinon ça fait des bugs, pas de && ici
-
+  // ligne 86 isSaved ne vas rester à true que pendant 2 secondes(voir la fct displaySuccessMessage) et donc le composant SavingMessage ne va s'afficher que pdt ce temps la
 
   // Ce que j'ai fait moi
   // const cardToModify = menu.find((card) => card.id === idEditCard);
