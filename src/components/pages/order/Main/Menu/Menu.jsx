@@ -82,10 +82,10 @@ export default function Menu() {
         id      : idProductSelected
       }
   
-      handleAddToBasket(infoProductSelected);
+      handleAddToBasket(infoProductSelected, username);
     } else{
       inBasket.quantity += 1;
-      majQuantity(inBasket);
+      majQuantity(inBasket, username);
     }
   
   }
