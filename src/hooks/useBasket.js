@@ -4,7 +4,7 @@ import { deepClone } from "../utils/array";
 import { setLocalStorage } from "../utils/window";
 
 export const useBasket = () => { 
-    const [basket, setBasket] = useState(fakeBasket.EMPTY);
+    const [basket, setBasket] = useState([]);
 
     const handleAddToBasket = (infoProductSelected, username) => {
         // 1. copie du state
@@ -41,5 +41,5 @@ export const useBasket = () => {
         setBasket(copy);
     }
 
-    return { basket, handleAddToBasket, majQuantity, handleDeleteInBasket, handleEditInBasket}
+    return { basket, setBasket, handleAddToBasket, majQuantity, handleDeleteInBasket, handleEditInBasket}
 }

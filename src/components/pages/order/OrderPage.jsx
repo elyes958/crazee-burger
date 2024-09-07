@@ -14,6 +14,7 @@ import { useBasket } from '../../../hooks/useBasket';
 import { getUser } from '../../../api/user';
 import { useEffect } from 'react';
 import { getMenu } from '../../../api/product';
+import { getLocalStorage } from '../../../utils/window';
 
 
 
@@ -34,7 +35,7 @@ export default function OrderPage() {
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const titleEditRef = useRef();
   const {menu, setMenu, handleAdd, handleDelete, handleEdit, resetMenu} = useMenu();   // setMenu est gerer proche de son state donc dans useMenu voila pourquoi il n'est pas utiliser ici
-  const { basket, handleAddToBasket, majQuantity, handleDeleteInBasket, handleEditInBasket } = useBasket();
+  const { basket, setBasket, handleAddToBasket, majQuantity, handleDeleteInBasket, handleEditInBasket } = useBasket();
   const {username} = useParams();
 
   const initialiseMenu = async () =>  {
@@ -43,11 +44,22 @@ export default function OrderPage() {
     setMenu(menuReceived);
   }
 
+  const initialiseBasket = () => { 
+    const basketReceived = getLocalStorage(username); // localStorage est synchrone, pas besoin de "await".
+    console.log("basketReceived: ", basketReceived);
+    setBasket(basketReceived); // localStorage va garder en memoir le basket de lutilisateur du coup quand on ce co il va initialiser le basket avec les donne du basket dans le localStorage de l'utilisateur
+  }
+
   //Un composant qui est render = un composant qui est appele comme une fonction est appele(autrement dit toutes les instructions de la fct sont éxecuté)
   // quand un composant est execute il va faire 2 lecture la premiere en "ignorant" tout les useEffect puis une 2 eme lecture ou il va executer les useEffect
   useEffect(() => {
     initialiseMenu()
   }, []); // useEffect nous met une erreur dans la console quand on lui met une fct asynchrone avec async await comme juste au dessus, du coup on fait comme ça pour contourner cet erreur
+
+
+  useEffect(() => {
+    initialiseBasket()
+  }, []);
   
 
   //value du context
