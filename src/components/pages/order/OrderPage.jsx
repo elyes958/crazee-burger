@@ -47,7 +47,8 @@ export default function OrderPage() {
   const initialiseBasket = () => { 
     const basketReceived = getLocalStorage(username); // localStorage est synchrone, pas besoin de "await".
     console.log("basketReceived: ", basketReceived);
-    setBasket(basketReceived); // localStorage va garder en memoir le basket de lutilisateur du coup quand on ce co il va initialiser le basket avec les donne du basket dans le localStorage de l'utilisateur
+    if(basketReceived) setBasket(basketReceived); // localStorage va garder en memoir le basket de lutilisateur du coup quand on ce co il va initialiser le basket avec les donne du basket dans le localStorage de l'utilisateur
+    // if(basketReceived) = si basketReceived existe et est different de null et undefined
   }
 
   //Un composant qui est render = un composant qui est appele comme une fonction est appele(autrement dit toutes les instructions de la fct sont éxecuté)

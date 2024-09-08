@@ -1,9 +1,13 @@
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
+import { BASKET_MESSAGE } from "../../../../../api/product";
 
-export default function EmptyBasket() {
+export default function EmptyBasket({ isLoading }) {
+  const basketEmptyMessage = BASKET_MESSAGE.EMPTY;
+  const basketLoadingMessage = BASKET_MESSAGE.LOADING;
+
   return (
-    <EmptyBasketStyled><span className="empty-message">Votre commande est vide.</span></EmptyBasketStyled>
+    <EmptyBasketStyled><span className="empty-message">{isLoading ? basketLoadingMessage : basketEmptyMessage}</span></EmptyBasketStyled>
   )
 }
 

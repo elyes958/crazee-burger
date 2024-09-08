@@ -10,7 +10,7 @@ import BasketProducts from "./BasketProducts.jsx";
 
 
 export default function Basket() {
-  const {basket} = useContext(AdminContext);
+  const {basket, menu} = useContext(AdminContext);
 
   let totalPrice = 0;
 
@@ -25,7 +25,7 @@ export default function Basket() {
   return (
     <BasketStyled>
         <Total amountToPay={formatPrice(totalPrice)}/>
-        {basket.length > 0  ? <BasketProducts/> : <EmptyBasket/>}
+        {basket.length > 0  ? <BasketProducts/> : <EmptyBasket isLoading={menu === undefined} />}
         <Footer/>
         {/* <div className="ttc">
           <div>
