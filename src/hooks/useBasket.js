@@ -23,15 +23,16 @@ export const useBasket = () => {
         setLocalStorage(username, copy)
     }
 
-    const handleDeleteInBasket = (id) => {
+    const handleDeleteInBasket = (id, username) => {
         const copy = deepClone(basket);
 
         const filterProducts = copy.filter((product) => product.id !== id);
 
         setBasket(filterProducts);
+        setLocalStorage(username, filterProducts)
     }
 
-    const handleEditInBasket = (productBeingUpdated) => { 
+    const handleEditInBasket = (productBeingUpdated) => {
         const copy = deepClone(basket);
 
         const findIndexInBasket = copy.findIndex((product) => product.id === productBeingUpdated.id);

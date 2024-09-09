@@ -21,7 +21,7 @@ export default function Menu() {
   const handleCardDelete = (event, idOfProductToDelete) => {
     event.stopPropagation();
     handleDelete(idOfProductToDelete, username);
-    handleDeleteInBasket(idOfProductToDelete); // je le supprime egalement du basket
+    handleDeleteInBasket(idOfProductToDelete, username); // je le supprime egalement du basket
     idOfProductToDelete === productSelected.id  && setProductSelected(EMPTY_PRODUCT); // permet d'ecrire une condition sur une ligne sans utiliser de if
     // titleEditRef.current.focus();
   }

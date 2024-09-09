@@ -23,3 +23,9 @@ export const getMenu = async (idUser) => {
         return menu; 
     } 
 }
+
+
+export const BASKET_MESSAGE = { 
+    EMPTY: "Votre commande est vide.",
+    LOADING: "Chargement en cours",
+}
