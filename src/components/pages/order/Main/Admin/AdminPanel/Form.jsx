@@ -8,7 +8,7 @@ import React from "react";
 
 
 
-const Form = React.forwardRef(({product, onSubmit, onChange, children}, ref) => {
+const Form = React.forwardRef(({product, onSubmit, onChange, children, onFocus, onBlur}, ref) => {
    
   const inputTexts = getInputTextsConfig(product);
 
@@ -27,6 +27,8 @@ const Form = React.forwardRef(({product, onSubmit, onChange, children}, ref) => 
               onChange={onChange}
               icon={input.Icon}
               version="minimalist"
+              onFocus={onFocus}
+              onBlur={onBlur}
               ref={ref && input.name === "title" ? ref : null}
               />
             ))}

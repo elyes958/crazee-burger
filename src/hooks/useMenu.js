@@ -4,24 +4,26 @@
 import { useState } from "react";
 import { fakeMenu2 } from "../fakeData/fakeMenu";
 import { deepClone } from "../utils/array";
+import { syncBothMenus } from "../api/product";
 
 export const useMenu = () => {
-    const [menu, setMenu] = useState(fakeMenu2);
+    const [menu, setMenu] = useState();
 
 
 
     //comportements (gestionnaire de state ou "state handlers")
     // oublie pas un comportement qui modifie un state doit etre defini proche de ce state(bonne pratique), la seul exception c'est quand ont a des state assez simple comme un booleen, ou juste une string mais pas sur des state complexe avec array objet
-    const handleAdd = (newProduct) => {
+    const handleAdd = (newProduct, username) => {  // double clique sur handleAdd(ou n'importe quel fct) + ctrl shift F pour voir ou on l'utilise dans le projet
         // Copie du tableau
         const menuCopy = [...menu]
         // manip de la copie du tableau
         const menuUpdated = [newProduct, ...menuCopy]
         // update du state
-        setMenu(menuUpdated)
+        setMenu(menuUpdated);
+        syncBothMenus(username, menuUpdated)
     }
 
-    const handleDelete = (idOfProductToDelete) => {
+    const handleDelete = (idOfProductToDelete, username) => {
         // Copie du tableau(je laisse l'ancienne facon de faire mais il faut utiliser la methode ligne 57 à partir de maintenant)
         const copy = [...menu];
 
@@ -31,9 +33,10 @@ export const useMenu = () => {
 
         // update du state
         setMenu(filterProducts);   // ce comportement doit etre defini proche du state qu'il est en train de modifier
+        syncBothMenus(username, filterProducts);
     }
 
-    const handleEdit = (productBeingEdited) => {
+    const handleEdit = (username, productBeingEdited) => {
         console.log("productBeingEdited: ", productBeingEdited);
         // Copie du state(deep clone) avec la methode JSON qui est bien mieux(voir explication F09 live 1 si tu te rapel plus pk)
         const menuCopy = deepClone(menu);
@@ -46,6 +49,7 @@ export const useMenu = () => {
 
         // update du state
         setMenu(menuCopy);
+        syncBothMenus(username, menuCopy)
     }
 
     // Ce que j'ai fait moi
@@ -58,8 +62,9 @@ export const useMenu = () => {
     //   setMenu(menuModify);
     // }
 
-    const resetMenu = () => { // ont envoie le comportement dans le context pour eviter d'envoyer le settter qui lui doit rester dans le composant dans lequel il est defini(bonne pratique)
+    const resetMenu = (username) => { // ont envoie le comportement dans le context pour eviter d'envoyer le settter qui lui doit rester dans le composant dans lequel il est defini(bonne pratique)
         setMenu(fakeMenu2);
+        syncBothMenus(username, fakeMenu2);
     }
 
     // const handleModify = (idOfProductToModify, newTitle, newImageSource, newPrice) => {

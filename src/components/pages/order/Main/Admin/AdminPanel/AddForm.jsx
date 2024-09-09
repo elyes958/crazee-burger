@@ -13,7 +13,7 @@ import { replaceFrenchCommaWithDot } from "../../../../../../utils/maths.jsx";
 
 export default function AddForm() {
   // du coup ont peu egalement faire passer des comportement via le context en le remontant tout en haut dans le composant parent comme on a fait ci dessus
-  const { handleAdd, newProduct, setNewProduct } = useContext(AdminContext);
+  const { handleAdd, newProduct, setNewProduct, username } = useContext(AdminContext);
   const [isSubmitted, setIsSubmitted] = useState(false);
   // const {isSubmitted, displaySuccessMessage} = useSuccessMessage() // on l'appelle avec des () car c'est une fonction, useSuccessMessage est notre custom hook, il nous return ici un hook(le state isSubmited) et un comportement
 
@@ -31,7 +31,7 @@ export default function AddForm() {
         price: replaceFrenchCommaWithDot(newProduct.price),
      }
 
-    handleAdd(newProductToAdd);
+    handleAdd(newProductToAdd, username);
     setNewProduct(EMPTY_PRODUCT); // on efface les champ après soumission du formulaire en vidant le state
 
     displaySuccessMessage(); // on met le code dans une fct(plus clean)

@@ -9,18 +9,19 @@ import EmptyMenuAdmin from "./EmptyMenuAdmin";
 import EmptyMenuClient from "./EmptyMenuClient";
 import { EMPTY_PRODUCT } from "../../../../../enums/product";
 // import Product from "./Product";
+import Loader from "./Loader.jsx"  // ctrl shift h pour importer le chemin
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
   // state
-  const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, setIsCollapsed, productSelected, setProductSelected, titleEditRef, basket, handleAddToBasket, majQuantity, handleDeleteInBasket} = useContext(AdminContext);
+  const {isModeAdmin, menu, handleDelete, resetMenu, setCurrentTabSelected, setIsCollapsed, productSelected, setProductSelected, titleEditRef, basket, handleAddToBasket, majQuantity, handleDeleteInBasket, username} = useContext(AdminContext);
 
   // Comportement (gestionnaire d'évenement ou "event handler")
   const handleCardDelete = (event, idOfProductToDelete) => {
     event.stopPropagation();
-    handleDelete(idOfProductToDelete);
-    handleDeleteInBasket(idOfProductToDelete); // je le supprime egalement du basket
+    handleDelete(idOfProductToDelete, username);
+    handleDeleteInBasket(idOfProductToDelete, username); // je le supprime egalement du basket
     idOfProductToDelete === productSelected.id  && setProductSelected(EMPTY_PRODUCT); // permet d'ecrire une condition sur une ligne sans utiliser de if
     // titleEditRef.current.focus();
   }
@@ -81,20 +82,22 @@ export default function Menu() {
         id      : idProductSelected
       }
   
-      handleAddToBasket(infoProductSelected);
+      handleAddToBasket(infoProductSelected, username);
     } else{
       inBasket.quantity += 1;
-      majQuantity(inBasket);
+      majQuantity(inBasket, username);
     }
   
   }
 
 
   // Affichage
+
+  if (menu === undefined) return <Loader/>  // une seul instruction dans le if donc pas besoin d'accolades, nous permet d'afficher ce composant pdt le chargement de la pasge et la recuperations des donnee via l'API sur firebase(firestore)
   
   if(menu.length === 0) {
   if (!isModeAdmin) return <EmptyMenuClient/>
-  return <EmptyMenuAdmin onReset={resetMenu} /> // on peu direct lui envoyer du specifique car on sais qu'on ne va pas rendre ce composant reutilisable
+  return <EmptyMenuAdmin onReset={() => resetMenu(username)} /> // on peu direct lui envoyer du specifique car on sais qu'on ne va pas rendre ce composant reutilisable
  } 
   // resetMenu ne prend rien param et n'a qu'une seul instruction donc on peu le definir direct dans le onClick
 

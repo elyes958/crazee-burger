@@ -11,6 +11,11 @@ import { EMPTY_PRODUCT } from '../../../enums/product';
 import { deepClone } from '../../../utils/array';
 import { useMenu } from '../../../hooks/useMenu';
 import { useBasket } from '../../../hooks/useBasket';
+import { getUser } from '../../../api/user';
+import { useEffect } from 'react';
+import { getMenu } from '../../../api/product';
+import { getLocalStorage } from '../../../utils/window';
+import { initialiseUserSession } from './helpers/initialiseUserSession';
 
 
 
@@ -31,7 +36,16 @@ export default function OrderPage() {
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const titleEditRef = useRef();
   const {menu, setMenu, handleAdd, handleDelete, handleEdit, resetMenu} = useMenu();   // setMenu est gerer proche de son state donc dans useMenu voila pourquoi il n'est pas utiliser ici
-  const { basket, handleAddToBasket, majQuantity, handleDeleteInBasket, handleEditInBasket } = useBasket();
+  const { basket, setBasket, handleAddToBasket, majQuantity, handleDeleteInBasket, handleEditInBasket } = useBasket();
+  const {username} = useParams();
+
+
+//Un composant qui est render = un composant qui est appele comme une fonction est appele(autrement dit toutes les instructions de la fct sont éxecuté)
+// quand un composant est execute il va faire 2 lecture la premiere en "ignorant" tout les useEffect puis une 2 eme lecture ou il va executer les useEffect
+  useEffect(() => {
+    initialiseUserSession(username, setMenu, setBasket)
+  }, []); // useEffect nous met une erreur dans la console quand on lui met une fct asynchrone avec async await comme juste au dessus, du coup on fait comme ça pour contourner cet erreur(on fait une fct asynchrone qu'on appelle dans le useEffect)
+
   
 
   //value du context
@@ -79,7 +93,23 @@ export default function OrderPage() {
     majQuantity         : majQuantity,
     handleDeleteInBasket: handleDeleteInBasket,
     handleEditInBasket  : handleEditInBasket,
+    username            : username,
   }
+
+  // appel API pour récupérer l'utilisateur "Alex"
+  // getUser("Alex");
+
+  console.log('import.meta.env.REACT_APP_API_KEY: ', import.meta.env.VITE_APP_API_KEY);   // nous permet de lire la valeur de cet variable d'environnement dans le fichier env, ne pas oublier process.env. avant le nom de la variable
+//   Pour ceux qui rencontrent le même problème que moi en utilisant VITE
+// "process is not defined"
+// il faut utiliser import.meta.env. au lieu de process.env.
+// ET renommer le nom de vos clés api en les faisant commencer par VITE_ exemple :
+// VITE_AUTH_DOMAIN =
+// VITE_API_KEY =
+// VITE_PROJECT_ID =
+// VITE_STORAGE_BUCKET =
+// VITE_MESSAGING_SENDER_ID =
+// VITE_APP_ID =
 
   //affichage
   return (

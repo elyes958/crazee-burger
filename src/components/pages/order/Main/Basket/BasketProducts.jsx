@@ -8,12 +8,12 @@ const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
 export default function BasketProducts() {
   // State
-  const {basket, handleDeleteInBasket, isModeAdmin, setIsCollapsed, setProductSelected, setCurrentTabSelected, productSelected} = useContext(AdminContext);
+  const {basket, handleDeleteInBasket, isModeAdmin, setIsCollapsed, setProductSelected, setCurrentTabSelected, productSelected, username} = useContext(AdminContext);
 
   // Comportement
   const handleDelete = (event, id) => {
     event.stopPropagation();
-    handleDeleteInBasket(id);
+    handleDeleteInBasket(id, username);
   }
 
   const handleClicked = (idCardInBadket) => {
