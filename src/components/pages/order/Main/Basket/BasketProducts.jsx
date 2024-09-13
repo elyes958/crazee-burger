@@ -4,6 +4,7 @@ import AdminContext from "../../../../../context/AdminContext";
 import { formatPrice } from "../../../../../utils/maths";
 import BasketCard from "./BasketCard";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { basketAnimation } from "../../../../../theme/animations";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -39,7 +40,7 @@ export default function BasketProducts() {
       <TransitionGroup>
         {basket.map((product) => {
             return(
-              <CSSTransition appear={true} classNames={"animation-basket"} key={product.id} timeout={{enter: 500 , exit: 500}}>
+              <CSSTransition appear={true} classNames={"animation-basket"} key={product.id} timeout={{enter: 300 , exit: 300}}>
                 <div className="card-container" >
                 <BasketCard
                     title={product.title}
@@ -69,6 +70,7 @@ export default function BasketProducts() {
 // Et la derniere props timeout(props qui prend un objet JS avec 2 propriete enter(temps pour faire aparaitre lanimation) et exit(duree de l'animation de sortie), chacune va avoir en valeur des number nombre de mili secondes ici 5000 = 5s qui sera la duree de l'animation quand le composant est monter pour enter et demonter pour exit)
 
 
+
 const BasketProductsStyled = styled.div`
  /* width: 350px;
  height: 694.69px; */
@@ -77,48 +79,6 @@ const BasketProductsStyled = styled.div`
  flex-direction: column;
  overflow-y: scroll; // pour que ça fonctionne il faut mettre overflow: hiden sur l'element parent
 
-  //(phase de mounting du composant on va avoir plusieurs etat appear, enter, exit)(tout ça vient de la librairie react-transition-group qu'on a importés ici)
- .animation-basket-appear {           // appear precede l'element enter et enter-active, il ne s'applique que sur le premier element ajouté(ici dans notre basket)
-  .card {
-    transform: translateX(100px);
-    opacity: 0%;
-  }
- }
- .animation-basket-appear-active {
-  .card {
-    transition: 0.5s;
-    transform: translateX(0px);
-    opacity: 100%;
-  }
- }
-
- .animation-basket-enter {
-  .card {
-    transform: translateX(100px);
-    opacity: 0%;
-  }
- }
- .animation-basket-enter-active {
-  .card {
-    transition: 0.5s;
-    transform: translateX(0px);
-    opacity: 100%;
-  }
- }
-
- .animation-basket-exit {
-  .card {
-    transform: translateX(0px);
-    opacity: 100%;    //(1) passse de entierement visible(100%)
-  }
- }
- .animation-basket-exit-active {
-  .card {
-    transform: translateX(-100px);    // chiffre negatif car ont veut que ça aille vers la gauche
-    opacity: 0%;                 //(2) à invisible(0%)
-    transition: 0.5s;
-  }
- }
 
  .card-container {
   margin: 10px 16px;
@@ -131,6 +91,8 @@ const BasketProductsStyled = styled.div`
     margin-bottom: 20px;
   }
  }
+
+ ${basketAnimation}
 `;
 
 
