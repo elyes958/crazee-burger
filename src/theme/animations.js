@@ -1,5 +1,19 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { theme } from ".";
+
+export const fadeInFromRight = keyframes`
+  0% {
+    position: absolute;
+    z-index: 1;
+    opacity: 0;       // opacity passe de 0 ici à 1 en bas donc de pas visible à visible
+    transform: translateX(100%);   // Au debut il est à droite(axe des X nombre positif)
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);    // et ensuite il va arriver à gauche
+  }
+`
 
 export const adminAnimation = css`
   .admin-appear{ // quand on met appear ici ne pas l'oublier de l'ajouter en props de CSSTransition, appear={true}
@@ -57,3 +71,4 @@ export const basketAnimation = css`
  }
 }
 `
+
