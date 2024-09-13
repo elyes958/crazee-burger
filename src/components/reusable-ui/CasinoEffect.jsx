@@ -7,7 +7,7 @@ export default function CasinoEffect(count, className) {
   return (
     <CasinoEffectStyled>
       <TransitionGroup className={"transition-group"}>
-        <CSSTransition classNames={"count-animated"} timeout={5000} key={count}>
+        <CSSTransition classNames={"count-animated"} timeout={300} key={count}>
           <span className={className}>{{count}}</span>
         </CSSTransition>
       </TransitionGroup>
@@ -19,26 +19,39 @@ export default function CasinoEffect(count, className) {
 
 const CasinoEffectStyled = styled.div`
   border: 1px solid red;
+  position: relative;
+  overflow-y: hidden;
+  
+  span{
+    display: inline-block;
+  }
 
   // MOUNTING
   .count-animated-enter{
-    background: green;
+    /* background: green; les couleurs ct pour mieux voir les elements */
+    transform: translateY(100%);    // 100% il est en bas sur l'axe Y
   }
   .count-animated-enter-active{
-    background: blue;
-    transition: 2s;
+    /* background: blue;  les couleurs ct pour mieux voir les elements*/
+    transform: translateY(0%);     // 0% il arrive au centre sur l'axe Y (il apparait)
+    transition: 300ms;
   }
   .count-animated-enter-done{
-    background: pink;
+    /* background: pink;  les couleurs ct pour mieux voir les elements*/
   }
 
   // UNMOUNTING
    .count-animated-exit{
-    background: yellow;
+    /* background: yellow;  pareil ct pour mieux voir les elements */
+    transform: translateY(0%); // pareil il est la visible
+    position: absolute;
+    left: 0;
+    bottom: 0; 
   }
   .count-animated-exit-active{
-    background: red;
-    transition: 2s;
+    /* background: red; pareil ct pour mieux voir les elements */  
+    transform: translateY(-100%); // et la on le fait partir vers le haut -100% sur l'axe Y
+    transition: 300ms;
   }
   /* .count-animated-exit-done{
     pas besoin de ce stade la vu que l'element sera deja partie(unmounting)
