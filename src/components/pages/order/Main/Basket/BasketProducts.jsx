@@ -39,8 +39,8 @@ export default function BasketProducts() {
       <TransitionGroup>
         {basket.map((product) => {
             return(
-              <CSSTransition appear={true} classNames={"abricot"} key={product.id} timeout={{enter: 500 , exit: 500}}>
-                <div className="basket-card" >
+              <CSSTransition appear={true} classNames={"animation-basket"} key={product.id} timeout={{enter: 500 , exit: 500}}>
+                <div className="card-container" >
                 <BasketCard
                     title={product.title}
                     image={product.imageSource === "" ? IMAGE_BY_DEFAULT : product.imageSource}
@@ -50,7 +50,7 @@ export default function BasketProducts() {
                     isModeAdmin={isModeAdmin}
                     onClicked={() => handleClicked(product.id)}
                     isSelected={checkIsSelected(product.id, productSelected.id)}
-                    className={"pomme"}
+                    className={"card"}
                 />
                 </div>
               </CSSTransition>
@@ -78,49 +78,49 @@ const BasketProductsStyled = styled.div`
  overflow-y: scroll; // pour que ça fonctionne il faut mettre overflow: hiden sur l'element parent
 
   //(phase de mounting du composant on va avoir plusieurs etat appear, enter, exit)(tout ça vient de la librairie react-transition-group qu'on a importés ici)
- .abricot-appear-enter {           // appear precede l'element enter et enter-active, il ne s'applique que sur le premier element ajouté(ici dans notre basket)
-  .pomme {
+ .animation-basket-appear {           // appear precede l'element enter et enter-active, il ne s'applique que sur le premier element ajouté(ici dans notre basket)
+  .card {
     transform: translateX(100px);
     opacity: 0%;
   }
  }
- .abricot-appear-enter-active {
-  .pomme {
+ .animation-basket-appear-active {
+  .card {
     transition: 0.5s;
     transform: translateX(0px);
     opacity: 100%;
   }
  }
 
- .abricot-enter {
-  .pomme {
+ .animation-basket-enter {
+  .card {
     transform: translateX(100px);
     opacity: 0%;
   }
  }
- .abricot-enter-active {
-  .pomme {
+ .animation-basket-enter-active {
+  .card {
     transition: 0.5s;
     transform: translateX(0px);
     opacity: 100%;
   }
  }
 
- .abricot-exit {
-  .pomme {
+ .animation-basket-exit {
+  .card {
     transform: translateX(0px);
     opacity: 100%;    //(1) passse de entierement visible(100%)
   }
  }
- .abricot-exit-active {
-  .pommme {
+ .animation-basket-exit-active {
+  .card {
     transform: translateX(-100px);    // chiffre negatif car ont veut que ça aille vers la gauche
     opacity: 0%;                 //(2) à invisible(0%)
     transition: 0.5s;
   }
  }
 
- .basket-card {
+ .card-container {
   margin: 10px 16px;
   height: 86px;
   box-sizing: border-box;
