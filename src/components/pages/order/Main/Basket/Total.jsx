@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
 import Header from "../../../../reusable-ui/Header";
+import CasinoEffect from "../../../../reusable-ui/CasinoEffect.jsx"
 
 export default function Total({ amountToPay }) {
   return (
       <Header>
           <TotalStyled>
               <span className="total">Total</span>
+              {/* <CasinoEffect count={amountToPay}/> */}
               <span className="amount">{amountToPay}</span>
           </TotalStyled>
       </Header>
