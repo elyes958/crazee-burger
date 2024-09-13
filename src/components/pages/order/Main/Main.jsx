@@ -1,10 +1,13 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../../../theme";
 import { useContext, useState } from "react";
 import Menu from "./Menu/Menu";
 import Admin from "./Admin/Admin";
 import AdminContext from "../../../../context/AdminContext";
 import Basket from "./Basket/Basket";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { adminAnimation } from "../../../../theme/animations";
+
 
 
 export default function Main() {
@@ -36,10 +39,15 @@ export default function Main() {
   // Affichage
   return (
     <MainStyled>
-      <Basket/>
+      <Basket />
       <div className="menu-and-admin">
-        <Menu/>
-        {modeAdmin.isModeAdmin && <Admin/>}  
+        <Menu />
+        {modeAdmin.isModeAdmin && (
+          <TransitionGroup className={"transition-group"}>
+            <CSSTransition appear={true} classNames={"admin"} timeout={5000} >
+              <Admin />
+            </CSSTransition>
+          </TransitionGroup>)}
       </div>
       {/* {affichage} */}
     </MainStyled>
@@ -47,6 +55,9 @@ export default function Main() {
 }
 // ligne 42, raccourci quand la 2eme condition ternaire = null/undefined, on ecrit directement comme ça avec le &&,
 // ligne 42 = si la premiere expresion est true alor tu m'affiche le composant Admin sinon tu m'affiche rien
+
+
+
 
 const MainStyled = styled.main`
     /* border: 3px solid green; */
@@ -80,7 +91,18 @@ const MainStyled = styled.main`
 
    }
 
-   
+   ${adminAnimation}
+
+   // enter = apparait apres qu'on est le render initial de l'application, pour quand il apparait pour la premiere fois donc au moment du render initial il faut utiliser appear
+   .admin-enter{
+
+   }
+   .admin-enter-active{
+
+   }
+   /* .admin-enter-done{  le done on en a pas besoin en general(rapel ces classe concerne la librairie react-transition-group)
+ 
+   } */
    
 
    /* h3{

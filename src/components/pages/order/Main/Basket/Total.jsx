@@ -15,6 +15,8 @@ export default function Total({ amountToPay }) {
   )
 }
 
+// ligne 11, je ne sais pas pourquoi le composant CasinoEffect realiser dans le f14 ne fonctionne pas chez moi, il faudrait que je revienne dessus
+
 const TotalStyled = styled.div`
   height: 100%;
   display: flex;
