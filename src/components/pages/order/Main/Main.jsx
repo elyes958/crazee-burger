@@ -44,7 +44,7 @@ export default function Main() {
         <Menu />
         {modeAdmin.isModeAdmin && (
           <TransitionGroup className={"transition-group"}>
-            <CSSTransition appear={true} classNames={"admin"} timeout={5000} >
+            <CSSTransition appear={true} classNames={"admin"} timeout={500} >
               <Admin />
             </CSSTransition>
           </TransitionGroup>)}
