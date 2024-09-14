@@ -3,7 +3,7 @@ import { getLocalStorage } from "../../../../utils/window";
 
 const initialiseMenu = async (username, setMenu) => {
     const menuReceived = await getMenu(username); // on met async et await pour attendre que la promesse ce termine est avoir un resultat negatif ou positif et non une promesse en cours(voir la fct getMenu pour comprendre)
-    // console.log("menuReceived: ", menuReceived);
+    console.log("menuReceived: ", menuReceived);
     setMenu(menuReceived);
 }
 

@@ -28,10 +28,10 @@ export default function LoginForm() {
     // on l'appelle navigate car ça a du sens, à chaque fois qu'on va appeler navigate il va nous executer cet fct(ce hook)
 
     // comportement
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        authenticateUser(username); // on a pas besoin d'attendre la fin de lexecution de cet fct pour passer aux instruction suivante donc ici le await est inutile par contre dans le cas contraire il aurais fallu un await
+        await authenticateUser(username); 
 
         // console.log(event);
         // console.log(event.target[0].value);
