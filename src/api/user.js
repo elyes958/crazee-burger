@@ -47,6 +47,6 @@ export const authenticateUser = async (userId) => {
 
      // 2. sinon tu créé un newUser
      if (!existingUser){
-         createUser(userId);   // fct setter de firestore sur firebase voir(user.js)
+        createUser(userId);   // fct setter de firestore sur firebase voir(user.js)
      }
 }
