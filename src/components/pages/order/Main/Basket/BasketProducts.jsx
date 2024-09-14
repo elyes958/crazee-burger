@@ -1,8 +1,10 @@
 import { useContext } from "react";
-import styled from "styled-components";
+import styled from "styled-components";      // en ajoutant macro on retrouve le nom des class dans la console comme on les a appele ici avec styleComponent(ça ne marche pas avec vite.js ici on dirait)
 import AdminContext from "../../../../../context/AdminContext";
 import { formatPrice } from "../../../../../utils/maths";
 import BasketCard from "./BasketCard";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { basketAnimation } from "../../../../../theme/animations";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -35,9 +37,11 @@ export default function BasketProducts() {
   // Affichage
   return (
     <BasketProductsStyled>
+      <TransitionGroup>
         {basket.map((product) => {
             return(
-                <div className="basket-card" key={product.id}>
+              <CSSTransition appear={true} classNames={"animation-basket"} key={product.id} timeout={{enter: 300 , exit: 300}}>
+                <div className="card-container" >
                 <BasketCard
                     title={product.title}
                     image={product.imageSource === "" ? IMAGE_BY_DEFAULT : product.imageSource}
@@ -47,15 +51,25 @@ export default function BasketProducts() {
                     isModeAdmin={isModeAdmin}
                     onClicked={() => handleClicked(product.id)}
                     isSelected={checkIsSelected(product.id, productSelected.id)}
+                    className={"card"}
                 />
                 </div>
+              </CSSTransition>
             )
         })}
+      </TransitionGroup>
     </BasketProductsStyled>
   )
 }
 // ligne 48 pas de fct anonyme car ont veut que ça s'execute directe dès le rerender, ligne 47 fct anonyme car ont veut que ça s'execute seulment apres un evenement et pas à chaque rerender
 // meilleur explication tout en bas
+
+// ligne 39 composant TransitionGroup est requis par la librairie react-transition-group quand ont veut utiliser les animation sur plusieurs element(groupe d'element, liste d'element) comme ici(on boucle dessus avec map)
+// ensuite on va utiliser CSSTransition pour l'envelopper sur l'element sur lesque ont veut ajouter l'animations,ici chaque element return par map donc on le met en parent(div parent, composant parent) ce que nous return map
+// CSSTransiton va avoir besoin de 3 props: classNames(entre parenthese tu lui donne le nom que tu veux ici 'abricot') qui sera la class ajouter à chaque element quand on va avoir une animation, ensuite il va avoir besoin de la props key comme on avait mis en dessous sur chaque div(ici on la remonte en haut du coup)
+// Et la derniere props timeout(props qui prend un objet JS avec 2 propriete enter(temps pour faire aparaitre lanimation) et exit(duree de l'animation de sortie), chacune va avoir en valeur des number nombre de mili secondes ici 5000 = 5s qui sera la duree de l'animation quand le composant est monter pour enter et demonter pour exit)
+
+
 
 const BasketProductsStyled = styled.div`
  /* width: 350px;
@@ -65,7 +79,8 @@ const BasketProductsStyled = styled.div`
  flex-direction: column;
  overflow-y: scroll; // pour que ça fonctionne il faut mettre overflow: hiden sur l'element parent
 
- .basket-card {
+
+ .card-container {
   margin: 10px 16px;
   height: 86px;
   box-sizing: border-box;
@@ -76,6 +91,8 @@ const BasketProductsStyled = styled.div`
     margin-bottom: 20px;
   }
  }
+
+ ${basketAnimation}
 `;
 
 

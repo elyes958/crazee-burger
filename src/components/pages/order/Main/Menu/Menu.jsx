@@ -10,6 +10,9 @@ import EmptyMenuClient from "./EmptyMenuClient";
 import { EMPTY_PRODUCT } from "../../../../../enums/product";
 // import Product from "./Product";
 import Loader from "./Loader.jsx"  // ctrl shift h pour importer le chemin
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { menuAnimation } from "../../../../../theme/animations.js";
+
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -103,26 +106,30 @@ export default function Menu() {
 
 
   return (
-    <MenuStyled className="menu">
+    // <MenuStyled className="menu"> // quand j'ai laisser menu comme ça j'ai eu un bug et ça ne fonctionner pas du coup j'ai utiliser l'autre technique en mettant mon composant MenuStyled dans la props component de Transition group avec ça className à coter et ça a fonctionner
+      <TransitionGroup component={MenuStyled} className="menu">
       {menu.map((produit) => {
         return (
-          <Card
-            onDelete={(event) => handleCardDelete(event, produit.id)}
-            hasDeleteButton={isModeAdmin}
-            key={produit.id}
-            title={produit.title}
-            imageSource={produit.imageSource === "" ? IMAGE_BY_DEFAULT : produit.imageSource}
-            leftDescription={formatPrice(produit.price)}
-            onClicked={() => handleClicked(produit.id)}
-            isHoverable={isModeAdmin}
-            isSelected={checkIfProductIsClicked(produit.id, productSelected.id)}
-            selectInBasket={(event) => handleSelectInBasket(event, produit.id)}
-          />
+          <CSSTransition classNames={"menu-animation"} key={produit.id} timeout={300}>
+            <Card
+              onDelete={(event) => handleCardDelete(event, produit.id)}
+              hasDeleteButton={isModeAdmin}
+              key={produit.id}
+              title={produit.title}
+              imageSource={produit.imageSource === "" ? IMAGE_BY_DEFAULT : produit.imageSource}
+              leftDescription={formatPrice(produit.price)}
+              onClicked={() => handleClicked(produit.id)}
+              isHoverable={isModeAdmin}
+              isSelected={checkIfProductIsClicked(produit.id, productSelected.id)}
+              selectInBasket={(event) => handleSelectInBasket(event, produit.id)}
+            />
+          </CSSTransition>
           // finalement comme on a rendu notre composant reutilisable et donc qu'on a fait remonter le specifique dans les props, alor on est obliger d'utiliser ça et pas l'autre methode en bas
           // <Card {...produit} />  // meme chose que ligne 5, ecriture bc plus simple spread operator dans un objet, cet methode fonctionne que si vous etes certain que "produit" a tous les élements dont "Product" a besoin. Du coup la methode au dessus est preferable et conseiller.
         )
       })};
-    </MenuStyled>
+      </TransitionGroup>
+    /* </MenuStyled> */
   )
 
 
@@ -161,6 +168,7 @@ const MenuStyled = styled.div`
     box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
     overflow-y: scroll; // du coup le contenu qu'on a cacher avec overflow-y hidden dans le composant parent main, ici ont le rend scroll pour pouvoir y acceder en scrollant
    
+   ${menuAnimation}
 `;
 
 const AdminMenuVide = styled.div`
