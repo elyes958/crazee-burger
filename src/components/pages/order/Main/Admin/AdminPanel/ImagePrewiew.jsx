@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../../../../../theme";
+import { fadeIn } from "../../../../../../theme/animations";
 
 
 export default function ImagePrewiew({ newProduct }) {
@@ -26,6 +27,7 @@ const ImagePrewiewStyled = styled.div`
         height: 100%;
         object-fit: contain;
         object-position: center;
+        animation: ${fadeIn} 1s;
     }
 
     .empty-image{
