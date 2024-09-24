@@ -30,6 +30,7 @@ const Form = React.forwardRef(({product, onSubmit, onChange, children, onFocus, 
               onFocus={onFocus}
               onBlur={onBlur}
               ref={ref && input.name === "title" ? ref : null}
+              className={input.className}
               />
             ))}
           {/* <TextInput
@@ -87,7 +88,20 @@ const FormStyled = styled.form`
     grid-area: 1 / 2 / -2 / 3;      // grid area d'abord la ligne puis la colonne: 1er valeur ligne 2eme valeur colonne pour coin superieur gauche puis la meme chose pour coin inferieur droit
 
     display: grid; // il a partager nos 3 element input de maniere egale automatiquement
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 8px;
+
+    .title{
+      grid-area: 1/1/2/4;   // utilise inspecteur selectionne l'element qui contient la grille et clic sur grid pour bien voir les ligne de la grille
+    }
+    .image-source{
+      grid-area: 2/1/3/4;    // 2 premiere valeur = ligne de depart et colonne de depart, et 2 derniere valeur = ligne d'arriver et colonne d'arriver. permet de selectionner l'espace que l'on veut que l'element prenne dans la grille
+    }
+    .price{
+      grid-area: 3/1/4/2;
+      background: red;
+    }
   }
   .submit{
     /* background: green; */
