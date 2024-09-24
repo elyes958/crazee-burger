@@ -33,6 +33,14 @@ const Form = React.forwardRef(({product, onSubmit, onChange, children, onFocus, 
               className={input.className}
               />
             ))}
+            <select name="isAvailable" className="is-available" id="3">
+              <option value={true}>En stock</option>
+              <option value={false}>En rupture</option>
+            </select>
+            <select name="isPublicised" className="is-publicised" id="4">
+              <option value={true}>Sans pub</option>
+              <option value={false}>Avec pub</option>
+            </select>
           {/* <TextInput
              name="title" 
              value={newProduct.title} 
@@ -91,6 +99,7 @@ const FormStyled = styled.form`
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 8px;
+    grid-column-gap: 8px;
 
     .title{
       grid-area: 1/1/2/4;   // utilise inspecteur selectionne l'element qui contient la grille et clic sur grid pour bien voir les ligne de la grille
@@ -101,6 +110,14 @@ const FormStyled = styled.form`
     .price{
       grid-area: 3/1/4/2;
       background: red;
+    }
+    .is-available{
+      grid-area: 3/2/4/3;
+      background: pink;
+    }
+    .is-publicised{
+      grid-area: 3/3/4/4;
+      background: yellow;
     }
   }
   .submit{
