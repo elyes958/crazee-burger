@@ -2,24 +2,15 @@ import styled from "styled-components";
 // import { TextInput } from "../../../../../reusable-ui/TextInput"; //ctrl shift H pour importe le lien toi meme(ici mon erreur a etait de l'importer entre {} on fait pas ça quand on importe un composant)
 import TextInput from "../../../../../reusable-ui/TextInput.jsx";
 import ImagePrewiew from "./ImagePrewiew.jsx";
-import { getInputTextsConfig } from "./inputTextConfig.jsx";
+import { getInputTextsConfig, getSelectInputConfig } from "./inputTextConfig.jsx";
 import React from "react";
 import SelectInput from "../../../../../reusable-ui/SelectInput.jsx";
-
-const isAvailableOptions = [
-  {value: true, label: "En stock"},
-  {value: false, label: "En rupture"},
-]
-
-const isPublicisedOptions = [
-  {value: true, label: "Sans pub"},
-  {value: false, label: "Avec pub"},
-]
 
 
 const Form = React.forwardRef(({product, onSubmit, onChange, children, onFocus, onBlur}, ref) => {
    
   const inputTexts = getInputTextsConfig(product);
+  const inputSelects = getSelectInputConfig(product);
 
 
   // Affichage
@@ -42,8 +33,12 @@ const Form = React.forwardRef(({product, onSubmit, onChange, children, onFocus, 
               className={input.className}
               />
             ))}
-            <SelectInput options={isAvailableOptions} className="is-available" id="3" />
-            <SelectInput options={isPublicisedOptions} className="is-publicised" id="4" />
+            {/* <SelectInput name={isAvailableOptions} options={isAvailableOptions} className="is-available" id="3" />
+            <SelectInput name={isPublicisedOptions} options={isPublicisedOptions} className="is-publicised" id="4" /> */}
+            {inputSelects.map((inputSelect) => 
+            <SelectInput {...inputSelect}
+            />
+            )}
           {/* <TextInput
              name="title" 
              value={newProduct.title} 
@@ -81,6 +76,7 @@ const Form = React.forwardRef(({product, onSubmit, onChange, children, onFocus, 
 })
 export default Form;
 // ligne 66 on affiche le button seulment si on recoit le props onSubmit(si on a un button on a forcement l'evenement onSubmit) de l'evenement onSubmit car l'autre onglet(modifier n'a pas besoin de ce button mais affiche simplement un message)
+// ligne 49: destructuring + copie de tout ce qu'on a destructurer dans inputSelect
 
 const FormStyled = styled.form`
   /* border: 2px solid black; */
