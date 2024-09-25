@@ -12,6 +12,7 @@ import { EMPTY_PRODUCT, IMAGE_NO_STOCK } from "../../../../../enums/product";
 import Loader from "./Loader.jsx"  // ctrl shift h pour importer le chemin
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { menuAnimation } from "../../../../../theme/animations.js";
+import { convertStringToBoolean } from "../../../../../utils/string.js";
 
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
@@ -109,6 +110,7 @@ export default function Menu() {
     // <MenuStyled className="menu"> // quand j'ai laisser menu comme ça j'ai eu un bug et ça ne fonctionner pas du coup j'ai utiliser l'autre technique en mettant mon composant MenuStyled dans la props component de Transition group avec ça className à coter et ça a fonctionner
       <TransitionGroup component={MenuStyled} className="menu">
       {menu.map((produit) => {
+        // console.log("isAvailable: " + produit.isAvailable)
         return (
           <CSSTransition classNames={"menu-animation"} key={produit.id} timeout={300}>
             <Card
@@ -123,7 +125,7 @@ export default function Menu() {
               isSelected={checkIfProductIsClicked(produit.id, productSelected.id)}
               selectInBasket={(event) => handleSelectInBasket(event, produit.id)}
               overlapImageSource={IMAGE_NO_STOCK}
-              isOverlapImageVisible={true}
+              isOverlapImageVisible={convertStringToBoolean(produit.isAvailable) === false}
             />
           </CSSTransition>
           // finalement comme on a rendu notre composant reutilisable et donc qu'on a fait remonter le specifique dans les props, alor on est obliger d'utiliser ça et pas l'autre methode en bas
