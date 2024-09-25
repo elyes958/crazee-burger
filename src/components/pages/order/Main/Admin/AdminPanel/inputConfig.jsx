@@ -2,6 +2,9 @@ import { FaHamburger } from "react-icons/fa";
 import { BsFillCameraFill } from "react-icons/bs";
 import { MdOutlineEuro } from "react-icons/md";
 import { isAvailableOptions, isPublicisedOptions } from "../../../../../../enums/select";
+import { FiPackage } from "react-icons/fi";
+import { GoMegaphone } from "react-icons/go";
+
 
 // on le fait sous forme de fct pour pouvoir recuperer le state la ou on l'appel à savoir addForm car ce fichier a besoin du state newProduct qu'on lui passera en parametre lors de l'appel
 export const getInputTextsConfig = (newProduct) => [
@@ -19,7 +22,7 @@ export const getInputTextsConfig = (newProduct) => [
     name:"imageSource", 
     value:newProduct.imageSource, 
     placeholder:"Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)", 
-    Icon:<BsFillCameraFill/>,
+    Icon:<BsFillCameraFill/>, 
     version:"minimalist",
     className: "image-source",
   },
@@ -43,6 +46,7 @@ export const getSelectInputConfig = (newProduct) => [
     value: newProduct.isAvailable,
     options: isAvailableOptions, 
     className: "is-available",
+    Icon:<FiPackage/>, 
   },
   { 
    id: "4",
@@ -50,6 +54,7 @@ export const getSelectInputConfig = (newProduct) => [
    value: newProduct.isPublicised,
    options: isPublicisedOptions,
    className: "is-publicised",
+   Icon:<GoMegaphone/>,
 },
 ]
 

@@ -114,15 +114,15 @@ const FormStyled = styled.form`
     }
     .price{
       grid-area: 3/1/4/2;
-      background: red;
+      /* background: red; */
     }
     .is-available{
       grid-area: 3/2/4/3;
-      background: pink;
+      /* background: pink; */
     }
     .is-publicised{
       grid-area: 3/3/4/4;
-      background: yellow;
+      /* background: yellow; */
     }
   }
   .submit{
