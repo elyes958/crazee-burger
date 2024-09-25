@@ -7,7 +7,7 @@ import { formatPrice } from "../../../../../utils/maths";
 import AdminContext from "../../../../../context/AdminContext";
 import EmptyMenuAdmin from "./EmptyMenuAdmin";
 import EmptyMenuClient from "./EmptyMenuClient";
-import { EMPTY_PRODUCT } from "../../../../../enums/product";
+import { EMPTY_PRODUCT, IMAGE_NO_STOCK } from "../../../../../enums/product";
 // import Product from "./Product";
 import Loader from "./Loader.jsx"  // ctrl shift h pour importer le chemin
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -122,6 +122,8 @@ export default function Menu() {
               isHoverable={isModeAdmin}
               isSelected={checkIfProductIsClicked(produit.id, productSelected.id)}
               selectInBasket={(event) => handleSelectInBasket(event, produit.id)}
+              overlapImageSource={IMAGE_NO_STOCK}
+              isOverlapImageVisible={true}
             />
           </CSSTransition>
           // finalement comme on a rendu notre composant reutilisable et donc qu'on a fait remonter le specifique dans les props, alor on est obliger d'utiliser ça et pas l'autre methode en bas

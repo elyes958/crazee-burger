@@ -3,9 +3,9 @@ import styled, { css } from "styled-components";
 import { theme } from "../../theme";
 import Button from "./Button";
 import { TiDelete } from "react-icons/ti";
-import { fadeInFromRight } from "../../theme/animations";
+import { fadeInFromRight, fadeInFromTop } from "../../theme/animations";
 
-export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked , isHoverable, isSelected, selectInBasket }) {
+export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked , isHoverable, isSelected, selectInBasket, overlapImageSource, isOverlapImageVisible }) {
   return (
     <CardStyled hasDeleteButton={hasDeleteButton} className="produit"  isHoverable={isHoverable} onClick={onClicked} isSelected={isSelected} >
       <div className="card">
@@ -13,9 +13,17 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
         <TiDelete className="icon" />
       </button>)}
       {/* {modeAdmin ? <TiDelete onClick={onClick} /> : null} */}
+
       <div className="image">
+        {isOverlapImageVisible && (
+          <div className="overlap">
+                <div className="transparent-layer"></div>
+                <img className="overlap-image" src={overlapImageSource} alt="overlap-image" />
+          </div>
+        )}
         <img src={imageSource} alt={title} />
       </div>
+
       <div className="text-info">
         <div className="title">{title}</div>
         <div className="description">
@@ -94,7 +102,7 @@ const CardStyled = styled.div`
       }
   } */
 
-  .image {
+  /* .image {
     width: 100%;
     height: auto;
     margin-top: 30px;
@@ -106,6 +114,44 @@ const CardStyled = styled.div`
       object-fit: contain;
     }
 
+  } */
+
+  .image {
+    /* border: 2px solid green; */
+    margin-top: 30px;
+    margin-bottom: 20px;
+    /* position: relative; */
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .overlap {
+      .overlap-image {
+        /* border: 1px solid red; */
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 80%;
+        height: 100%;
+        z-index: 1;
+        animation: ${fadeInFromTop} 500ms;
+        border-radius: ${theme.borderRadius.extraRound};
+      }
+
+      .transparent-layer {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 70%;
+        background: snow;
+        z-index: 1;
+        border-radius: ${theme.borderRadius.extraRound};
+      }
+    }
   }
 
   .text-info {

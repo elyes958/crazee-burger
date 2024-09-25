@@ -9,3 +9,5 @@ export const EMPTY_PRODUCT = Object.freeze({
     isPublicised: false,
 })
 // Object.freeze sert a protéger notre objet pour qu'on ne puisse plus le modifier ni lui ajouter d'autres valeurs
+
+export const IMAGE_NO_STOCK = "/images/stock-epuise.png";
