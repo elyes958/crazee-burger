@@ -36,7 +36,12 @@ const Form = React.forwardRef(({product, onSubmit, onChange, children, onFocus, 
             {/* <SelectInput name={isAvailableOptions} options={isAvailableOptions} className="is-available" id="3" />
             <SelectInput name={isPublicisedOptions} options={isPublicisedOptions} className="is-publicised" id="4" /> */}
             {inputSelects.map((inputSelect) => 
-            <SelectInput {...inputSelect} key={inputSelect.id} onChange={onChange}
+            <SelectInput 
+            {...inputSelect} 
+            key={inputSelect.id} 
+            onChange={onChange} 
+            onFocus={onFocus} 
+            onBlur={onBlur}
             />
             )}
             {/* ne pas oublier de mettre une key à chaque fois que tu utilise la methode map */}
