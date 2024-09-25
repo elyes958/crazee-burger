@@ -2,7 +2,7 @@ import styled from "styled-components";
 // import { TextInput } from "../../../../../reusable-ui/TextInput"; //ctrl shift H pour importe le lien toi meme(ici mon erreur a etait de l'importer entre {} on fait pas ça quand on importe un composant)
 import TextInput from "../../../../../reusable-ui/TextInput.jsx";
 import ImagePrewiew from "./ImagePrewiew.jsx";
-import { getInputTextsConfig, getSelectInputConfig } from "./inputTextConfig.jsx";
+import { getInputTextsConfig, getSelectInputConfig } from "./inputConfig.jsx";
 import React from "react";
 import SelectInput from "../../../../../reusable-ui/SelectInput.jsx";
 
@@ -36,9 +36,10 @@ const Form = React.forwardRef(({product, onSubmit, onChange, children, onFocus, 
             {/* <SelectInput name={isAvailableOptions} options={isAvailableOptions} className="is-available" id="3" />
             <SelectInput name={isPublicisedOptions} options={isPublicisedOptions} className="is-publicised" id="4" /> */}
             {inputSelects.map((inputSelect) => 
-            <SelectInput {...inputSelect}
+            <SelectInput {...inputSelect} key={inputSelect.id} onChange={onChange}
             />
             )}
+            {/* ne pas oublier de mettre une key à chaque fois que tu utilise la methode map */}
           {/* <TextInput
              name="title" 
              value={newProduct.title} 
