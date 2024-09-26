@@ -13,6 +13,9 @@ import Loader from "./Loader.jsx"  // ctrl shift h pour importer le chemin
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { menuAnimation } from "../../../../../theme/animations.js";
 import { convertStringToBoolean } from "../../../../../utils/string.js";
+import RibbonAnimated from "./RibbonAnimated.jsx";
+import { ribbonAnimation } from "./RibbonAnimated.jsx";
+
 
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
@@ -106,6 +109,7 @@ export default function Menu() {
  } 
   // resetMenu ne prend rien param et n'a qu'une seul instruction donc on peu le definir direct dans le onClick
 
+  let cardContainerClassName = isModeAdmin ? "card-container is-hoverable" : "card-container";
 
   return (
     // <MenuStyled className="menu"> // quand j'ai laisser menu comme ça j'ai eu un bug et ça ne fonctionner pas du coup j'ai utiliser l'autre technique en mettant mon composant MenuStyled dans la props component de Transition group avec ça className à coter et ça a fonctionner
@@ -114,6 +118,8 @@ export default function Menu() {
         // console.log("isAvailable: " + produit.isAvailable)
         return (
           <CSSTransition classNames={"menu-animation"} key={produit.id} timeout={300}>
+            <div className={cardContainerClassName}>
+            {convertStringToBoolean(produit.isPublicised) && <RibbonAnimated/>}
             <Card
               onDelete={(event) => handleCardDelete(event, produit.id)}
               hasDeleteButton={isModeAdmin}
@@ -128,6 +134,7 @@ export default function Menu() {
               overlapImageSource={IMAGE_NO_STOCK}
               isOverlapImageVisible={convertStringToBoolean(produit.isAvailable) === false}
             />
+            </div>
           </CSSTransition>
           // finalement comme on a rendu notre composant reutilisable et donc qu'on a fait remonter le specifique dans les props, alor on est obliger d'utiliser ça et pas l'autre methode en bas
           // <Card {...produit} />  // meme chose que ligne 5, ecriture bc plus simple spread operator dans un objet, cet methode fonctionne que si vous etes certain que "produit" a tous les élements dont "Product" a besoin. Du coup la methode au dessus est preferable et conseiller.
@@ -172,9 +179,28 @@ const MenuStyled = styled.div`
     justify-items: center;  /* Centre les éléments horizontalement */
     box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
     overflow-y: scroll; // du coup le contenu qu'on a cacher avec overflow-y hidden dans le composant parent main, ici ont le rend scroll pour pouvoir y acceder en scrollant
-   
+
    ${menuAnimation}
+
+   .card-container{
+      position: relative;
+      height: 330px; // pour éviter une zone de click verticale bizarre qu'on voit qu'au pointeur de l'outil inspect du navigateur
+      border-radius: ${theme.borderRadius.extraRound};
+
+      &.is-hoverable {
+        :hover {
+          /* border: 1px solid red; */
+          transform: scale(1.05);
+          transition: ease-out 0.4s;
+        }
+      }
+      .ribbon {
+        z-index: 2;      // le ruban ce retrouver derriere donc on lui a mis un z-index pour qu'il ce retrouve devant
+      }
+    }
+    ${ribbonAnimation} 
 `;
+// rappel ligne 181, quand un element est en position absolute il a besoin d'un element parent en position relative pour pouvoir s'y "accrocher" voila pourquoi ont doit mettre position relative sur la div parent a ribbon pour que le ruban s'accroche ou l'on veut
 
 const AdminMenuVide = styled.div`
   display: flex;
