@@ -5,6 +5,8 @@ import { formatPrice } from "../../../../../utils/maths";
 import BasketCard from "./BasketCard";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { basketAnimation } from "../../../../../theme/animations";
+import { convertStringToBoolean } from "../../../../../utils/string";
+import { BASKET_MESSAGE } from "../../../../../api/product";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -45,7 +47,7 @@ export default function BasketProducts() {
                 <BasketCard
                     title={product.title}
                     image={product.imageSource === "" ? IMAGE_BY_DEFAULT : product.imageSource}
-                    price={formatPrice(product.price)}
+                    price={convertStringToBoolean(product.isAvailable) ? formatPrice(product.price) : BASKET_MESSAGE.NOT_AVAILABLE}
                     quantity={product.quantity}
                     onDelete={(event) => handleDelete(event, product.id)}
                     isModeAdmin={isModeAdmin}

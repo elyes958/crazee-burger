@@ -83,7 +83,8 @@ export default function Menu() {
         price   : productClickedOn.price,
         quantity: productClickedOn.quantity + 1,
         // id      : new Date().getTime(),
-        id      : idProductSelected
+        id      : idProductSelected,
+        isAvailable : productClickedOn.isAvailable,
       }
   
       handleAddToBasket(infoProductSelected, username);
