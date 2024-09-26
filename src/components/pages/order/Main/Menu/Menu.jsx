@@ -88,6 +88,7 @@ export default function Menu() {
         // id      : new Date().getTime(),
         id      : idProductSelected,
         isAvailable : productClickedOn.isAvailable,
+        isPublicised: productClickedOn.isPublicised,
       }
   
       handleAddToBasket(infoProductSelected, username);
