@@ -29,7 +29,7 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
         <div className="description">
           <div className="left-description">{leftDescription}</div>
           <div className="right-description">
-            <Button className="primary-button" label={"Ajouter"} version="primary" onClick={selectInBasket} />
+            <Button className="primary-button" label={"Ajouter"} version="primary" onClick={selectInBasket} disabled={isOverlapImageVisible} />
           </div>
         </div>
       </div>
@@ -40,6 +40,7 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
 // ligne 10 ce que j'ai fait moi
 // ce que j'avais fait dans les props : onClick={hasDeleteButton ? onClicked : null} et onClicked que j'avais recuperer en props dans la fct
 // style{} attend forcement un objet donc ne peu pas utiliser && avec lui, mais une ternaire obliger
+// ligne 32: disabled est une propriete html 
 
 const CardStyled = styled.div`
   /* {(props) => (props.hasDeleteButton && modeAdmin)}  ce que j'ai fait moi */
@@ -198,7 +199,6 @@ const CardStyled = styled.div`
 
         .primary-button {
           font-size: ${theme.fonts.size.XS};
-          cursor: pointer;
           padding: 12px;
         }
       }

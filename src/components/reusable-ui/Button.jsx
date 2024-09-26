@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 import { theme } from "../../theme";
 
-export default function Button({label, icon, version="normal", onClick}) {
+export default function Button({label, icon, version="normal", onClick, disabled}) {
   return (
-      <ButtonStyled version={version} onClick={onClick}>
+      <ButtonStyled version={version} onClick={onClick} disabled={disabled} >
           {/* <Link to={`/order/${inputValue}`}> */}
           <span>{label}</span>
           <div className="icon">{icon && icon}</div>
@@ -11,16 +11,18 @@ export default function Button({label, icon, version="normal", onClick}) {
       </ButtonStyled>
   )
 }
+// si tu survole disabled tu peu voir qu'il prend soit un boolean true ou false soit undefined aucune valeur dans le cas ou on ne l'aurais pas renseigner
+// disabled permet de cancel tt les events onClick, onChange etc(en gros tu peu cliker et rien ne va ce passer)
 
 const ButtonStyled = styled.button`
-   /* ${(props) => props.version === "normal" && extraStylePrimary};
+   /* ${(props) => props.version === "normal" && extraStyleNormal};
    ${(props) => props.version === "success" && extraStyleSuccess}; */
    
    ${(props) => extraStyle[props.version]}
 `;
 // Quand ont rend nos composant reutilisable comme celui la ont fait remonter les props dans le composant parent(tout le specifique quoi) et quand ont lui passe les props(envoie les donnee) ont appelle ça "hydrater un composant"
 
-const extraStylePrimary = css `
+const extraStyleNormal = css`
 width: 100%;
 border: 1px solid red;
 display: inline-flex;
@@ -38,6 +40,7 @@ font-weight: 800;
 color: white;
 background-color: #ff9f1b;
 border: 1px solid #ff9f1b;
+cursor: pointer;
 
 &:hover:not(:disabled) {
     background-color: white;
@@ -55,6 +58,22 @@ border: 1px solid #ff9f1b;
 &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    z-index: 2;
+}
+
+&.with-focus {
+    border: 1px solid white;
+    background-color: ${theme.colors.white};
+    color: ${theme.colors.primary};
+    &:hover {
+        color: ${theme.colors.white};
+        background-color: ${theme.colors.primary};
+        border: 1px solid ${theme.colors.white};
+    }
+    &:active {
+        background-color: ${theme.colors.white};
+        color: ${theme.colors.primary};
+    }
 }
 
 .icon{
@@ -66,7 +85,7 @@ border: 1px solid #ff9f1b;
 
 `;
 
-const extraStyleSuccess = css `
+const extraStyleSuccess = css`
    cursor: pointer;
    color: ${theme.colors.white};
    background: ${theme.colors.success};
@@ -89,6 +108,6 @@ const extraStyleSuccess = css `
 
 // utilisation du "dictionnaire"
 const extraStyle = {
-    primary : extraStylePrimary,
+    normal : extraStyleNormal,
     success : extraStyleSuccess,
 }
