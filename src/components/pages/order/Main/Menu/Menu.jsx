@@ -178,7 +178,7 @@ const MenuStyled = styled.div`
     grid-row-gap: 60px;
     padding: 50px 50px 150px;
     justify-items: center;  /* Centre les éléments horizontalement */
-    box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
+    box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
     overflow-y: scroll; // du coup le contenu qu'on a cacher avec overflow-y hidden dans le composant parent main, ici ont le rend scroll pour pouvoir y acceder en scrollant
 
    ${menuAnimation}
@@ -188,16 +188,18 @@ const MenuStyled = styled.div`
       height: 330px; // pour éviter une zone de click verticale bizarre qu'on voit qu'au pointeur de l'outil inspect du navigateur
       border-radius: ${theme.borderRadius.extraRound};
 
-      &.is-hoverable {
-        :hover {
-          /* border: 1px solid red; */
+       &.is-hoverable {
+        :hover { 
+          /* border: 1px solid red;  */
           transform: scale(1.05);
           transition: ease-out 0.4s;
         }
-      }
-      .ribbon {
+      } 
+    }
+
+    .ribbon {
         z-index: 2;      // le ruban ce retrouver derriere donc on lui a mis un z-index pour qu'il ce retrouve devant
-      }
+        pointer-events: none;   // ma enlever le bug de l'animation au moment du hover je ne sais pas pourquoi(a creuser)       
     }
     ${ribbonAnimation} 
 `;

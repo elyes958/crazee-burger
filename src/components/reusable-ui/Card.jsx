@@ -18,10 +18,10 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
         {isOverlapImageVisible && (
           <div className="overlap">
                 <div className="transparent-layer"></div>
-                <img className="overlap-image" src={overlapImageSource} alt="overlap-image" />
+                <img className="overlap-image" src={overlapImageSource} alt="overlap" />
           </div>
         )}
-        <img src={imageSource} alt={title} />
+        <img className="product" src={imageSource} alt={title} />
       </div>
 
       <div className="text-info">
@@ -29,7 +29,7 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
         <div className="description">
           <div className="left-description">{leftDescription}</div>
           <div className="right-description">
-            <Button className="primary-button" label={"Ajouter"} version="primary" onClick={selectInBasket} disabled={isOverlapImageVisible} />
+            <Button className="primary-button" label={"Ajouter"} version="normal" onClick={selectInBasket} disabled={isOverlapImageVisible} />
           </div>
         </div>
       </div>
@@ -139,6 +139,7 @@ const CardStyled = styled.div`
         z-index: 1;
         animation: ${fadeInFromTop} 500ms;
         border-radius: ${theme.borderRadius.extraRound};
+        pointer-events: none;     // ma enlever le bug de l'animation au moment du hover je ne sais pas pourquoi(a creuser)       
       }
 
       .transparent-layer {
@@ -151,6 +152,7 @@ const CardStyled = styled.div`
         background: snow;
         z-index: 1;
         border-radius: ${theme.borderRadius.extraRound};
+        pointer-events: none;     // ma enlever le bug de l'animation au moment du hover je ne sais pas pourquoi(a creuser)   
       }
     }
   }
@@ -219,8 +221,8 @@ const CardStyled = styled.div`
 
 const hoverableStyle = css`
   &:hover{
-  transform: scale(1.05);
-  transition: ease-out 0.4s;
+  /* transform: scale(1.05);
+  transition: ease-out 0.4s; */
   box-shadow: ${theme.shadows.orangeHighlight};
   cursor: pointer;
 }

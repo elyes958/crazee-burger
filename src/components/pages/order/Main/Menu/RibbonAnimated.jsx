@@ -6,7 +6,7 @@ import Ribbon from "../../../../reusable-ui/Ribbon";
 
 export default function RibbonAnimated() {
   return (
-    <CSSTransition>
+    <CSSTransition in={true} timeout={500} appear={true} classNames={"ribbon-animation"}>
         <Ribbon className={"ribbon"} label="nouveau"></Ribbon>
     </CSSTransition>
   )
