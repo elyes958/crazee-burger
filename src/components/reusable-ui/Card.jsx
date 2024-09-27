@@ -3,9 +3,9 @@ import styled, { css } from "styled-components";
 import { theme } from "../../theme";
 import Button from "./Button";
 import { TiDelete } from "react-icons/ti";
-import { fadeInFromRight } from "../../theme/animations";
+import { fadeInFromRight, fadeInFromTop } from "../../theme/animations";
 
-export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked , isHoverable, isSelected, selectInBasket }) {
+export default function Card({ title, imageSource, leftDescription, hasDeleteButton, onDelete, onClicked , isHoverable, isSelected, selectInBasket, overlapImageSource, isOverlapImageVisible }) {
   return (
     <CardStyled hasDeleteButton={hasDeleteButton} className="produit"  isHoverable={isHoverable} onClick={onClicked} isSelected={isSelected} >
       <div className="card">
@@ -13,15 +13,23 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
         <TiDelete className="icon" />
       </button>)}
       {/* {modeAdmin ? <TiDelete onClick={onClick} /> : null} */}
+
       <div className="image">
-        <img src={imageSource} alt={title} />
+        {isOverlapImageVisible && (
+          <div className="overlap">
+                <div className="transparent-layer"></div>
+                <img className="overlap-image" src={overlapImageSource} alt="overlap" />
+          </div>
+        )}
+        <img className="product" src={imageSource} alt={title} />
       </div>
+
       <div className="text-info">
         <div className="title">{title}</div>
         <div className="description">
           <div className="left-description">{leftDescription}</div>
           <div className="right-description">
-            <Button className="primary-button" label={"Ajouter"} version="primary" onClick={selectInBasket} />
+            <Button className="primary-button" label={"Ajouter"} version="normal" onClick={selectInBasket} disabled={isOverlapImageVisible} />
           </div>
         </div>
       </div>
@@ -32,6 +40,7 @@ export default function Card({ title, imageSource, leftDescription, hasDeleteBut
 // ligne 10 ce que j'ai fait moi
 // ce que j'avais fait dans les props : onClick={hasDeleteButton ? onClicked : null} et onClicked que j'avais recuperer en props dans la fct
 // style{} attend forcement un objet donc ne peu pas utiliser && avec lui, mais une ternaire obliger
+// ligne 32: disabled est une propriete html 
 
 const CardStyled = styled.div`
   /* {(props) => (props.hasDeleteButton && modeAdmin)}  ce que j'ai fait moi */
@@ -94,7 +103,7 @@ const CardStyled = styled.div`
       }
   } */
 
-  .image {
+  /* .image {
     width: 100%;
     height: auto;
     margin-top: 30px;
@@ -106,6 +115,46 @@ const CardStyled = styled.div`
       object-fit: contain;
     }
 
+  } */
+
+  .image {
+    /* border: 2px solid green; */
+    margin-top: 30px;
+    margin-bottom: 20px;
+    /* position: relative; */
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .overlap {
+      .overlap-image {
+        /* border: 1px solid red; */
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 80%;
+        height: 100%;
+        z-index: 1;
+        animation: ${fadeInFromTop} 500ms;
+        border-radius: ${theme.borderRadius.extraRound};
+        pointer-events: none;     // ma enlever le bug de l'animation au moment du hover je ne sais pas pourquoi(a creuser)       
+      }
+
+      .transparent-layer {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 70%;
+        background: snow;
+        z-index: 1;
+        border-radius: ${theme.borderRadius.extraRound};
+        pointer-events: none;     // ma enlever le bug de l'animation au moment du hover je ne sais pas pourquoi(a creuser)   
+      }
+    }
   }
 
   .text-info {
@@ -152,7 +201,6 @@ const CardStyled = styled.div`
 
         .primary-button {
           font-size: ${theme.fonts.size.XS};
-          cursor: pointer;
           padding: 12px;
         }
       }
@@ -173,8 +221,8 @@ const CardStyled = styled.div`
 
 const hoverableStyle = css`
   &:hover{
-  transform: scale(1.05);
-  transition: ease-out 0.4s;
+  /* transform: scale(1.05);
+  transition: ease-out 0.4s; */
   box-shadow: ${theme.shadows.orangeHighlight};
   cursor: pointer;
 }

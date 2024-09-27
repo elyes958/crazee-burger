@@ -5,6 +5,9 @@ import { formatPrice } from "../../../../../utils/maths";
 import BasketCard from "./BasketCard";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { basketAnimation } from "../../../../../theme/animations";
+import { convertStringToBoolean } from "../../../../../utils/string";
+import { BASKET_MESSAGE } from "../../../../../api/product";
+import Sticker from "../../../../reusable-ui/Sticker";
 
 const IMAGE_BY_DEFAULT = "/images/coming-soon.png";
 
@@ -42,10 +45,11 @@ export default function BasketProducts() {
             return(
               <CSSTransition appear={true} classNames={"animation-basket"} key={product.id} timeout={{enter: 300 , exit: 300}}>
                 <div className="card-container" >
+                  {convertStringToBoolean(product.isPublicised) && <Sticker className={"badge-new"} />}
                 <BasketCard
                     title={product.title}
                     image={product.imageSource === "" ? IMAGE_BY_DEFAULT : product.imageSource}
-                    price={formatPrice(product.price)}
+                    price={convertStringToBoolean(product.isAvailable) ? formatPrice(product.price) : BASKET_MESSAGE.NOT_AVAILABLE}
                     quantity={product.quantity}
                     onDelete={(event) => handleDelete(event, product.id)}
                     isModeAdmin={isModeAdmin}
@@ -84,11 +88,21 @@ const BasketProductsStyled = styled.div`
   margin: 10px 16px;
   height: 86px;
   box-sizing: border-box;
+  position: relative;
   &:first-child {         // Attention ne pas oublier le & devant juste à cause de ça mon css ne fonctionner pas! je crois dans la nouvelle version de react il faut tout le temps le mettre à voir !
     margin-top: 20px;
   }
   &:last-child{
     margin-bottom: 20px;
+  }
+
+  .badge-new {
+    position: absolute;
+    z-index: 1;
+    bottom: 10%;
+    left: 21%;
+    transform: translateY(-21%);
+    transform: translateX(-5%);
   }
  }
 

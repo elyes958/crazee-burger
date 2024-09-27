@@ -1,6 +1,15 @@
 import styled, { css, keyframes } from "styled-components";
 import { theme } from ".";
 
+export const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
 export const fadeInFromRight = keyframes`
   0% {
     position: absolute;
@@ -12,6 +21,20 @@ export const fadeInFromRight = keyframes`
   100% {
     opacity: 1;
     transform: translateX(0);    // et ensuite il va arriver à gauche
+  }
+`
+
+export const fadeInFromTop = keyframes`
+  0% {
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(-40%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 `
 

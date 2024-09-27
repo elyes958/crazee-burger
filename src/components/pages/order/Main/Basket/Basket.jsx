@@ -7,6 +7,7 @@ import EmptyBasket from "./EmptyBasket.jsx";
 import { useContext } from "react";
 import AdminContext from "../../../../../context/AdminContext";
 import BasketProducts from "./BasketProducts.jsx";
+import { convertStringToBoolean } from "../../../../../utils/string.js";
 
 
 export default function Basket() {
@@ -15,7 +16,7 @@ export default function Basket() {
   let totalPrice = 0;
 
   for (let i = 0; i < basket.length; i++) {
-    if(isNaN(basket[i].price)){
+    if(isNaN(basket[i].price) || (convertStringToBoolean(basket[i].isAvailable) === false)){
       continue;
     }   // on va gerer ça dans un autre ticket
     totalPrice += (basket[i].price * basket[i].quantity);

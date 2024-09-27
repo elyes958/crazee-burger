@@ -2,15 +2,15 @@ import styled from "styled-components";
 // import { TextInput } from "../../../../../reusable-ui/TextInput"; //ctrl shift H pour importe le lien toi meme(ici mon erreur a etait de l'importer entre {} on fait pas ça quand on importe un composant)
 import TextInput from "../../../../../reusable-ui/TextInput.jsx";
 import ImagePrewiew from "./ImagePrewiew.jsx";
-import { getInputTextsConfig } from "./inputTextConfig.jsx";
+import { getInputTextsConfig, getSelectInputConfig } from "./inputConfig.jsx";
 import React from "react";
-
-
+import SelectInput from "../../../../../reusable-ui/SelectInput.jsx";
 
 
 const Form = React.forwardRef(({product, onSubmit, onChange, children, onFocus, onBlur}, ref) => {
    
   const inputTexts = getInputTextsConfig(product);
+  const inputSelects = getSelectInputConfig(product);
 
 
   // Affichage
@@ -30,8 +30,21 @@ const Form = React.forwardRef(({product, onSubmit, onChange, children, onFocus, 
               onFocus={onFocus}
               onBlur={onBlur}
               ref={ref && input.name === "title" ? ref : null}
+              className={input.className}
               />
             ))}
+            {/* <SelectInput name={isAvailableOptions} options={isAvailableOptions} className="is-available" id="3" />
+            <SelectInput name={isPublicisedOptions} options={isPublicisedOptions} className="is-publicised" id="4" /> */}
+            {inputSelects.map((inputSelect) => 
+            <SelectInput 
+            {...inputSelect} 
+            key={inputSelect.id} 
+            onChange={onChange} 
+            onFocus={onFocus} 
+            onBlur={onBlur}
+            />
+            )}
+            {/* ne pas oublier de mettre une key à chaque fois que tu utilise la methode map */}
           {/* <TextInput
              name="title" 
              value={newProduct.title} 
@@ -69,6 +82,7 @@ const Form = React.forwardRef(({product, onSubmit, onChange, children, onFocus, 
 })
 export default Form;
 // ligne 66 on affiche le button seulment si on recoit le props onSubmit(si on a un button on a forcement l'evenement onSubmit) de l'evenement onSubmit car l'autre onglet(modifier n'a pas besoin de ce button mais affiche simplement un message)
+// ligne 49: destructuring + copie de tout ce qu'on a destructurer dans inputSelect
 
 const FormStyled = styled.form`
   /* border: 2px solid black; */
@@ -87,7 +101,29 @@ const FormStyled = styled.form`
     grid-area: 1 / 2 / -2 / 3;      // grid area d'abord la ligne puis la colonne: 1er valeur ligne 2eme valeur colonne pour coin superieur gauche puis la meme chose pour coin inferieur droit
 
     display: grid; // il a partager nos 3 element input de maniere egale automatiquement
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 8px;
+    grid-column-gap: 8px;
+
+    .title{
+      grid-area: 1/1/2/4;   // utilise inspecteur selectionne l'element qui contient la grille et clic sur grid pour bien voir les ligne de la grille
+    }
+    .image-source{
+      grid-area: 2/1/3/4;    // 2 premiere valeur = ligne de depart et colonne de depart, et 2 derniere valeur = ligne d'arriver et colonne d'arriver. permet de selectionner l'espace que l'on veut que l'element prenne dans la grille
+    }
+    .price{
+      grid-area: 3/1/4/2;
+      /* background: red; */
+    }
+    .is-available{
+      grid-area: 3/2/4/3;
+      /* background: pink; */
+    }
+    .is-publicised{
+      grid-area: 3/3/4/4;
+      /* background: yellow; */
+    }
   }
   .submit{
     /* background: green; */

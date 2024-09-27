@@ -28,4 +28,5 @@ export const getMenu = async (idUser) => {
 export const BASKET_MESSAGE = { 
     EMPTY: "Votre commande est vide.",
     LOADING: "Chargement en cours",
+    NOT_AVAILABLE: "Non disponible",
 }
